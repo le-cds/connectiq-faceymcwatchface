@@ -1,0 +1,44 @@
+<layout id="WatchFace">
+    <drawable class="Background" />
+
+	<drawable id="GoalMeterLeft" class="GoalMeter">
+		<param name="side">:left</param>
+		<param name="style">0</param>
+		<param name="stroke">4</param>
+		<param name="height">160</param>
+		<param name="separator">2</param>
+		<param name="symbolX">48</param>
+		<param name="symbolY">24</param>
+	</drawable>
+
+	<drawable id="GoalMeterRight" class="GoalMeter">
+		<param name="side">:right</param>
+		<param name="style">0</param>
+		<param name="stroke">4</param>
+		<param name="height">160</param>
+		<param name="separator">2</param>
+		<param name="symbolX">176</param>
+		<param name="symbolY">24</param>
+	</drawable>
+	
+	<drawable id="StatusIndicators" class="StatusIndicators">
+		<param name="y">8</param>
+		<param name="distance">30</param>
+	</drawable>
+
+	<drawable id="Date" class="DateLine">
+		<param name="y">52</param>
+	</drawable>
+	
+	<drawable id="Time" class="TimeLine">
+		<param name="timeY">66</param>
+		<param name="detailsOffsetY">48</param>
+		<param name="secondsClipOffsetY">6</param>
+		<param name="secondsClipHeight">14</param>
+	</drawable>
+	
+	<drawable id="ValueIndicators" class="ValueIndicators">
+		<param name="y">184</param>
+		<param name="distance">30</param>
+	</drawable>
+</layout>
