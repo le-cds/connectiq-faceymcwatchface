@@ -1,5 +1,6 @@
 using Toybox.Application;
 using Toybox.Background;
+using Toybox.Communications;
 using Toybox.Lang;
 using Toybox.System;
 using Toybox.Time;
@@ -51,6 +52,9 @@ const CALENDAR_SERVICE_KEY = "service";
 /** Dictionary key under which the next appointment's time will be stored. */
 const NEXT_APPOINTMENT_KEY = "nextappointment";
 
+/** Message sent to the phone to request the time of the next appointment. */
+const NEXT_APPOINTMENT_REQUEST = CALENDAR_SERVICE_ID + ".requestnextappointment";
+
 
 /**
  * Checks whether or not the calendar service can be run on this device.
@@ -93,6 +97,7 @@ function processCalendarServiceData(data) {
         return true;
 
     } else {
+        System.println("No Calendar service return data.");
         return false;
     }
 }
@@ -185,12 +190,57 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
     }
 
     function onTemporalEvent() {
-        // TODO Ask the mobile phone for the next appointment
+        // Check if Bluetooth is currently enabled. If not, there is no use trying to
+        // communicate with the phone
+        if (!System.getDeviceSettings().phoneConnected) {
+            Background.exit(null);
+        }
+
+        // Register for phone messages and send a request
+        Communications.registerForPhoneAppMessages(method(:phoneMessageReceived));
+        Communications.transmit(
+            NEXT_APPOINTMENT_REQUEST,
+            {},
+            new CalendarConnectionListener());
+
+        /* Code stub that simply returns an appointment time of one hour from now.
         var utcNow = Time.now().value() - UTC_OFFSET;
         var utcInAnHour = new Time.Moment(utcNow).add(new Time.Duration(3600)).value();
         Background.exit({
             CALENDAR_SERVICE_KEY => CALENDAR_SERVICE_ID,
             NEXT_APPOINTMENT_KEY => utcInAnHour});
+        */
+    }
+
+    function phoneMessageReceived(message) {
+        System.println("Received: " + message.data);
+        Background.exit({
+            CALENDAR_SERVICE_KEY => CALENDAR_SERVICE_ID,
+            NEXT_APPOINTMENT_KEY => message.data});
+    }
+
+}
+
+/**
+ * Listens for success or error when sending messages to the phone.
+ */
+(:background)
+class CalendarConnectionListener extends Communications.ConnectionListener {
+
+    function initialize() {
+        Communications.ConnectionListener.initialize();
+    }
+
+    function onComplete() {
+        // There's not really anything to do here but allow the background service
+        // to continue running and waiting for the phone app to respond to its
+        // request
+    }
+
+    function onError() {
+        // Sending the request failed -- no need for the background service to
+        // continue running...
+        Background.exit(null);
     }
 
 }
