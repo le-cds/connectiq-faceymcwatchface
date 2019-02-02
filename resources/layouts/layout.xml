@@ -37,8 +37,12 @@
 		<param name="secondsClipHeight">14</param>
 	</drawable>
 	
+	<drawable id="CalendarIndicator" class="CalendarIndicator">
+		<param name="y">148</param>
+	</drawable>
+	
 	<drawable id="ValueIndicators" class="ValueIndicators">
-		<param name="y">184</param>
+		<param name="y">194</param>
 		<param name="distance">30</param>
 	</drawable>
 </layout>

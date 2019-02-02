@@ -5,7 +5,7 @@
             <iq:product id="vivoactive3m"/>
         </iq:products>
         <iq:permissions>
-            <iq:uses-permission id="UserProfile"/>
+            <iq:uses-permission id="Background"/>
         </iq:permissions>
         <iq:languages>
             <iq:language>eng</iq:language>

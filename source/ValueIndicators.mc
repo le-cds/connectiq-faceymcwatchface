@@ -49,7 +49,7 @@ class ValueIndicators extends WatchUi.Drawable {
 
         // Initialize from parameters
         mY = params[:y];
-        mTextY = mY + SYMBOL_SIZE - 2;
+        mTextY = mY + SYMBOL_SIZE;
 
         var distance = params[:distance];
 

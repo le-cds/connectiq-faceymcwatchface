@@ -87,32 +87,7 @@ class TimeLine extends WatchUi.Drawable {
 
     function drawEverythingExceptSeconds(dc) {
         var time = System.getClockTime();
-
-        // Retrieve the basic time values
-        var hours = time.hour;
-        var minutes = time.min;
-        var amPm = "";
-
-        // If the clock is not in 24-hour mode, we may need to adjust the hours
-        // and add an am/pm indicator
-        if (!System.getDeviceSettings().is24Hour) {
-            if (hours >= 12) {
-                amPm = "pm";
-
-                // Noon needs to be shown as 12, not 0
-                if (hours > 12) {
-                    hours -= 12;
-                }
-
-            } else {
-                amPm = "am";
-
-                // Midnight must be 12, not 0
-                if (hours == 0) {
-                    hours = 12;
-                }
-            }
-        }
+        var displayTime = displayableTime(time.hour, time.min, time.sec);
 
         // Actually draw stuff
         dc.setColor(gColorHours, Graphics.COLOR_TRANSPARENT);
@@ -120,7 +95,7 @@ class TimeLine extends WatchUi.Drawable {
             mHoursRightX,
             mTimeY,
             gHoursFont,
-            hours.format("%02d"),
+            displayTime[:hour],
             Graphics.TEXT_JUSTIFY_RIGHT
         );
 
@@ -137,7 +112,7 @@ class TimeLine extends WatchUi.Drawable {
             mMinutesX,
             mTimeY,
             gMinutesFont,
-            minutes.format("%02d"),
+            displayTime[:minute],
             Graphics.TEXT_JUSTIFY_LEFT
         );
 
@@ -146,7 +121,7 @@ class TimeLine extends WatchUi.Drawable {
             mAmPmRightX,
             mDetailsY,
             gDetailsFont,
-            amPm,
+            displayTime[:ampm],
             Graphics.TEXT_JUSTIFY_RIGHT
         );
     }

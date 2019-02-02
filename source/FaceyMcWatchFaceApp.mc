@@ -1,6 +1,9 @@
 using Toybox.Application;
+using Toybox.Background;
+using Toybox.Time;
 using Toybox.WatchUi;
 
+(:background)
 class FaceyMcWatchFaceApp extends Application.AppBase {
 
     function initialize() {
@@ -17,12 +20,25 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-        return [ new FaceyMcWatchFaceView() ];
+        registerCalendarService();
+        return [new FaceyMcWatchFaceView()];
     }
 
     // New app settings have been received so trigger a UI update
     function onSettingsChanged() {
         WatchUi.requestUpdate();
+    }
+
+    // Returns the background service to run.
+    function getServiceDelegate() {
+        return [new CalendarServiceDelegate()];
+    }
+
+    // Receives data produced by our background service.
+    function onBackgroundData(data) {
+        if (processCalendarServiceData(data)) {
+            WatchUi.requestUpdate();
+        }
     }
 
 }
