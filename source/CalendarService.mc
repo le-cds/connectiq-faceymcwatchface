@@ -97,7 +97,7 @@ function processCalendarServiceData(data) {
         return true;
 
     } else {
-        System.println("No Calendar service return data.");
+        //System.println("No Calendar service return data.");
         return false;
     }
 }
@@ -113,9 +113,9 @@ function getNextAppointment() {
         return null;
     }
 
-    // We have an appointment in UTC time. Turn it into a moment in time in the local
-    // time zone and return it if it is in the upcoming 24 hours minus 5 minutes
-    var appointment = new Time.Moment(nextAppointment + UTC_OFFSET);
+    // We have an appointment in UTC time. Return it if it is in the upcoming 24 hours
+    // minus 5 minutes
+    var appointment = new Time.Moment(nextAppointment);
     var now = new Time.Moment(Time.now().value());
     var dayFromNow = now.add(new Time.Duration(Time.Gregorian.SECONDS_PER_DAY - 300));
 
@@ -213,10 +213,11 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
     }
 
     function phoneMessageReceived(message) {
-        System.println("Received: " + message.data);
+        // TODO Only exit if the message is less than, say, 10 seconds old
+        //System.println("Received reply: " + message.data);
         Background.exit({
             CALENDAR_SERVICE_KEY => CALENDAR_SERVICE_ID,
-            NEXT_APPOINTMENT_KEY => message.data});
+            NEXT_APPOINTMENT_KEY => message.data[0]});
     }
 
 }
@@ -235,11 +236,13 @@ class CalendarConnectionListener extends Communications.ConnectionListener {
         // There's not really anything to do here but allow the background service
         // to continue running and waiting for the phone app to respond to its
         // request
+        //System.println("Successfully sent request");
     }
 
     function onError() {
         // Sending the request failed -- no need for the background service to
         // continue running...
+        //System.println("Sending request failed");
         Background.exit(null);
     }
 
