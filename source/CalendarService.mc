@@ -33,6 +33,9 @@ using Toybox.Time;
  *   time components that can be displayed on screen.
  */
 
+/** Number of seconds between consecutive invocations of the background process. */
+const INVOCATION_INTERVAL = 300;
+
 /**
  * UTC time zone offset. Subtract from local time to get UTC time, add to
  * UTC time to get local time.
@@ -44,16 +47,17 @@ const CALENDAR_SERVICE_ID = "calendarservice";
 
 /** Property key under which the time of the most recent update is stored. */
 const PROP_LAST_REFRESH = CALENDAR_SERVICE_ID + ".lastupdatetime";
+/** Property key under which the number of saved next appointments is stored. */
+const PROP_APPOINTMENT_COUNT = CALENDAR_SERVICE_ID + ".appointmentcount";
 /** Property key under which the next appointment data are stored. */
-const PROP_NEXT_APPOINTMENT = CALENDAR_SERVICE_ID + ".nextappointment";
+const PROP_APPOINTMENTS = CALENDAR_SERVICE_ID + ".appointments";
 
 /** Dictionary key to identify this service as being the source of a background job result. */
-const CALENDAR_SERVICE_KEY = "service";
-/** Dictionary key under which the next appointment's time will be stored. */
-const NEXT_APPOINTMENT_KEY = "nextappointment";
-
-/** Message sent to the phone to request the time of the next appointment. */
-const NEXT_APPOINTMENT_REQUEST = CALENDAR_SERVICE_ID + ".requestnextappointment";
+const KEY_CALENDAR_SERVICE = "service";
+/** Dictionary key under which the number of appointments will be stored. */
+const KEY_APPOINTMENT_COUNT = "appointmentcount";
+/** Dictionary key under which the next appointment times will be stored. */
+const KEY_APPOINTMENTS = "appointments";
 
 
 /**
@@ -73,7 +77,7 @@ function hasCalendarService() {
 function registerCalendarService() {
     if (hasCalendarService()) {
         // Run the service every five minutes
-        Background.registerForTemporalEvent(new Time.Duration(300));
+        Background.registerForTemporalEvent(new Time.Duration(INVOCATION_INTERVAL));
         return true;
     } else {
         return false;
@@ -89,10 +93,11 @@ function registerCalendarService() {
  *         the caller.
  */
 function processCalendarServiceData(data) {
-    if (data instanceof Lang.Dictionary && CALENDAR_SERVICE_ID.equals(data[CALENDAR_SERVICE_KEY])) {
-        // Save the appointment
+    if (data instanceof Lang.Dictionary && CALENDAR_SERVICE_ID.equals(data[KEY_CALENDAR_SERVICE])) {
+        // Save the appointments
         Application.Storage.setValue(PROP_LAST_REFRESH, Time.now().value());
-        Application.Storage.setValue(PROP_NEXT_APPOINTMENT, data[NEXT_APPOINTMENT_KEY]);
+        Application.Storage.setValue(PROP_APPOINTMENT_COUNT, data[KEY_APPOINTMENT_COUNT]);
+        Application.Storage.setValue(PROP_APPOINTMENTS, data[KEY_APPOINTMENTS]);
 
         return true;
 
@@ -108,19 +113,61 @@ function processCalendarServiceData(data) {
  */
 function getNextAppointment() {
     // If we don't have any appointments yet, return nothing.
-    var nextAppointment = Application.Storage.getValue(PROP_NEXT_APPOINTMENT);
-    if (nextAppointment == null) {
+    var appointmentCount = Application.Storage.getValue(PROP_APPOINTMENT_COUNT);
+    var appointments = Application.Storage.getValue(PROP_APPOINTMENTS);
+    if (appointments == null || appointmentCount == null || appointmentCount == 0) {
         return null;
     }
 
+    // Get the current time in seconds UTC
+    var now = Time.now().value();
+
+    // Go through the list of appointments and find the index of the first which is still
+    // in the future
+    var firstValidIndex = 0;
+    while (firstValidIndex < appointmentCount && appointments[firstValidIndex] < now) {
+        firstValidIndex += 1;
+    }
+
+    // If we have moved past passed appointments, save the new list
+    if (firstValidIndex > 0) {
+        if (firstValidIndex >= appointmentCount) {
+            // Reset our variables
+            appointmentCount = 0;
+            appointments = null;
+
+        } else {
+            // Build a new array
+            var newAppointments = new [appointmentCount - firstValidIndex];
+            for (var i = firstValidIndex; i < appointmentCount; i++) {
+                newAppointments[i - firstValidIndex] = appointments[i];
+            }
+
+            // Update the variables
+            appointmentCount -= firstValidIndex;
+            appointments = newAppointments;
+        }
+
+        // Save the new stuff
+        Application.Storage.setValue(PROP_APPOINTMENT_COUNT, appointmentCount);
+        Application.Storage.setValue(PROP_APPOINTMENTS, appointments);
+    }
+
+    // If the list is not empty, find the first entry
+    if (appointmentCount == 0) {
+        return null;
+    }
+
+    var nextAppointment = appointments[0];
+
     // We have an appointment in UTC time. Return it if it is in the upcoming 24 hours
     // minus 5 minutes
-    var appointment = new Time.Moment(nextAppointment);
-    var now = new Time.Moment(Time.now().value());
-    var dayFromNow = now.add(new Time.Duration(Time.Gregorian.SECONDS_PER_DAY - 300));
+    var nextAppointmentMoment = new Time.Moment(nextAppointment);
+    var nowMoment = new Time.Moment(now);
+    var dayFromNowMoment = nowMoment.add(new Time.Duration(Time.Gregorian.SECONDS_PER_DAY - 300));
 
-    if (appointment.greaterThan(now) && appointment.lessThan(dayFromNow)) {
-        return appointment;
+    if (nextAppointmentMoment.greaterThan(nowMoment) && nextAppointmentMoment.lessThan(dayFromNowMoment)) {
+        return nextAppointmentMoment;
     } else {
         return null;
     }
@@ -196,54 +243,49 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
             Background.exit(null);
         }
 
-        // Register for phone messages and send a request
+        // Register for phone messages and hope that we have received one
         Communications.registerForPhoneAppMessages(method(:phoneMessageReceived));
-        Communications.transmit(
-            NEXT_APPOINTMENT_REQUEST,
-            {},
-            new CalendarConnectionListener());
 
-        /* Code stub that simply returns an appointment time of one hour from now.
-        var utcNow = Time.now().value() - UTC_OFFSET;
-        var utcInAnHour = new Time.Moment(utcNow).add(new Time.Duration(3600)).value();
+        /*
+        // Code stub that simply returns a number of appointments in half-hour intervals,
+        // starting an hour in the past to check whether our code correctly sorts those out
+        var appointmentCount = 10;
+        var appointments = new [appointmentCount];
+
+        var app = new Time.Moment(Time.now().value() - 60 * 60);
+        var halfHour = new Time.Duration(30 * 60);
+        for (var i = 0; i < appointmentCount; i++) {
+            appointments[i] = app.value();
+            app = app.add(halfHour);
+        }
+
         Background.exit({
-            CALENDAR_SERVICE_KEY => CALENDAR_SERVICE_ID,
-            NEXT_APPOINTMENT_KEY => utcInAnHour});
+            KEY_CALENDAR_SERVICE => CALENDAR_SERVICE_ID,
+            KEY_APPOINTMENT_COUNT => appointmentCount,
+            KEY_APPOINTMENTS => appointments});
         */
     }
 
     function phoneMessageReceived(message) {
-        // TODO Only exit if the message is less than, say, 10 seconds old
-        //System.println("Received reply: " + message.data);
-        Background.exit({
-            CALENDAR_SERVICE_KEY => CALENDAR_SERVICE_ID,
-            NEXT_APPOINTMENT_KEY => message.data[0]});
-    }
+        // Only end the background process by handling this message if it was sent
+        // after our most recent invocation
+        var messageTimestamp = message.data[0];
+        var lastInvocation = Time.now().value() - INVOCATION_INTERVAL;
 
-}
+        if (messageTimestamp >= lastInvocation) {
+            // Unpack the remainder of the message
+            var appointmentCount = message.data[1];
 
-/**
- * Listens for success or error when sending messages to the phone.
- */
-(:background)
-class CalendarConnectionListener extends Communications.ConnectionListener {
+            var appointments = new [appointmentCount];
+            for (var i = 0; i < appointmentCount; i += 1) {
+                appointments[i] = message.data[i + 2];
+            }
 
-    function initialize() {
-        Communications.ConnectionListener.initialize();
-    }
-
-    function onComplete() {
-        // There's not really anything to do here but allow the background service
-        // to continue running and waiting for the phone app to respond to its
-        // request
-        //System.println("Successfully sent request");
-    }
-
-    function onError() {
-        // Sending the request failed -- no need for the background service to
-        // continue running...
-        //System.println("Sending request failed");
-        Background.exit(null);
+            Background.exit({
+                KEY_CALENDAR_SERVICE => CALENDAR_SERVICE_ID,
+                KEY_APPOINTMENT_COUNT => appointmentCount,
+                KEY_APPOINTMENTS => appointments});
+        }
     }
 
 }
