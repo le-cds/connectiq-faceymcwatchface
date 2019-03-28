@@ -36,9 +36,9 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
 
     // Receives data produced by our background service.
     function onBackgroundData(data) {
-        if (processCalendarServiceData(data)) {
-            WatchUi.requestUpdate();
-        }
+        // We would usually update the UI, but why bother when the
+        // appointment item is updated on the full minute anyway
+        processCalendarServiceData(data);
     }
 
 }
