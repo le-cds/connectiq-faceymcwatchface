@@ -86,7 +86,8 @@ function registerCalendarService() {
 
 /**
  * Processes the calendar service data if they come from the calendar service
- * in the first place.
+ * in the first place. If not, we sanitize the appointment data we have saved
+ * by removing those appointments that are now in the past.
  *
  * @return true if the data came from the calendar service and were processed
  *         by this method, false if the data should be further processed by
@@ -102,7 +103,47 @@ function processCalendarServiceData(data) {
         return true;
 
     } else {
-        //System.println("No Calendar service return data.");
+        // If we don't have any appointments yet, return nothing.
+        var appointmentCount = Application.Storage.getValue(PROP_APPOINTMENT_COUNT);
+        var appointments = Application.Storage.getValue(PROP_APPOINTMENTS);
+        if (appointments == null || appointmentCount == null || appointmentCount == 0) {
+            return false;
+        }
+
+        // Get the current time in seconds UTC
+        var now = Time.now().value();
+
+        // Go through the list of appointments and find the index of the first which is still
+        // in the future
+        var firstValidIndex = 0;
+        while (firstValidIndex < appointmentCount && appointments[firstValidIndex] <= now) {
+            firstValidIndex += 1;
+        }
+
+        // If we have moved past passed appointments, save the new list
+        if (firstValidIndex > 0) {
+            if (firstValidIndex >= appointmentCount) {
+                // Reset our variables
+                appointmentCount = 0;
+                appointments = null;
+
+            } else {
+                // Build a new array
+                var newAppointments = new [appointmentCount - firstValidIndex];
+                for (var i = firstValidIndex; i < appointmentCount; i++) {
+                    newAppointments[i - firstValidIndex] = appointments[i];
+                }
+
+                // Update the variables
+                appointmentCount -= firstValidIndex;
+                appointments = newAppointments;
+            }
+
+            // Save the new stuff
+            Application.Storage.setValue(PROP_APPOINTMENT_COUNT, appointmentCount);
+            Application.Storage.setValue(PROP_APPOINTMENTS, appointments);
+        }
+
         return false;
     }
 }
@@ -125,52 +166,25 @@ function getNextAppointment() {
     // Go through the list of appointments and find the index of the first which is still
     // in the future
     var firstValidIndex = 0;
-    while (firstValidIndex < appointmentCount && appointments[firstValidIndex] < now) {
+    while (firstValidIndex < appointmentCount && appointments[firstValidIndex] <= now) {
         firstValidIndex += 1;
     }
 
-    // If we have moved past passed appointments, save the new list
-    if (firstValidIndex > 0) {
-        if (firstValidIndex >= appointmentCount) {
-            // Reset our variables
-            appointmentCount = 0;
-            appointments = null;
+    if (firstValidIndex < appointmentCount) {
+        var nextAppointment = appointments[0];
 
-        } else {
-            // Build a new array
-            var newAppointments = new [appointmentCount - firstValidIndex];
-            for (var i = firstValidIndex; i < appointmentCount; i++) {
-                newAppointments[i - firstValidIndex] = appointments[i];
-            }
+        // We have an appointment in UTC time. Return it if it is in the upcoming 24 hours
+        // minus 5 minutes
+        var nextAppointmentMoment = new Time.Moment(nextAppointment);
+        var nowMoment = new Time.Moment(now);
+        var dayFromNowMoment = nowMoment.add(new Time.Duration(Time.Gregorian.SECONDS_PER_DAY - 300));
 
-            // Update the variables
-            appointmentCount -= firstValidIndex;
-            appointments = newAppointments;
+        if (nextAppointmentMoment.greaterThan(nowMoment) && nextAppointmentMoment.lessThan(dayFromNowMoment)) {
+            return nextAppointmentMoment;
         }
-
-        // Save the new stuff
-        Application.Storage.setValue(PROP_APPOINTMENT_COUNT, appointmentCount);
-        Application.Storage.setValue(PROP_APPOINTMENTS, appointments);
     }
 
-    // If the list is not empty, find the first entry
-    if (appointmentCount == 0) {
-        return null;
-    }
-
-    var nextAppointment = appointments[0];
-
-    // We have an appointment in UTC time. Return it if it is in the upcoming 24 hours
-    // minus 5 minutes
-    var nextAppointmentMoment = new Time.Moment(nextAppointment);
-    var nowMoment = new Time.Moment(now);
-    var dayFromNowMoment = nowMoment.add(new Time.Duration(Time.Gregorian.SECONDS_PER_DAY - 300));
-
-    if (nextAppointmentMoment.greaterThan(nowMoment) && nextAppointmentMoment.lessThan(dayFromNowMoment)) {
-        return nextAppointmentMoment;
-    } else {
-        return null;
-    }
+    return null;
 }
 
 /**
@@ -247,16 +261,16 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
         Communications.registerForPhoneAppMessages(method(:phoneMessageReceived));
 
         /*
-        // Code stub that simply returns a number of appointments in half-hour intervals,
-        // starting an hour in the past to check whether our code correctly sorts those out
+        // Code stub that simply returns a number of appointments in two-minute intervals,
+        // starting three minutes in the past to check whether our code correctly sorts those out
         var appointmentCount = 10;
         var appointments = new [appointmentCount];
 
-        var app = new Time.Moment(Time.now().value() - 60 * 60);
-        var halfHour = new Time.Duration(30 * 60);
+        var app = new Time.Moment(Time.now().value() - 3 * 60);
+        var interval = new Time.Duration(2 * 60);
         for (var i = 0; i < appointmentCount; i++) {
-            appointments[i] = app.value();
-            app = app.add(halfHour);
+            appointments[i] = app.value() - app.value() % 60;
+            app = app.add(interval);
         }
 
         Background.exit({
@@ -278,7 +292,8 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
 
             var appointments = new [appointmentCount];
             for (var i = 0; i < appointmentCount; i += 1) {
-                appointments[i] = message.data[i + 2];
+                // Discard any superfluous seconds; minute granularity is perfectly fine
+                appointments[i] = message.data[i + 2] - message.data[i + 2] % 60;
             }
 
             Background.exit({
