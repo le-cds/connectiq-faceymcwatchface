@@ -34,7 +34,7 @@ using Toybox.Time;
  */
 
 /** Number of seconds between consecutive invocations of the background process. */
-const INVOCATION_INTERVAL = 300;
+const INVOCATION_INTERVAL = 900;
 
 /**
  * UTC time zone offset. Subtract from local time to get UTC time, add to
