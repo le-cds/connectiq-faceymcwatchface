@@ -171,7 +171,7 @@ function getNextAppointment() {
     }
 
     if (firstValidIndex < appointmentCount) {
-        var nextAppointment = appointments[0];
+        var nextAppointment = appointments[firstValidIndex];
 
         // We have an appointment in UTC time. Return it if it is in the upcoming 24 hours
         // minus 5 minutes
