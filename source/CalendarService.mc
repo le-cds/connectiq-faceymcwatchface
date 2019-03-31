@@ -13,7 +13,9 @@ using Toybox.Time;
  * Setup
  *
  * - In your AppBase subclass, call registerCalendarService() in the getInitialView()
- *   function or register for temporal events yourself.
+ *   function or register for temporal events yourself. Optionally, call the
+ *   loadAppointments() function as well. If you don't it will be called automatically
+ *   upon the first invocation to getNextAppointment().
  *
  * - Add a getServiceDelegate() function and return a list that contains an instance
  *   of CalendarServiceDelegate.
@@ -21,6 +23,10 @@ using Toybox.Time;
  * - Add an onBackgroundData(data) function and call processCalendarServiceData(data).
  *   If the function returns true, the data came from the calendar service. If not,
  *   they may have come from other delegates an need to be processed further.
+ *
+ * - Add a call to storeAppointments() to your onStop() function so that when the
+ *   app is closed, we store the state of our appointments. To save energy, this
+ *   library avoids any access to storage while the app is running.
  *
  *
  * Appointment Retrieval
@@ -59,6 +65,19 @@ const KEY_APPOINTMENT_COUNT = "appointmentcount";
 /** Dictionary key under which the next appointment times will be stored. */
 const KEY_APPOINTMENTS = "appointments";
 
+/* The following variables store appointment data in main memory to spare us the
+ * need of having to load the values from storage each minute, which costs time
+ * and energy. The values are put into storage whenever the background service
+ * finishes.
+ */
+
+/** Time of when we most recently received appointment data. */
+var last_appointment_refresh = -1;
+/** The number of appointments. */
+var appointment_count = -1;
+/** Array of appointments. */
+var appointments = null;
+
 
 /**
  * Checks whether or not the calendar service can be run on this device.
@@ -95,18 +114,16 @@ function registerCalendarService() {
  */
 function processCalendarServiceData(data) {
     if (data instanceof Lang.Dictionary && CALENDAR_SERVICE_ID.equals(data[KEY_CALENDAR_SERVICE])) {
-        // Save the appointments
-        Application.Storage.setValue(PROP_LAST_REFRESH, Time.now().value());
-        Application.Storage.setValue(PROP_APPOINTMENT_COUNT, data[KEY_APPOINTMENT_COUNT]);
-        Application.Storage.setValue(PROP_APPOINTMENTS, data[KEY_APPOINTMENTS]);
+        // Save the appointments in our local variables to be saved later
+        last_appointment_refresh = Time.now().value();
+        appointment_count = data[KEY_APPOINTMENT_COUNT];
+        appointments = data[KEY_APPOINTMENTS];
 
         return true;
 
     } else {
         // If we don't have any appointments yet, return nothing.
-        var appointmentCount = Application.Storage.getValue(PROP_APPOINTMENT_COUNT);
-        var appointments = Application.Storage.getValue(PROP_APPOINTMENTS);
-        if (appointments == null || appointmentCount == null || appointmentCount == 0) {
+        if (appointments == null || appointment_count <= 0) {
             return false;
         }
 
@@ -116,36 +133,59 @@ function processCalendarServiceData(data) {
         // Go through the list of appointments and find the index of the first which is still
         // in the future
         var firstValidIndex = 0;
-        while (firstValidIndex < appointmentCount && appointments[firstValidIndex] <= now) {
+        while (firstValidIndex < appointment_count && appointments[firstValidIndex] <= now) {
             firstValidIndex += 1;
         }
 
         // If we have moved past passed appointments, save the new list
         if (firstValidIndex > 0) {
-            if (firstValidIndex >= appointmentCount) {
+            if (firstValidIndex >= appointment_count) {
                 // Reset our variables
-                appointmentCount = 0;
+                appointment_count = 0;
                 appointments = null;
 
             } else {
                 // Build a new array
-                var newAppointments = new [appointmentCount - firstValidIndex];
-                for (var i = firstValidIndex; i < appointmentCount; i++) {
+                var newAppointments = new [appointment_count - firstValidIndex];
+                for (var i = firstValidIndex; i < appointment_count; i++) {
                     newAppointments[i - firstValidIndex] = appointments[i];
                 }
 
                 // Update the variables
-                appointmentCount -= firstValidIndex;
+                appointment_count -= firstValidIndex;
                 appointments = newAppointments;
             }
-
-            // Save the new stuff
-            Application.Storage.setValue(PROP_APPOINTMENT_COUNT, appointmentCount);
-            Application.Storage.setValue(PROP_APPOINTMENTS, appointments);
         }
 
         return false;
     }
+
+}
+
+/**
+ * Loads appointment data from storage. This is automatically called by the
+ * getNextAppointment() function if it hasn't been called before, but can also
+ * be called manually.
+ */
+function loadAppointments() {
+    last_appointment_refresh = Application.Storage.getValue(PROP_LAST_REFRESH);
+    appointment_count = Application.Storage.getValue(PROP_APPOINTMENT_COUNT);
+    appointments = Application.Storage.getValue(PROP_APPOINTMENTS);
+
+    // If the appointment count is not existent, set it to zero to make sure that
+    // getNextAppointment() doesn't call loadAppointments() on every invocation
+    if (appointment_count == null || appointment_count < 0) {
+        appointment_count = 0;
+    }
+}
+
+/**
+ * Saves our appointment variables to storage to be retrieved later.
+ */
+function storeAppointments() {
+    Application.Storage.setValue(PROP_LAST_REFRESH, last_appointment_refresh);
+    Application.Storage.setValue(PROP_APPOINTMENT_COUNT, appointment_count);
+    Application.Storage.setValue(PROP_APPOINTMENTS, appointments);
 }
 
 /**
@@ -153,10 +193,13 @@ function processCalendarServiceData(data) {
  * moment is only returned if it is in the upcoming 24 hours. If not, null is returned.
  */
 function getNextAppointment() {
-    // If we don't have any appointments yet, return nothing.
-    var appointmentCount = Application.Storage.getValue(PROP_APPOINTMENT_COUNT);
-    var appointments = Application.Storage.getValue(PROP_APPOINTMENTS);
-    if (appointments == null || appointmentCount == null || appointmentCount == 0) {
+    if (appointment_count == -1) {
+        // We haven't loaded appointments yet, so try loading them and proceed
+        loadAppointments();
+    }
+
+    // If we don't have any appointments, return nothing.
+    if (appointments == null || appointment_count == 0) {
         return null;
     }
 
@@ -166,11 +209,11 @@ function getNextAppointment() {
     // Go through the list of appointments and find the index of the first which is still
     // in the future
     var firstValidIndex = 0;
-    while (firstValidIndex < appointmentCount && appointments[firstValidIndex] <= now) {
+    while (firstValidIndex < appointment_count && appointments[firstValidIndex] <= now) {
         firstValidIndex += 1;
     }
 
-    if (firstValidIndex < appointmentCount) {
+    if (firstValidIndex < appointment_count) {
         var nextAppointment = appointments[firstValidIndex];
 
         // We have an appointment in UTC time. Return it if it is in the upcoming 24 hours

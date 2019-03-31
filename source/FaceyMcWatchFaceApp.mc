@@ -16,11 +16,17 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
+        // Be sure to save our appointments now
+        storeAppointments();
     }
 
     // Return the initial view of your application here
     function getInitialView() {
+        // Register the calendar service and load appointments from storage now
+        // while we're at it
         registerCalendarService();
+        loadAppointments();
+
         return [new FaceyMcWatchFaceView()];
     }
 
