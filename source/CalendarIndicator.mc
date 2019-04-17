@@ -1,3 +1,4 @@
+using Toybox.Application.Properties;
 using Toybox.System;
 using Toybox.Time;
 using Toybox.WatchUi;
@@ -14,6 +15,9 @@ class CalendarIndicator extends WatchUi.Drawable {
 
     // The characters used for the different symbols
     private const SYMBOL_CALENDAR = "G";
+
+    // Whether we actually display anything or not
+    private var mActive;
 
     // Y coordinate of the symbols.
     private var mY;
@@ -33,12 +37,27 @@ class CalendarIndicator extends WatchUi.Drawable {
         mTextY = mY + SYMBOL_SIZE;
 
         mMidX = System.getDeviceSettings().screenWidth / 2;
+
+        // Load application settings
+        onSettingsChanged();
+    }
+
+    /**
+     * Re-reads the settings to check whether we actually need to display anything.
+     */
+    function onSettingsChanged() {
+        mActive = Properties.getValue(ACTIVATE_APPOINTMENTS);
     }
 
     /**
      * Updates the date. If it has changed, draws the date onto the device context.
      */
     function draw(dc) {
+        // If we're not actually active, draw nothing
+        if (!mActive) {
+            return;
+        }
+
         var nextAppointment = getNextAppointment();
 
         if (nextAppointment == null) {

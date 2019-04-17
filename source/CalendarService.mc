@@ -39,9 +39,6 @@ using Toybox.Time;
  *   time components that can be displayed on screen.
  */
 
-/** Number of seconds between consecutive invocations of the background process. */
-const INVOCATION_INTERVAL = 900;
-
 /**
  * UTC time zone offset. Subtract from local time to get UTC time, add to
  * UTC time to get local time.
@@ -71,6 +68,8 @@ const KEY_APPOINTMENTS = "appointments";
  * finishes.
  */
 
+/** The appointment interval in seconds. Overwritten as soon as the calendar service is registered. */
+var appointment_update_interval = 15 * 60;
 /** Time of when we most recently received appointment data. */
 var last_appointment_refresh = -1;
 /** The number of appointments. */
@@ -91,15 +90,27 @@ function hasCalendarService() {
  * will succeed if the watch supports service delegates. Call this procedure from
  * the base app's getInitialView() function.
  *
+ * @param update_interval the number of minutes between successive updates.
  * @return true or false as the registration did or did not complete successfully.
  */
-function registerCalendarService() {
+function registerCalendarService(update_interval) {
     if (hasCalendarService()) {
-        // Run the service every five minutes
-        Background.registerForTemporalEvent(new Time.Duration(INVOCATION_INTERVAL));
+        // Run the service every updateInterval minutes
+        appointment_update_interval = update_interval * 60;
+        Background.registerForTemporalEvent(new Time.Duration(appointment_update_interval));
         return true;
     } else {
         return false;
+    }
+}
+
+/**
+ * Unregisters the background process for the calendar processing.
+ */
+function unregisterCalendarService() {
+    // Stops the calendar service
+    if (hasCalendarService()) {
+        Background.deleteTemporalEvent();
     }
 }
 
@@ -327,7 +338,7 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
         // Only end the background process by handling this message if it was sent
         // after our most recent invocation
         var messageTimestamp = message.data[0];
-        var lastInvocation = Time.now().value() - INVOCATION_INTERVAL;
+        var lastInvocation = Time.now().value() - appointment_update_interval;
 
         if (messageTimestamp >= lastInvocation) {
             // Unpack the remainder of the message

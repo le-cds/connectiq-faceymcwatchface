@@ -1,7 +1,17 @@
 <strings>
 
     <string id="AppName">FaceyMcWatchFace</string>
-
+    
+    
+    <!-- Settings -->
+    <string id="ActivateAppointments_Title">Show next appointment (requires Android app)</string>
+    
+    <string id="AppointmentUpdateInterval_Title">Appointment update interval</string>
+    <string id="AppointmentUpdateInterval_Prompt">Number of minutes between appointment updates.</string>
+    <string id="AppointmentUpdateInterval_Error">We need at least 5 minutes between successive updates.</string>
+    
+    
+	<!-- Strings for the date indicator. -->
 	<string id="Sun">Sun</string>
 	<string id="Mon">Mon</string>
 	<string id="Tue">Tue</string>

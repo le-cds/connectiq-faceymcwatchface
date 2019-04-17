@@ -1,10 +1,15 @@
 using Toybox.Application;
+using Toybox.Application.Properties;
 using Toybox.Background;
 using Toybox.Time;
 using Toybox.WatchUi;
 
 (:background)
 class FaceyMcWatchFaceApp extends Application.AppBase {
+
+    /** Our copy of our view. Used to pass setting update events along. */
+    private var mView;
+
 
     function initialize() {
         AppBase.initialize();
@@ -24,14 +29,21 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     function getInitialView() {
         // Register the calendar service and load appointments from storage now
         // while we're at it
-        registerCalendarService();
+        initializeCalendarService();
         loadAppointments();
 
-        return [new FaceyMcWatchFaceView()];
+        mView = new FaceyMcWatchFaceView();
+        return [mView];
     }
 
-    // New app settings have been received so trigger a UI update
+    // New app settings have been received.
     function onSettingsChanged() {
+        // The calendar service might have had its settings changed
+        initializeCalendarService();
+
+        mView.onSettingsChanged();
+
+        // Trigger a UI update to reflect the new settings
         WatchUi.requestUpdate();
     }
 
@@ -45,6 +57,18 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
         // We would usually update the UI, but why bother when the
         // appointment item is updated on the full minute anyway
         processCalendarServiceData(data);
+    }
+
+    /**
+     * Takes care of starting, restarting or stopping the calendar service in accordance
+     * with the active settings.
+     */
+    function initializeCalendarService() {
+        if (Properties.getValue(ACTIVATE_APPOINTMENTS)) {
+            registerCalendarService(Properties.getValue(APPOINTMENT_UPDATE_INTERVAL));
+        } else {
+            unregisterCalendarService();
+        }
     }
 
 }

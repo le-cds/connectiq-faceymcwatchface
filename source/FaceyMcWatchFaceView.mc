@@ -20,6 +20,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     // calls later WHEN TIME IS SCARCE!!!
     private var mStatusIndicators;
     private var mTimeLine;
+    private var mCalendarIndicator;
     private var mValueIndicators;
     private var mGoalMeterLeft;
     private var mGoalMeterRight;
@@ -44,9 +45,17 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         // Remember drawables
         mStatusIndicators = View.findDrawableById("StatusIndicators");
         mTimeLine = View.findDrawableById("Time");
+        mCalendarIndicator = View.findDrawableById("CalendarIndicator");
         mValueIndicators = View.findDrawableById("ValueIndicators");
         mGoalMeterLeft = View.findDrawableById("GoalMeterLeft");
         mGoalMeterRight = View.findDrawableById("GoalMeterRight");
+    }
+
+    /**
+     * Called by the app whenever the settings have changed.
+     */
+    function onSettingsChanged() {
+        mCalendarIndicator.onSettingsChanged();
     }
 
     /**
