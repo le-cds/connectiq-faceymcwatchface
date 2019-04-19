@@ -25,7 +25,7 @@ class ValueIndicators extends WatchUi.Drawable {
 
     // I wasn't able to find out how (and if) character arithmetic works, so this
     // array is a workaround
-    private const SYMBOL_BATTERY = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    private const SYMBOL_BATTERY = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":"];
 
     // Y coordinate of the symbols.
     private var mY;
@@ -63,25 +63,30 @@ class ValueIndicators extends WatchUi.Drawable {
      */
     function draw(dc) {
         var settings = System.getDeviceSettings();
+        var stats = System.getSystemStats();
 
         // Notifications indicator
         drawNotifications(dc, false);
 
-        // Compute in which battery percentile we are:
+        // Compute in which battery percentile we are (unless we're currently charging):
         //    0% to 10% -> 0
         //   11% to 20% -> 1
         //   ...
-        var batt = System.getSystemStats().battery.toNumber();
-        var battPercentile = (batt - 1) / 10;
-        if (battPercentile < 0) {
-            battPercentile = 0;
+        var batt = stats.battery.toNumber();
+
+        var battSymbol = 10;
+        if (!stats.charging) {
+            battSymbol = (batt - 1) / 10;
+            if (battSymbol < 0) {
+                battSymbol = 0;
+            }
         }
 
         // Battery indicator (draw as active if battery is below 20%)
         drawIndicator(
             dc,
             mMidX,
-            SYMBOL_BATTERY[battPercentile],
+            SYMBOL_BATTERY[battSymbol],
             batt.format("%d") + "%",
             batt < 20);
 
