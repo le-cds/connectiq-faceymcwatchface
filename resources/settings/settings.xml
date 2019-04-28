@@ -5,7 +5,7 @@
     </setting>
     
     <setting propertyKey="@Properties.AppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval_Title" prompt="@Strings.AppointmentUpdateInterval_Prompt">
-    	<settingConfig type="numeric" min="5" max="240" errorMessage="@Strings.AppointmentUpdateInterval_Error" />
+    	<settingConfig type="numeric" min="15" max="1440" errorMessage="@Strings.AppointmentUpdateInterval_Error" />
     </setting>
 
 </settings>
