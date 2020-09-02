@@ -9,23 +9,7 @@ A _Garmin ConnectIQ_ watchface currently optimized for the following Garmin watc
 * vivoactive 3
 * vivoactive 3 music
 
-## Features
-
-The watchface shows the following information:
-
-* Date
-* Time
-* Steps
-* Floors
-* Bluetooth connection status
-* Do Not Disturb status
-* Time of next appointment (see below)
-* Number of notifications
-* Battery status
-* Number of active watch alarms
-
-
-## Appointments
+## Next Appointment
 
 The watchface is able to show the time of the upcoming appointment. Only appointments in the upcoming 24 hours (minus 5 minutes) are displayed. The whole thing only works if a companion app, _Calendar IQ Connector_, is installed on an Android mobile the watch is connected to. That app will send information on upcoming appointments to the watch in regular intervals.
 
