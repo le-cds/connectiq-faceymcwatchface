@@ -7,6 +7,12 @@ using Toybox.WatchUi;
 (:background)
 class FaceyMcWatchFaceApp extends Application.AppBase {
 
+    /**
+     * Whether we're currently running as part of the background service or not.
+     * This is updated in getServiceDelegate(), which is only called on the
+     * background service, but not on the actual watchface.
+     */
+    private var mIsBackground = false;
     /** Our copy of our view. Used to pass setting update events along. */
     private var mView;
 
@@ -21,8 +27,10 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
-        // Be sure to save our appointments now
-        storeAppointments();
+        if (!mIsBackground) {
+            // Be sure to save our appointments now
+            storeAppointments();
+        }
     }
 
     // Return the initial view of your application here
@@ -49,6 +57,7 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
 
     // Returns the background service to run.
     function getServiceDelegate() {
+        mIsBackground = true;
         return [new CalendarServiceDelegate()];
     }
 
