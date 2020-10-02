@@ -2,7 +2,9 @@
     <iq:application entry="FaceyMcWatchFaceApp" id="d7d720e4e39743feb4ef7df656ac5766" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="3.0.0" name="@Strings.AppName" type="watchface" version="0.0.0">
         <iq:products>
             <iq:product id="vivoactive3"/>
+            <iq:product id="vivoactive3d"/>
             <iq:product id="vivoactive3m"/>
+            <iq:product id="vivoactive3mlte"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Background"/>
