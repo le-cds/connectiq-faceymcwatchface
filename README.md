@@ -1,17 +1,18 @@
 # Facey McWatchface
 
-Looks something like this:
+A watchface for Garmin smartwatches with a focus on communication instead of fitness. Looks something like this:
 
 ![Watchface design](design/face.png)
 
-A _Garmin ConnectIQ_ watchface currently optimized for the following Garmin watches:
 
-* vivoactive 3
-* vivoactive 3 music
+## Main Feature: Time of Upcoming Appointment
 
-## Next Appointment
+The watchface is able to show the time of the upcoming appointment. Only appointments in the upcoming 24 hours (minus 5 minutes) are displayed. The whole thing only works if a companion app, [Calendar IQ Connector](https://github.com/le-cds/android-calendariq), is installed on an Android mobile the watch is connected to. That app will send information on upcoming appointments to the watch in regular intervals.
 
-The watchface is able to show the time of the upcoming appointment. Only appointments in the upcoming 24 hours (minus 5 minutes) are displayed. The whole thing only works if a companion app, _Calendar IQ Connector_, is installed on an Android mobile the watch is connected to. That app will send information on upcoming appointments to the watch in regular intervals.
+
+## Supported Smartwatches
+
+* vivoactive 3 (all variations)
 
 
 ## Attributions
