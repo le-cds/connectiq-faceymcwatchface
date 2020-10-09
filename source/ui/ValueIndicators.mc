@@ -119,7 +119,7 @@ class ValueIndicators extends WatchUi.Drawable {
                     SYMBOL_SIZE + 20
                 );
 
-                dc.setColor(gColorHighlights, gColorBackground);
+                dc.setColor(Graphics.COLOR_TRANSPARENT, gColorBackground);
                 dc.clear();
 
                 drawIndicator(dc, mLeftX, SYMBOL_NOTIFICATIONS, notifications.format("%d"), notifications > 0);

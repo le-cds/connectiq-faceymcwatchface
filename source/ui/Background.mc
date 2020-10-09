@@ -2,6 +2,10 @@ using Toybox.WatchUi;
 using Toybox.Application;
 using Toybox.Graphics;
 
+/**
+ * Clears the whole screen and draws the background in the configured
+ * colour.
+ */
 class Background extends WatchUi.Drawable {
 
     function initialize() {

@@ -75,7 +75,7 @@ class StatusIndicators extends WatchUi.Drawable {
                     SYMBOL_SIZE
                 );
 
-                dc.setColor(gColorHighlights, gColorBackground);
+                dc.setColor(Graphics.COLOR_TRANSPARENT, gColorBackground);
                 dc.clear();
 
                 drawIndicator(dc, mLeftX, SYMBOL_BLUETOOTH, connected);
