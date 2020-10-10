@@ -18,7 +18,8 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
 
     // Cache references to drawables immediately after layout, to avoid expensive findDrawableById()
     // calls later WHEN TIME IS SCARCE!!!
-    private var mStatusIndicators;
+    private var mBluetoothIndicator;
+    private var mDndIndicator;
     private var mTimeLine;
     private var mCalendarIndicator;
     private var mValueIndicators;
@@ -43,7 +44,8 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         setLayout(Rez.Layouts.WatchFace(dc));
 
         // Remember drawables
-        mStatusIndicators = View.findDrawableById("StatusIndicators");
+        mBluetoothIndicator = View.findDrawableById("BluetoothIndicator");
+        mDndIndicator = View.findDrawableById("DndIndicator");
         mTimeLine = View.findDrawableById("Time");
         mCalendarIndicator = View.findDrawableById("CalendarIndicator");
         mValueIndicators = View.findDrawableById("ValueIndicators");
@@ -95,7 +97,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      * Update only the most pressing things here.
      */
     function onPartialUpdate(dc) {
-        mStatusIndicators.drawBluetooth(dc, true);
+        mBluetoothIndicator.partialDraw(dc);
         mTimeLine.drawSeconds(dc, true);
         mValueIndicators.drawNotifications(dc, true);
     }

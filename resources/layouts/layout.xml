@@ -21,9 +21,14 @@
 		<param name="symbolY">24</param>
 	</drawable>
 	
-	<drawable id="StatusIndicators" class="StatusIndicators">
-		<param name="y">8</param>
-		<param name="distance">30</param>
+	<drawable id="BluetoothIndicator" class="BluetoothIndicator">
+		<param name="centerX">96</param>
+		<param name="topY">8</param>
+	</drawable>
+	
+	<drawable id="DndIndicator" class="DoNotDisturbIndicator">
+		<param name="centerX">144</param>
+		<param name="topY">8</param>
 	</drawable>
 
 	<drawable id="Date" class="DateLine">
