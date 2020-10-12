@@ -12,10 +12,6 @@ using Toybox.WatchUi;
  */
 class FaceyMcWatchFaceView extends WatchUi.WatchFace {
 
-    // Symbols for the goal meters
-    private const SYMBOL_STEPS = "E";
-    private const SYMBOL_STAIRS = "F";
-
     // Cache references to drawables immediately after layout, to avoid expensive findDrawableById()
     // calls later WHEN TIME IS SCARCE!!!
     private var mTopLeftIndicator;
@@ -63,7 +59,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mBottomCenterIndicator.setBehavior(new BatteryBehavior());
         mBottomRightIndicator.setBehavior(new AlarmsBehavior());
         mLeftGoalMeter.setBehavior(new StepsMeterBehavior());
-        mRightGoalMeter.setBehavior(new BatteryMeterBehavior());
+        mRightGoalMeter.setBehavior(new StairsMeterBehavior());
     }
 
     /**
