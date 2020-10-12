@@ -22,7 +22,9 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     private var mTopRightIndicator;
     private var mTimeLine;
     private var mCalendarIndicator;
-    private var mValueIndicators;
+    private var mBottomLeftIndicator;
+    private var mBottomCenterIndicator;
+    private var mBottomRightIndicator;
     private var mGoalMeterLeft;
     private var mGoalMeterRight;
 
@@ -48,12 +50,17 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mTopRightIndicator = View.findDrawableById("TopRightIndicator");
         mTimeLine = View.findDrawableById("Time");
         mCalendarIndicator = View.findDrawableById("CalendarIndicator");
-        mValueIndicators = View.findDrawableById("ValueIndicators");
+        mBottomLeftIndicator = View.findDrawableById("BottomLeftIndicator");
+        mBottomCenterIndicator = View.findDrawableById("BottomCenterIndicator");
+        mBottomRightIndicator = View.findDrawableById("BottomRightIndicator");
         mGoalMeterLeft = View.findDrawableById("GoalMeterLeft");
         mGoalMeterRight = View.findDrawableById("GoalMeterRight");
         
         mTopLeftIndicator.setBehavior(new BluetoothBehavior());
         mTopRightIndicator.setBehavior(new DoNotDisturbBehavior());
+        mBottomLeftIndicator.setBehavior(new NotificationsBehavior());
+        mBottomCenterIndicator.setBehavior(new BatteryBehavior());
+        mBottomRightIndicator.setBehavior(new AlarmsBehavior());
     }
 
     /**
@@ -102,7 +109,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     function onPartialUpdate(dc) {
         mTopLeftIndicator.partialDraw(dc);
         mTimeLine.drawSeconds(dc, true);
-        mValueIndicators.drawNotifications(dc, true);
+        mBottomLeftIndicator.partialDraw(dc);
     }
 
     /**

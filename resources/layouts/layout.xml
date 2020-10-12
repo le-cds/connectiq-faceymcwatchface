@@ -21,12 +21,12 @@
 		<param name="symbolY">24</param>
 	</drawable>
 	
-	<drawable id="TopLeftIndicator" class="OnOffIndicator">
+	<drawable id="TopLeftIndicator" class="IconIndicator">
 		<param name="centerX">96</param>
 		<param name="topY">8</param>
 	</drawable>
 	
-	<drawable id="TopRightIndicator" class="OnOffIndicator">
+	<drawable id="TopRightIndicator" class="IconIndicator">
 		<param name="centerX">144</param>
 		<param name="topY">8</param>
 	</drawable>
@@ -46,8 +46,21 @@
 		<param name="y">148</param>
 	</drawable>
 	
-	<drawable id="ValueIndicators" class="ValueIndicators">
-		<param name="y">194</param>
-		<param name="distance">30</param>
+	<drawable id="BottomLeftIndicator" class="ValueIndicator">
+		<param name="centerX">74</param>
+		<param name="topY">194</param>
+		<param name="topYValueOffset">16</param>
+	</drawable>
+	
+	<drawable id="BottomCenterIndicator" class="ValueIndicator">
+		<param name="centerX">120</param>
+		<param name="topY">194</param>
+		<param name="topYValueOffset">16</param>
+	</drawable>
+	
+	<drawable id="BottomRightIndicator" class="ValueIndicator">
+		<param name="centerX">166</param>
+		<param name="topY">194</param>
+		<param name="topYValueOffset">16</param>
 	</drawable>
 </layout>

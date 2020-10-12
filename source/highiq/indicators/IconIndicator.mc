@@ -2,23 +2,18 @@ using Toybox.System;
 using Toybox.WatchUi;
 
 /**
- * Subclasses should implement:
- * - isIndicating()
- * 
- * Subclasses can implement:
- * - supportsPartialUpdate()
- * - needsUpdate()
- * - initialize(params) -> must call superclass implementation
+ * Indicator which draws an icon. An IconIndicator needs an IconBehavior object to tell
+ * it how and what to draw.
  */
-class OnOffIndicator extends WatchUi.Drawable {
+class IconIndicator extends WatchUi.Drawable {
 
     ///////////////////////////////////////////////////////////////////////////////////
     // Layout Parameters
 
     // X coordinate of this indicator's center.
-    private var mCenterX;
+    protected var mCenterX;
     // Y coordinate of this incidcator's top border.
-    private var mTopY;
+    protected var mTopY;
     
     ///////////////////////////////////////////////////////////////////////////////////
     // State
@@ -68,7 +63,7 @@ class OnOffIndicator extends WatchUi.Drawable {
      */
     public function draw(dc) {
         if (mBehavior != null) {
-            drawIcon(dc, false);
+            doDraw(dc, false);
         }
     }
     
@@ -80,14 +75,16 @@ class OnOffIndicator extends WatchUi.Drawable {
             && mBehavior.supportsPartialUpdate()
             && mBehavior.needsUpdate()) {
             
-            drawIcon(dc, true);
+            doDraw(dc, true);
         }
     }
     
     /**
      * Implements the actual drawing.
      */
-    private function drawIcon(dc, partial) {
+    protected function doDraw(dc, partial) {
+        mBehavior.update();
+    
         // If this is a partial update, we need to manually clear our little area
         // of the screen
         if (partial) {
@@ -101,12 +98,7 @@ class OnOffIndicator extends WatchUi.Drawable {
         }
         
         // Draw the icon
-        if (mBehavior.isOn()) {
-            dc.setColor(gColorIndicatorActive, Graphics.COLOR_TRANSPARENT);
-        } else {
-            dc.setColor(gColorIndicatorInactive, Graphics.COLOR_TRANSPARENT);
-        }
-        
+        dc.setColor(mBehavior.getIconColor(), Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mCenterX,
             mTopY,
