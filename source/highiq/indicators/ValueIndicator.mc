@@ -48,7 +48,7 @@ class ValueIndicator extends IconIndicator {
         IconIndicator.doDraw(dc, partial);
         
         // Draw the value
-        dc.setColor(mBehavior.getValueColor(), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(mBehavior.getValueColor(), mBehavior.getBackgroundColor());
         dc.drawText(
             mCenterX,
             mTopY + mTopYValueOffset,

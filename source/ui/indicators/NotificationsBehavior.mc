@@ -34,6 +34,10 @@ class NotificationsBehavior extends ValueBehavior {
         }
     }
     
+    public function getBackgroundColor() {
+        return gColorBackground;
+    }
+    
     public function getIconCharacter() {
         return 'C';
     }

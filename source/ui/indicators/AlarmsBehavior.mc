@@ -23,6 +23,10 @@ class AlarmsBehavior extends ValueBehavior {
         }
     }
     
+    public function getBackgroundColor() {
+        return gColorBackground;
+    }
+    
     public function getIconCharacter() {
         return "D";
     }

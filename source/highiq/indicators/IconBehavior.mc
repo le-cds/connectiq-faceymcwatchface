@@ -5,6 +5,7 @@
  * - initialize() (subclasses need to indicate whether or not they support partial updates)
  * - getIconFont()
  * - getIconColor()
+ * - getBackgroundColor()
  * - getIconCharacter()
  *
  * Clients may want to implement these functions as well:
@@ -47,6 +48,13 @@ class IconBehavior {
      * Returns the current icon color. This can be different upon each invocation.
      */
     public function getIconColor() {
+        return null;
+    }
+    
+    /**
+     * Returns the background color. This can be different upon each invocation.
+     */
+    public function getBackgroundColor() {
         return null;
     }
     

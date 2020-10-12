@@ -27,6 +27,10 @@ class BatteryBehavior extends ValueBehavior {
         }
     }
     
+    public function getBackgroundColor() {
+        return gColorBackground;
+    }
+    
     public function getIconCharacter() {
         // Compute in which battery percentile we are (unless we're currently charging):
         //    0% to 10% -> 0

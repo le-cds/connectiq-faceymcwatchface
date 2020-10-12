@@ -84,21 +84,9 @@ class IconIndicator extends WatchUi.Drawable {
      */
     protected function doDraw(dc, partial) {
         mBehavior.update();
-    
-        // If this is a partial update, we need to manually clear our little area
-        // of the screen
-        if (partial) {
-            dc.setClip(
-                mCenterX - mIconSize / 2,
-                mTopY,
-                mIconSize,
-                mIconSize);
-            dc.setColor(Graphics.COLOR_TRANSPARENT, gColorBackground);
-            dc.clear();
-        }
         
         // Draw the icon
-        dc.setColor(mBehavior.getIconColor(), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(mBehavior.getIconColor(), mBehavior.getBackgroundColor());
         dc.drawText(
             mCenterX,
             mTopY,

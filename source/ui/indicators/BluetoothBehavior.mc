@@ -35,6 +35,10 @@ class BluetoothBehavior extends IconBehavior {
         }
     }
     
+    public function getBackgroundColor() {
+        return gColorBackground;
+    }
+    
     public function getIconCharacter() {
         return 'A';
     }
