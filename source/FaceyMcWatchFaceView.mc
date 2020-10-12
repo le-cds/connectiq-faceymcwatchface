@@ -14,13 +14,15 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
 
     // Cache references to drawables immediately after layout, to avoid expensive findDrawableById()
     // calls later WHEN TIME IS SCARCE!!!
+    private var mTimeLine;
+    
     private var mTopLeftIndicator;
     private var mTopRightIndicator;
-    private var mTimeLine;
     private var mCenterIndicator;
     private var mBottomLeftIndicator;
     private var mBottomCenterIndicator;
     private var mBottomRightIndicator;
+    
     private var mLeftGoalMeter;
     private var mRightGoalMeter;
 
@@ -103,9 +105,12 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      * Update only the most pressing things here.
      */
     function onPartialUpdate(dc) {
-        mTopLeftIndicator.partialDraw(dc);
         mTimeLine.drawSeconds(dc, true);
+        mTopRightIndicator.partialDraw(dc);
+        mCenterIndicator.partialDraw(dc);
         mBottomLeftIndicator.partialDraw(dc);
+        mBottomCenterIndicator.partialDraw(dc);
+        mBottomRightIndicator.partialDraw(dc);
     }
 
     /**
