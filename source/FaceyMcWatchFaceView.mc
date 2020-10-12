@@ -21,7 +21,6 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     private var mTopLeftIndicator;
     private var mTopRightIndicator;
     private var mTimeLine;
-    private var mCalendarIndicator;
     private var mCenterIndicator;
     private var mBottomLeftIndicator;
     private var mBottomCenterIndicator;
@@ -50,7 +49,6 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mTopLeftIndicator = View.findDrawableById("TopLeftIndicator");
         mTopRightIndicator = View.findDrawableById("TopRightIndicator");
         mTimeLine = View.findDrawableById("Time");
-        mCalendarIndicator = View.findDrawableById("CalendarIndicator");
         mCenterIndicator = View.findDrawableById("CenterIndicator");
         mBottomLeftIndicator = View.findDrawableById("BottomLeftIndicator");
         mBottomCenterIndicator = View.findDrawableById("BottomCenterIndicator");
