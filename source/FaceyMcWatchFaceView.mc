@@ -22,6 +22,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     private var mTopRightIndicator;
     private var mTimeLine;
     private var mCalendarIndicator;
+    private var mCenterIndicator;
     private var mBottomLeftIndicator;
     private var mBottomCenterIndicator;
     private var mBottomRightIndicator;
@@ -50,6 +51,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mTopRightIndicator = View.findDrawableById("TopRightIndicator");
         mTimeLine = View.findDrawableById("Time");
         mCalendarIndicator = View.findDrawableById("CalendarIndicator");
+        mCenterIndicator = View.findDrawableById("CenterIndicator");
         mBottomLeftIndicator = View.findDrawableById("BottomLeftIndicator");
         mBottomCenterIndicator = View.findDrawableById("BottomCenterIndicator");
         mBottomRightIndicator = View.findDrawableById("BottomRightIndicator");
@@ -58,6 +60,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         
         mTopLeftIndicator.setBehavior(new BluetoothBehavior());
         mTopRightIndicator.setBehavior(new DoNotDisturbBehavior());
+        mCenterIndicator.setBehavior(new AppointmentBehavior());
         mBottomLeftIndicator.setBehavior(new NotificationsBehavior());
         mBottomCenterIndicator.setBehavior(new BatteryBehavior());
         mBottomRightIndicator.setBehavior(new AlarmsBehavior());
@@ -67,7 +70,11 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      * Called by the app whenever the settings have changed.
      */
     function onSettingsChanged() {
-        mCalendarIndicator.onSettingsChanged();
+        if (Properties.getValue(ACTIVATE_APPOINTMENTS)) {
+            mCenterIndicator.setBehavior(new AppointmentBehavior());
+        } else {
+            mCenterIndicator.setBehavior(null);
+        }
     }
 
     /**

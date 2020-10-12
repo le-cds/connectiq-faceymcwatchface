@@ -42,8 +42,10 @@
 		<param name="secondsClipHeight">14</param>
 	</drawable>
 	
-	<drawable id="CalendarIndicator" class="CalendarIndicator">
-		<param name="y">148</param>
+	<drawable id="CenterIndicator" class="ValueIndicator">
+		<param name="centerX">120</param>
+		<param name="topY">148</param>
+		<param name="topYValueOffset">16</param>
 	</drawable>
 	
 	<drawable id="BottomLeftIndicator" class="ValueIndicator">
