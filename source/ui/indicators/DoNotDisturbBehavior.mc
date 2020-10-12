@@ -4,19 +4,21 @@ using Toybox.System;
  * Indicator for the watch's Do Not Disturb setting. Does not support partial
  * updates since changing this setting entails leaving the watchface.
  */
-class DoNotDisturbIndicator extends BaseIndicator {
-
-    public function initialize(params) {
-        BaseIndicator.initialize(params);
-        
-        mIconSize = 16;
+class DoNotDisturbBehavior extends OnOffBehavior {
+    
+    public function initialize() {
+        OnOffBehavior.initialize();
     }
     
-    protected function isIndicating() {
+    public function isOn() {
         return System.getDeviceSettings().doNotDisturb;
     }
     
-    protected function getIconCharacter() {
+    public function getIconFont() {
+        return gSymbolsFont;
+    }
+    
+    public function getIconCharacter() {
         return 'B';
     }
     

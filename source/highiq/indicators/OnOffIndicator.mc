@@ -10,7 +10,7 @@ using Toybox.WatchUi;
  * - needsUpdate()
  * - initialize(params) -> must call superclass implementation
  */
-class BaseIndicator extends WatchUi.Drawable {
+class OnOffIndicator extends WatchUi.Drawable {
 
     ///////////////////////////////////////////////////////////////////////////////////
     // Layout Parameters
@@ -21,13 +21,36 @@ class BaseIndicator extends WatchUi.Drawable {
     private var mTopY;
     
     ///////////////////////////////////////////////////////////////////////////////////
-    // Subclass Settings
+    // State
     
-    // Size of the icon (e.g., 16 for a 16x16 icon).
-    protected var mIconSize = 1;
+    // The actual definition of how the indicator behaves.
+    protected var mBehavior;
+    // Cached icon font.
+    protected var mIconFont;
+    // Size of the icon displayed. E.g., 16 for a 16x16 icon.
+    protected var mIconSize;
     
     ///////////////////////////////////////////////////////////////////////////////////
-    // Drawable
+    // Behavior
+    
+    /**
+     * Sets the gehavior that will define what this indicator does.
+     */
+    public function setBehavior(behavior) {
+        mBehavior = behavior;
+        
+        if (mBehavior != null) {
+            // There is a behavior; cache resources
+            mIconFont = mBehavior.getIconFont();
+            mIconSize = mBehavior.getIconSize();
+        } else {
+            // No behavior; release resources
+            mIconFont = null;
+        }
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////////
+    // Drawing
     
     /**
      * Initializes this thing. Subclasses may override this for additional initialization,
@@ -44,14 +67,19 @@ class BaseIndicator extends WatchUi.Drawable {
      * Draws the indicator.
      */
     public function draw(dc) {
-        drawIcon(dc, false);
+        if (mBehavior != null) {
+            drawIcon(dc, false);
+        }
     }
     
     /**
      * Partially draws the indicator, if supported and necessary.
      */
     public function partialDraw(dc) {
-        if (supportsPartialUpdate() && needsUpdate()) {
+        if (mBehavior != null
+            && mBehavior.supportsPartialUpdate()
+            && mBehavior.needsUpdate()) {
+            
             drawIcon(dc, true);
         }
     }
@@ -73,7 +101,7 @@ class BaseIndicator extends WatchUi.Drawable {
         }
         
         // Draw the icon
-        if (isIndicating()) {
+        if (mBehavior.isOn()) {
             dc.setColor(gColorIndicatorActive, Graphics.COLOR_TRANSPARENT);
         } else {
             dc.setColor(gColorIndicatorInactive, Graphics.COLOR_TRANSPARENT);
@@ -82,47 +110,9 @@ class BaseIndicator extends WatchUi.Drawable {
         dc.drawText(
             mCenterX,
             mTopY,
-            gSymbolsFont,
-            getIconCharacter(),
+            mIconFont,
+            mBehavior.getIconCharacter(),
             Graphics.TEXT_JUSTIFY_CENTER);
-    }
-    
-    ///////////////////////////////////////////////////////////////////////////////////
-    // Subclass Behavior
-    
-    /**
-     * Returns whether or not this indicator updates during partial updates. By default,
-     * this is not the case, which will cause the indicator to update only once per
-     * minute or when the watchface is completely redrawn anyway. Override and return
-     * true only if the indicator displays information that should be updated more often
-     * than that.
-     */
-    public function supportsPartialUpdate() {
-        return false;
-    }
-    
-    /**
-     * If the indicator supports partial updates, this function is used to check whether
-     * an update is actually required. This is ignored during regular updates.
-     */
-    protected function needsUpdate() {
-        return true;
-    }
-    
-    /**
-     * Returns whether or not the indicator should light up. This function should be
-     * implemented by subclasses.
-     */
-    protected function isIndicating() {
-        return false;
-    }
-    
-    /**
-     * Returns the current icon character. This may change depending on the indicator's
-     * state.
-     */
-    protected function getIconCharacter() {
-        return ' ';
     }
 
 }
