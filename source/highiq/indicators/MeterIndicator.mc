@@ -6,14 +6,15 @@ using Toybox.WatchUi;
 const MIN_WHOLE_SEGMENT_HEIGHT = 5;
 
 enum /* GOAL_METER_STYLES */ {
-    STYLE_MULTI_SEGMENTS,
-    STYLE_SINGLE_SEGMENT
+    STYLE_ALL_SEGMENTS,
+    STYLE_ALL_SEGMENTS_MERGED,
+    STYLE_FILLED_SEGMENTS,
+    STYLE_FILLED_SEGMENTS_MERGED
 }
 
 /**
- * Goal meters display the progress towards a goal. This version has been stripped of a lot of
- * functionality and adaptibility as compared to the original since it's geared towards the
- * Vivoactive 3.
+ * Meter indicators display bars the set a current value against a possible maximum. What exactly
+ * they show must be configured through a MeterBehavior object. 
  *
  * Buffered drawing behaviour:
  * - On initialisation: calculate clip width (non-trivial for arc shape); create buffers for empty
@@ -27,7 +28,10 @@ enum /* GOAL_METER_STYLES */ {
  * This code is based on code from the Crystal watch face, which can be found at:
  * https://github.com/warmsound/crystal-face
  */
-class GoalMeter extends WatchUi.Drawable {
+class MeterIndicator extends WatchUi.Drawable {
+
+    // MeterBehavior object that determines what this meter displays.
+    private var mBehavior = null;
 
     // The side we're on (either :left or :right)
     private var mSide;
@@ -40,16 +44,14 @@ class GoalMeter extends WatchUi.Drawable {
     // Clip height of meter
     private var mHeight;
     // Current stroke width of separator bars
-    private var mSeparator;
-    // Stroke width of separator bars specified in layout
-    private var mLayoutSeparator;
+    private var mSeparator = 0;
 
-    // The symbol character
-    private var mSymbol;
-    // X coordinate of symbol
-    private var mSymbolX;
-    // Y coordinate of symbol.
-    private var mSymbolY;
+    // Font used to draw the icon.
+    private var mIconFont;
+    // X coordinate of icon
+    private var mIconX;
+    // Y coordinate of icon.
+    private var mIconY;
 
     // Array of segment heights, in pixels, excluding separators.
     private var mSegments;
@@ -71,40 +73,63 @@ class GoalMeter extends WatchUi.Drawable {
     // The current maximum value.
     private var mMaxValue;
 
-    function initialize(params) {
+    public function initialize(params) {
         Drawable.initialize(params);
 
         mSide = params[:side];
         mStyle = params[:style];
         mStroke = params[:stroke];
         mHeight = params[:height];
-        mLayoutSeparator = params[:separator];
+        
+        // Only read separator width from layout if a multi-segment style is enabled (in
+        // the original code, this is user-configurable and can change during runtime)
+        if (mStyle == STYLE_ALL_SEGMENTS || mStyle == STYLE_FILLED_SEGMENTS) {
+            mSeparator = params[:separator];
+        }
 
-        mSymbolX = params[:symbolX];
-        mSymbolY = params[:symbolY];
-
-        // Read meter style setting to determine current separator width.
-        onSettingsChanged();
+        mIconX = params[:iconX];
+        mIconY = params[:iconY];
 
         mWidth = getWidth();
     }
 
-    function getWidth() {
-        var halfScreenWidth = System.getDeviceSettings().screenWidth / 2;
-        var innerRadius = halfScreenWidth - mStroke;
+    private function getWidth() {
+        var width;
+        
+        var halfScreenWidth;
+        var innerRadius;
 
-        var width = halfScreenWidth - Math.sqrt(Math.pow(innerRadius, 2) - Math.pow(mHeight / 2, 2));
+        if (System.getDeviceSettings().screenShape == System.SCREEN_SHAPE_RECTANGLE) {
+            width = mStroke;
+        } else {
+            halfScreenWidth = System.getDeviceSettings().screenWidth / 2;
+            innerRadius = halfScreenWidth - mStroke; 
+            width = halfScreenWidth - Math.sqrt(Math.pow(innerRadius, 2) - Math.pow(mHeight / 2, 2));
+            
+            // Round up to cover partial pixels.
+            width = Math.ceil(width).toNumber();
+        }
 
-        // Round up to cover partial pixels.
-        return Math.ceil(width).toNumber();
+        return width;
+    }
+    
+    public function setBehavior(behavior) {
+        // Things will be properly reset upon the next draw cycle
+        mBehavior = behavior;
+        
+        if (mBehavior != null) {
+            // There is a behavior; cache resources
+            mIconFont = mBehavior.getIconFont();
+        } else {
+            // No behavior; release resources
+            mIconFont = null;
+        }
     }
 
     /**
      * Call to set the current and maximum values to be displayed.
      */
-    function setValues(symbol, current, max) {
-        mSymbol = symbol;
-
+    private function setValues(current, max) {
         // If max value changes, recalculate and cache segment layout, and set mBuffersNeedRedraw flag.
         // Can't redraw buffers here, as we don't have reference to screen DC, in order to determine
         // its dimensions - do this later, in draw() (already in draw cycle, so no real benefit in
@@ -124,28 +149,6 @@ class GoalMeter extends WatchUi.Drawable {
         }
     }
 
-    function onSettingsChanged() {
-        mBuffersNeedRecreate = true;
-
-        // #18 Only read separator width from layout if multi segment style is selected.
-        if (mStyle == STYLE_MULTI_SEGMENTS) {
-            // Force recalculation of mSegments in setValues() if mSeparator is about to change.
-            if (mSeparator != mLayoutSeparator) {
-                mMaxValue = null;
-            }
-
-            mSeparator = mLayoutSeparator;
-
-        } else {
-            // Force recalculation of mSegments in setValues() if mSeparator is about to change.
-            if (mSeparator != 0) {
-                mMaxValue = null;
-            }
-
-            mSeparator = 0;
-        }
-    }
-
     // Different draw algorithms have been tried:
     // 1. Draw each segment as a circle, clipped to a rectangle of the desired height, direct to screen DC.
     //    Intuitive, but expensive.
@@ -155,30 +158,44 @@ class GoalMeter extends WatchUi.Drawable {
     // 3. Unbuffered drawing: no buffer, and no clip support. Want common drawBuffer() function, so draw each segment as
     //    rectangle, then draw circular background colour mask between both meters. This requires an extra drawable in the layout,
     //    expensive, so only use this strategy for unbuffered drawing. For buffered, the mask can be drawn into each buffer.
-    function draw(dc) {
-        // Determine coordinates
-        var left;
-        if (mSide == :left) {
-            left = 0;
-        } else {
-            left = dc.getWidth() - mWidth;
+    public function draw(dc) {
+        // Don't bother if there's no behavior set yet
+        if (mBehavior == null) {
+            return;
         }
-
+        
+        // Update our values, which may cause us to redraw buffers
+        mBehavior.update();
+        setValues(mBehavior.getCurrValue(), mBehavior.getMaxValue());
+        
+        // Determine coordinates
+        var left = (mSide == :left) ? 0 : (dc.getWidth() - mWidth);
         var top = (dc.getHeight() - mHeight) / 2;
 
-        drawBuffered(dc, left, top);
+        // Force unbuffered drawing on fr735xt (CIQ 2.x) to reduce memory usage.
+        // Now changed to use buffered drawing only on round watches.
+        if ((Graphics has :BufferedBitmap) && (Graphics.Dc has :setClip)
+            && (System.getDeviceSettings().screenShape == System.SCREEN_SHAPE_ROUND)) {
 
-        // Draw the symbol
-        if (mCurrentValue >= mMaxValue) {
-            dc.setColor(gColorMeterReached, Graphics.COLOR_TRANSPARENT);
+            drawBuffered(dc, left, top);
+        
         } else {
-            dc.setColor(gColorMeterNotReached, Graphics.COLOR_TRANSPARENT);
+            // Filled segments: 0 --> fill height.
+            drawSegments(dc, left, top, mBehavior.getActiveMeterColor(), mSegments, 0, mFillHeight);
+
+            // Unfilled segments, if necessary: fill height --> height.
+            if (mStyle == STYLE_ALL_SEGMENTS || mStyle == STYLE_ALL_SEGMENTS_MERGED) {
+                drawSegments(dc, left, top, mBehavior.getInactiveMeterColor(), mSegments, mFillHeight, mHeight);
+            }
         }
+
+        // Draw the icon
+        dc.setColor(mBehavior.getIconColor(), mBehavior.getBackgroundColor());
         dc.drawText(
-            mSymbolX,
-            mSymbolY,
-            gSymbolsFont,
-            mSymbol,
+            mIconX,
+            mIconY,
+            mIconFont,
+            mBehavior.getIconCharacter(),
             Graphics.TEXT_JUSTIFY_LEFT
         );
     }
@@ -188,7 +205,7 @@ class GoalMeter extends WatchUi.Drawable {
      * empty buffer for remaining height.
      */
     (:buffered)
-    function drawBuffered(dc, left, top) {
+    private function drawBuffered(dc, left, top) {
         var emptyBufferDc;
         var filledBufferDc;
 
@@ -200,47 +217,45 @@ class GoalMeter extends WatchUi.Drawable {
         var x;
         var radius;
 
-        // Recreate buffers only if necessary
+        // Recreate buffers only if this is the very first draw(), or if optimised colour palette has changed e.g. theme colour
+        // change.
         if (mBuffersNeedRecreate) {
-            mEmptyBuffer = createSegmentBuffer(gColorMeterBackground);
-            mFilledBuffer = createSegmentBuffer(gColorHighlights);
+            mEmptyBuffer = createSegmentBuffer(mBehavior.getInactiveMeterColor());
+            mFilledBuffer = createSegmentBuffer(mBehavior.getActiveMeterColor());
             mBuffersNeedRecreate = false;
-
-
             // Ensure newly-created buffers are drawn next.
             mBuffersNeedRedraw = true;
         }
 
         // Redraw buffers only if maximum value changes.
         if (mBuffersNeedRedraw) {
+
             // Clear both buffers with background colour.
             emptyBufferDc = mEmptyBuffer.getDc();
-            emptyBufferDc.setColor(Graphics.COLOR_TRANSPARENT, gColorBackground);
+            emptyBufferDc.setColor(Graphics.COLOR_TRANSPARENT, mBehavior.getBackgroundColor());
             emptyBufferDc.clear();
 
             filledBufferDc = mFilledBuffer.getDc();
-            filledBufferDc.setColor(Graphics.COLOR_TRANSPARENT, gColorBackground);
+            filledBufferDc.setColor(Graphics.COLOR_TRANSPARENT, mBehavior.getBackgroundColor());
             filledBufferDc.clear();
 
             // Draw full fill height for each buffer.
-            drawSegments(emptyBufferDc, 0, 0, gColorMeterBackground, mSegments, 0, mHeight);
-            drawSegments(filledBufferDc, 0, 0, gColorHighlights, mSegments, 0, mHeight);
+            drawSegments(emptyBufferDc, 0, 0, mBehavior.getInactiveMeterColor(), mSegments, 0, mHeight);
+            // #62 Could avoid drawing filled segments buffer if style is not ALL_SEGMENTS or ALL_SEGMENTS_MERGED.
+            drawSegments(filledBufferDc, 0, 0, mBehavior.getActiveMeterColor(), mSegments, 0, mHeight);
 
-            // Draw circular mask for each buffer.
-            if (mSide == :left) {
-                // Beyond right edge of bufferDc.
-                x = halfScreenDcWidth;
-            } else {
-                // Beyond left edge of bufferDc.
-                x = mWidth - halfScreenDcWidth - 1;
+            // For arc meters, draw circular mask for each buffer.
+            if (System.getDeviceSettings().screenShape != System.SCREEN_SHAPE_RECTANGLE) {
+                // Beyond right edge of bufferDc : Beyond left edge of bufferDc.
+                x = (mSide == :left) ? halfScreenDcWidth : (mWidth - halfScreenDcWidth - 1);
+                radius = halfScreenDcWidth - mStroke;
+
+                emptyBufferDc.setColor(mBehavior.getBackgroundColor(), Graphics.COLOR_TRANSPARENT);
+                emptyBufferDc.fillCircle(x, (mHeight / 2), radius);
+
+                filledBufferDc.setColor(mBehavior.getBackgroundColor(), Graphics.COLOR_TRANSPARENT);
+                filledBufferDc.fillCircle(x, (mHeight / 2), radius);
             }
-            radius = halfScreenDcWidth - mStroke;
-
-            emptyBufferDc.setColor(gColorBackground, Graphics.COLOR_TRANSPARENT);
-            emptyBufferDc.fillCircle(x, (mHeight / 2), radius);
-
-            filledBufferDc.setColor(gColorBackground, Graphics.COLOR_TRANSPARENT);
-            filledBufferDc.fillCircle(x, (mHeight / 2), radius);
 
             mBuffersNeedRedraw = false;
         }
@@ -256,13 +271,16 @@ class GoalMeter extends WatchUi.Drawable {
         }
 
         // Draw unfilled segments.
-        clipBottom = clipTop;
-        clipTop = top;
-        clipHeight = clipBottom - clipTop;
+        // #62 ALL_SEGMENTS or ALL_SEGMENTS_MERGED.
+        if (mStyle == STYLE_ALL_SEGMENTS || mStyle == STYLE_ALL_SEGMENTS_MERGED) {
+            clipBottom = clipTop;
+            clipTop = top;
+            clipHeight = clipBottom - clipTop;
 
-        if (clipHeight > 0) {
-            dc.setClip(left, clipTop, mWidth, clipHeight);
-            dc.drawBitmap(left, top, mEmptyBuffer);
+            if (clipHeight > 0) {
+                dc.setClip(left, clipTop, mWidth, clipHeight);
+                dc.drawBitmap(left, top, mEmptyBuffer);
+            }
         }
 
         dc.clearClip();
@@ -272,20 +290,20 @@ class GoalMeter extends WatchUi.Drawable {
      * Use restricted palette, to conserve memory (four buffers per watchface).
      */
     (:buffered)
-    function createSegmentBuffer(fillColour) {
+    private function createSegmentBuffer(fillColour) {
         return new Graphics.BufferedBitmap({
             :width => mWidth,
             :height => mHeight,
 
             // First palette colour appears to determine initial colour of buffer.
-            :palette => [gColorBackground, fillColour]
+            :palette => [mBehavior.getBackgroundColor(), fillColour]
         });
     }
 
     // dc can be screen or buffer DC, depending on drawing mode.
     // x and y are co-ordinates of top-left corner of meter.
     // start/endFillHeight are pixel fill heights including separators, starting from zero at bottom.
-    function drawSegments(dc, x, y, fillColour, segments, startFillHeight, endFillHeight) {
+    private function drawSegments(dc, x, y, fillColour, segments, startFillHeight, endFillHeight) {
         var segmentStart = 0;
         var segmentEnd;
 
@@ -295,10 +313,10 @@ class GoalMeter extends WatchUi.Drawable {
 
         y += mHeight; // Start from bottom.
 
-        dc.setColor(fillColour, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(fillColour, Graphics.COLOR_TRANSPARENT /* Graphics.COLOR_RED */);
 
         // Draw rectangles, separator-width apart vertically, starting from bottom.
-        for (var i = 0; i < segments.size(); ++i) {
+        for (var i = 0; i < segments.size(); ++i) {         
             segmentEnd = segmentStart + segments[i];
 
             // Full segment is filled.
@@ -315,7 +333,7 @@ class GoalMeter extends WatchUi.Drawable {
             } else if (segmentEnd <= endFillHeight) {
                 fillStart = startFillHeight;
                 fillEnd = segmentEnd;
-
+            
             // Segment is not filled.
             } else {
                 fillStart = 0;
@@ -334,7 +352,7 @@ class GoalMeter extends WatchUi.Drawable {
     // Return array of segment heights.
     // Last segment may be partial segment; if so, ensure its height is at least 1 pixel.
     // Segment heights rounded to nearest pixel, so neighbouring whole segments may differ in height by a pixel.
-    function getSegments() {
+    private function getSegments() {
         // Value each whole segment represents.
         var segmentScale = getSegmentScale();
 
@@ -344,6 +362,7 @@ class GoalMeter extends WatchUi.Drawable {
 
         // Subtract total separator height from full height.
         var totalSegmentHeight = mHeight - (numSeparators * mSeparator);
+        // Force floating-point division.
         var segmentHeight = totalSegmentHeight * 1.0 / numSegments;
 
         var segments = new [Math.ceil(numSegments)];
@@ -366,7 +385,7 @@ class GoalMeter extends WatchUi.Drawable {
         return segments;
     }
 
-    function getFillHeight(segments) {
+    private function getFillHeight(segments) {
         var fillHeight;
 
         var i;
@@ -376,13 +395,14 @@ class GoalMeter extends WatchUi.Drawable {
             totalSegmentHeight += segments[i];
         }
 
-        var remainingFillHeight = Math.floor((mCurrentValue * 1.0 / mMaxValue) * totalSegmentHeight).toNumber(); // Excluding separators.
+        // Excluding separators.
+        var remainingFillHeight = Math.floor((mCurrentValue * 1.0 / mMaxValue) * totalSegmentHeight).toNumber();
         fillHeight = remainingFillHeight;
 
         for (i = 0; i < segments.size(); ++i) {
             remainingFillHeight -= segments[i];
             if (remainingFillHeight > 0) {
-                 // Fill extends beyond end of this segment, so add separator height.
+                // Fill extends beyond end of this segment, so add separator height.
                 fillHeight += mSeparator;
             } else {
                 // Fill does not extend beyond end of this segment, because this segment is not full.
@@ -395,7 +415,7 @@ class GoalMeter extends WatchUi.Drawable {
 
     // Determine what value each whole segment represents.
     // Try each scale in SEGMENT_SCALES array, until MIN_SEGMENT_HEIGHT is breached.
-    function getSegmentScale() {
+    private function getSegmentScale() {
         var segmentScale;
 
         var tryScaleIndex = 0;
@@ -414,8 +434,8 @@ class GoalMeter extends WatchUi.Drawable {
             totalSegmentHeight = mHeight - (numSeparators * mSeparator);
             segmentHeight = Math.floor(totalSegmentHeight / numSegments);
 
-            tryScaleIndex++;
-        } while (segmentHeight <= MIN_WHOLE_SEGMENT_HEIGHT);
+            tryScaleIndex++;    
+        } while (segmentHeight <= 5);
 
         return segmentScale;
     }

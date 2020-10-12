@@ -25,8 +25,8 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     private var mBottomLeftIndicator;
     private var mBottomCenterIndicator;
     private var mBottomRightIndicator;
-    private var mGoalMeterLeft;
-    private var mGoalMeterRight;
+    private var mLeftGoalMeter;
+    private var mRightGoalMeter;
 
 
     /**
@@ -53,8 +53,8 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mBottomLeftIndicator = View.findDrawableById("BottomLeftIndicator");
         mBottomCenterIndicator = View.findDrawableById("BottomCenterIndicator");
         mBottomRightIndicator = View.findDrawableById("BottomRightIndicator");
-        mGoalMeterLeft = View.findDrawableById("GoalMeterLeft");
-        mGoalMeterRight = View.findDrawableById("GoalMeterRight");
+        mLeftGoalMeter = View.findDrawableById("LeftGoalMeter");
+        mRightGoalMeter = View.findDrawableById("RightGoalMeter");
         
         mTopLeftIndicator.setBehavior(new BluetoothBehavior());
         mTopRightIndicator.setBehavior(new DoNotDisturbBehavior());
@@ -62,6 +62,8 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mBottomLeftIndicator.setBehavior(new NotificationsBehavior());
         mBottomCenterIndicator.setBehavior(new BatteryBehavior());
         mBottomRightIndicator.setBehavior(new AlarmsBehavior());
+        mLeftGoalMeter.setBehavior(new StepsMeterBehavior());
+        mRightGoalMeter.setBehavior(new BatteryMeterBehavior());
     }
 
     /**
@@ -96,13 +98,6 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     function onUpdate(dc) {
         // Clear any partial update clipping.
         dc.clearClip();
-
-        // Update the goal meters
-        var leftValues = getValuesForGoalType(GOAL_TYPE_STEPS);
-        mGoalMeterLeft.setValues(SYMBOL_STEPS, leftValues[:current], leftValues[:max]);
-
-        var rightValues = getValuesForGoalType(GOAL_TYPE_FLOORS_CLIMBED);
-        mGoalMeterRight.setValues(SYMBOL_STAIRS, rightValues[:current], rightValues[:max]);
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
