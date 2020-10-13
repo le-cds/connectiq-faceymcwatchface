@@ -33,12 +33,12 @@
 	</drawable>
 	
 	<drawable id="IndicatorTopLeft" class="Indicator">
-		<param name="centerX">115</param>
+		<param name="centerX">110</param>
 		<param name="topY">4</param>
 	</drawable>
 	
 	<drawable id="IndicatorTopRight" class="Indicator">
-		<param name="centerX">145</param>
+		<param name="centerX">150</param>
 		<param name="topY">4</param>
 	</drawable>
 	
