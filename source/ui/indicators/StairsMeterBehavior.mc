@@ -1,14 +1,14 @@
 /**
  * Implements behavior for displaying the number of steps.
  */
-class StairsMeterBehavior extends MeterBehavior {
+class StairsMeterBehavior extends DefaultMeterBehavior {
     
     // Cache most recent values
     private var mStairs = 0;
     private var mStairsGoal = 1;
 
     function initialize() {
-        MeterBehavior.initialize();
+        DefaultMeterBehavior.initialize();
     }
     
     public function update() {
@@ -24,21 +24,9 @@ class StairsMeterBehavior extends MeterBehavior {
         }
     }
     
-    public function getIconFont() {
-        return gSymbolsFont;
-    }
-    
-    public function getIconColor() {
+    public function isIndicating() {
         // Light up if the steps goal has been reached
-        if (mStairs >= mStairsGoal) {
-            return gColorIndicatorActive;
-        } else {
-            return gColorIndicatorInactive;
-        }
-    }
-    
-    public function getBackgroundColor() {
-        return gColorBackground;
+        return mStairs >= mStairsGoal;
     }
     
     public function getIconCharacter() {
@@ -51,14 +39,6 @@ class StairsMeterBehavior extends MeterBehavior {
     
     public function getMaxValue() {
         return mStairsGoal;
-    }
-    
-    public function getActiveMeterColor() {
-        return gColorHighlights;
-    }
-    
-    public function getInactiveMeterColor() {
-        return gColorMeterBackground;
     }
     
 }

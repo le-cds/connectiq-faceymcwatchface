@@ -3,17 +3,17 @@ using Toybox.System;
 /**
  * Indicates the number of unread notifications. Supports partial updates.
  */
-class NotificationsBehavior extends ValueBehavior {
+class NotificationsIndicatorBehavior extends DefaultIndicatorBehavior {
 
     // Last known number of notifications. When the current number differs it
     // is time to redraw.
     private var mNotifications;
     
     public function initialize() {
-        ValueBehavior.initialize(true);
+        DefaultIndicatorBehavior.initialize(true);
     }
 
-    public function needsUpdate() {
+    public function wantsPartialUpdate() {
         return mNotifications != System.getDeviceSettings().notificationCount;
     }
     
@@ -21,33 +21,13 @@ class NotificationsBehavior extends ValueBehavior {
         mNotifications = System.getDeviceSettings().notificationCount;
     }
     
-    public function getIconFont() {
-        return gSymbolsFont;
-    }
-    
-    public function getIconColor() {
+    public function isIndicating() {
         // The indicator should light up if there are notifications
-        if (mNotifications > 0) {
-            return gColorIndicatorActive;
-        } else {
-            return gColorIndicatorInactive;
-        }
-    }
-    
-    public function getBackgroundColor() {
-        return gColorBackground;
+        return mNotifications > 0;
     }
     
     public function getIconCharacter() {
         return 'C';
-    }
-    
-    public function getValueFont() {
-        return gIndicatorFont;
-    }
-    
-    public function getValueColor() {
-        return gColorIndicatorText;
     }
     
     public function getValue() {

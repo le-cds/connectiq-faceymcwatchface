@@ -28,7 +28,7 @@ enum /* GOAL_METER_STYLES */ {
  * This code is based on code from the Crystal watch face, which can be found at:
  * https://github.com/warmsound/crystal-face
  */
-class MeterIndicator extends WatchUi.Drawable {
+class Meter extends WatchUi.Drawable {
 
     // MeterBehavior object that determines what this meter displays.
     private var mBehavior = null;

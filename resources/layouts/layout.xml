@@ -1,7 +1,7 @@
 <layout id="WatchFace">
     <drawable class="Background" />
 
-	<drawable id="LeftGoalMeter" class="MeterIndicator">
+	<drawable id="LeftGoalMeter" class="Meter">
 		<param name="side">:left</param>
 		<param name="style">0</param>
 		<param name="stroke">4</param>
@@ -11,7 +11,7 @@
 		<param name="iconY">24</param>
 	</drawable>
 
-	<drawable id="RightGoalMeter" class="MeterIndicator">
+	<drawable id="RightGoalMeter" class="Meter">
 		<param name="side">:right</param>
 		<param name="style">0</param>
 		<param name="stroke">4</param>
@@ -21,12 +21,12 @@
 		<param name="iconY">24</param>
 	</drawable>
 	
-	<drawable id="TopLeftIndicator" class="IconIndicator">
+	<drawable id="TopLeftIndicator" class="Indicator">
 		<param name="centerX">96</param>
 		<param name="topY">8</param>
 	</drawable>
 	
-	<drawable id="TopRightIndicator" class="IconIndicator">
+	<drawable id="TopRightIndicator" class="Indicator">
 		<param name="centerX">144</param>
 		<param name="topY">8</param>
 	</drawable>
@@ -42,25 +42,25 @@
 		<param name="secondsClipHeight">14</param>
 	</drawable>
 	
-	<drawable id="CenterIndicator" class="ValueIndicator">
+	<drawable id="CenterIndicator" class="Indicator">
 		<param name="centerX">120</param>
 		<param name="topY">148</param>
 		<param name="topYValueOffset">16</param>
 	</drawable>
 	
-	<drawable id="BottomLeftIndicator" class="ValueIndicator">
+	<drawable id="BottomLeftIndicator" class="Indicator">
 		<param name="centerX">74</param>
 		<param name="topY">194</param>
 		<param name="topYValueOffset">16</param>
 	</drawable>
 	
-	<drawable id="BottomCenterIndicator" class="ValueIndicator">
+	<drawable id="BottomCenterIndicator" class="Indicator">
 		<param name="centerX">120</param>
 		<param name="topY">194</param>
 		<param name="topYValueOffset">16</param>
 	</drawable>
 	
-	<drawable id="BottomRightIndicator" class="ValueIndicator">
+	<drawable id="BottomRightIndicator" class="Indicator">
 		<param name="centerX">166</param>
 		<param name="topY">194</param>
 		<param name="topYValueOffset">16</param>

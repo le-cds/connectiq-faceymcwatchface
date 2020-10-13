@@ -54,12 +54,12 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         mLeftGoalMeter = View.findDrawableById("LeftGoalMeter");
         mRightGoalMeter = View.findDrawableById("RightGoalMeter");
         
-        mTopLeftIndicator.setBehavior(new BluetoothBehavior());
-        mTopRightIndicator.setBehavior(new DoNotDisturbBehavior());
-        mCenterIndicator.setBehavior(new AppointmentBehavior());
-        mBottomLeftIndicator.setBehavior(new NotificationsBehavior());
-        mBottomCenterIndicator.setBehavior(new BatteryBehavior());
-        mBottomRightIndicator.setBehavior(new AlarmsBehavior());
+        mTopLeftIndicator.setBehavior(new BluetoothIndicatorBehavior());
+        mTopRightIndicator.setBehavior(new DoNotDisturbIndicatorBehavior());
+        mCenterIndicator.setBehavior(new AppointmentIndicatorBehavior());
+        mBottomLeftIndicator.setBehavior(new NotificationsIndicatorBehavior());
+        mBottomCenterIndicator.setBehavior(new BatteryIndicatorBehavior());
+        mBottomRightIndicator.setBehavior(new AlarmsIndicatorBehavior());
         mLeftGoalMeter.setBehavior(new StepsMeterBehavior());
         mRightGoalMeter.setBehavior(new StairsMeterBehavior());
     }
@@ -69,7 +69,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      */
     function onSettingsChanged() {
         if (Properties.getValue(ACTIVATE_APPOINTMENTS)) {
-            mCenterIndicator.setBehavior(new AppointmentBehavior());
+            mCenterIndicator.setBehavior(new AppointmentIndicatorBehavior());
         } else {
             mCenterIndicator.setBehavior(null);
         }

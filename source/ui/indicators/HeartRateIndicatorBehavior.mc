@@ -4,7 +4,7 @@ using Toybox.System;
 /**
  * Indicates the heart rate. Supports partial updates.
  */
-class HeartRateBehavior extends ValueBehavior {
+class HeartRateIndicatorBehavior extends DefaultIndicatorBehavior {
 
     // Last known heart rate. When the current number differs it is time to redraw.
     // The only reason for this optimization is to disable partial updates while
@@ -12,10 +12,10 @@ class HeartRateBehavior extends ValueBehavior {
     private var mHeartRate = 0;
     
     public function initialize() {
-        ValueBehavior.initialize(true);
+        DefaultIndicatorBehavior.initialize(true);
     }
 
-    public function needsUpdate() {
+    public function wantsPartialUpdate() {
         var heartRateIterator = ActivityMonitor.getHeartRateHistory(1, true);
         var heartRateSample = heartRateIterator.next();
         var newHeartRate = (heartRateSample != null) ? heartRateSample.heartRate : 0;
@@ -33,30 +33,14 @@ class HeartRateBehavior extends ValueBehavior {
         return (heartRateSample != null) ? heartRateSample.heartRate : 0;
     }
     
-    public function getIconFont() {
-        return gSymbolsFont;
-    }
-    
-    public function getIconColor() {
+    public function isIndicating() {
         // This thing never lights up
-        return gColorIndicatorInactive;
-    }
-    
-    public function getBackgroundColor() {
-        return gColorBackground;
+        return false;
     }
     
     public function getIconCharacter() {
         // TODO Proper heart icon
         return 'C';
-    }
-    
-    public function getValueFont() {
-        return gIndicatorFont;
-    }
-    
-    public function getValueColor() {
-        return gColorIndicatorText;
     }
     
     public function getValue() {

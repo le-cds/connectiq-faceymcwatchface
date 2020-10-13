@@ -4,31 +4,19 @@ using Toybox.System;
  * Indicator for the watch's battery state. Does not support partial updates
  * since updating the battery state once per minute is enough.
  */
-class BatteryBehavior extends ValueBehavior {
+class BatteryIndicatorBehavior extends DefaultIndicatorBehavior {
 
     // I wasn't able to find out how (and if) character arithmetic works, so this
     // array is a workaround
     private const SYMBOL_BATTERY = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":"];
     
     public function initialize() {
-        ValueBehavior.initialize(false);
+        DefaultIndicatorBehavior.initialize(false);
     }
     
-    public function getIconFont() {
-        return gSymbolsFont;
-    }
-    
-    public function getIconColor() {
+    public function isIndicating() {
         // The indicator should light up if the battery level has dropped below 20%
-        if (System.getSystemStats().battery < 20) {
-            return gColorIndicatorActive;
-        } else {
-            return gColorIndicatorInactive;
-        }
-    }
-    
-    public function getBackgroundColor() {
-        return gColorBackground;
+        return System.getSystemStats().battery < 20;
     }
     
     public function getIconCharacter() {
@@ -49,14 +37,6 @@ class BatteryBehavior extends ValueBehavior {
         
         // To the Batt Mobile, Robin!
         return SYMBOL_BATTERY[battSymbol];
-    }
-    
-    public function getValueFont() {
-        return gIndicatorFont;
-    }
-    
-    public function getValueColor() {
-        return gColorIndicatorText;
     }
     
     public function getValue() {

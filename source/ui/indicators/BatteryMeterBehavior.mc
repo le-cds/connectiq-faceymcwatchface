@@ -3,27 +3,15 @@ using Toybox.System;
 /**
  * Implements behavior for displaying the battery state.
  */
-class BatteryMeterBehavior extends MeterBehavior {
+class BatteryMeterBehavior extends DefaultMeterBehavior {
 
     function initialize() {
-        MeterBehavior.initialize();
+        DefaultMeterBehavior.initialize();
     }
     
-    public function getIconFont() {
-        return gSymbolsFont;
-    }
-    
-    public function getIconColor() {
+    public function isIndicating() {
         // Light up if the battery charge falls below 20%
-        if (System.getSystemStats().battery < 20) {
-            return gColorIndicatorActive;
-        } else {
-            return gColorIndicatorInactive;
-        }
-    }
-    
-    public function getBackgroundColor() {
-        return gColorBackground;
+        return System.getSystemStats().battery < 20;
     }
     
     public function getIconCharacter() {
@@ -40,14 +28,6 @@ class BatteryMeterBehavior extends MeterBehavior {
     
     public function getMaxValue() {
         return 100;
-    }
-    
-    public function getActiveMeterColor() {
-        return gColorHighlights;
-    }
-    
-    public function getInactiveMeterColor() {
-        return gColorMeterBackground;
     }
     
 }

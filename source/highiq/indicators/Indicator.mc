@@ -2,28 +2,32 @@ using Toybox.System;
 using Toybox.WatchUi;
 
 /**
- * Indicator which draws an icon. An IconIndicator needs an IconBehavior object to tell
- * it how and what to draw.
+ * Indicator which draws an icon and, optionally, a text. Needs an IndicatorBehavior
+ * object to tell it how and what to draw.
  */
-class IconIndicator extends WatchUi.Drawable {
+class Indicator extends WatchUi.Drawable {
 
     ///////////////////////////////////////////////////////////////////////////////////
     // Layout Parameters
 
     // X coordinate of this indicator's center.
-    protected var mCenterX;
+    private var mCenterX;
     // Y coordinate of this incidcator's top border.
-    protected var mTopY;
+    private var mTopY;
+    // Offset from the top y position to the value's top border.
+    private var mTopYValueOffset;
     
     ///////////////////////////////////////////////////////////////////////////////////
     // State
     
     // The actual definition of how the indicator behaves.
     protected var mBehavior;
-    // Cached icon font.
-    protected var mIconFont;
     // Size of the icon displayed. E.g., 16 for a 16x16 icon.
     protected var mIconSize;
+    // Cached icon font.
+    protected var mIconFont;
+    // Cached value font.
+    protected var mValueFont;
     
     ///////////////////////////////////////////////////////////////////////////////////
     // Behavior
@@ -36,11 +40,13 @@ class IconIndicator extends WatchUi.Drawable {
         
         if (mBehavior != null) {
             // There is a behavior; cache resources
-            mIconFont = mBehavior.getIconFont();
             mIconSize = mBehavior.getIconSize();
+            mIconFont = mBehavior.getIconFont();
+            mValueFont = mBehavior.getValueFont();
         } else {
             // No behavior; release resources
             mIconFont = null;
+            mValueFont = null;
         }
     }
     
@@ -56,6 +62,7 @@ class IconIndicator extends WatchUi.Drawable {
         
         mCenterX = params[:centerX];
         mTopY = params[:topY];
+        mTopYValueOffset = params[:topYValueOffset];
     }
     
     /**
@@ -73,7 +80,7 @@ class IconIndicator extends WatchUi.Drawable {
     public function partialDraw(dc) {
         if (mBehavior != null
             && mBehavior.supportsPartialUpdate()
-            && mBehavior.needsUpdate()) {
+            && mBehavior.wantsPartialUpdate()) {
             
             doDraw(dc, true);
         }
@@ -93,6 +100,21 @@ class IconIndicator extends WatchUi.Drawable {
             mIconFont,
             mBehavior.getIconCharacter(),
             Graphics.TEXT_JUSTIFY_CENTER);
+        
+        // Draw the value, if we're configured to do so and if there is any
+        if (mTopYValueOffset != null) {
+            var value = mBehavior.getValue();
+            if (value != null) {
+                dc.setColor(mBehavior.getValueColor(), mBehavior.getBackgroundColor());
+                dc.drawText(
+                    mCenterX,
+                    mTopY + mTopYValueOffset,
+                    mValueFont,
+                    mBehavior.getValue(),
+                    Graphics.TEXT_JUSTIFY_CENTER
+                );
+            }
+        }
     }
 
 }

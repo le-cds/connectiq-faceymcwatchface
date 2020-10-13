@@ -4,17 +4,17 @@ using Toybox.System;
  * Indicates whether the phone is currently connected or not. Supports partial
  * updates.
  */
-class BluetoothBehavior extends IconBehavior {
+class BluetoothIndicatorBehavior extends DefaultIndicatorBehavior {
 
     // Last known state of Bluetooth connection. When the current state differs
     // it is time to redraw.
     private var mPhoneConnected;
     
     public function initialize() {
-        IconBehavior.initialize(true);
+        DefaultIndicatorBehavior.initialize(true);
     }
     
-    public function needsUpdate() {
+    public function wantsPartialUpdate() {
         return mPhoneConnected != System.getDeviceSettings().phoneConnected;
     }
     
@@ -22,25 +22,17 @@ class BluetoothBehavior extends IconBehavior {
         mPhoneConnected = System.getDeviceSettings().phoneConnected;
     }
     
-    public function getIconFont() {
-        return gSymbolsFont;
-    }
-    
-    public function getIconColor() {
+    public function isIndicating() {
         // The indicator should light up if there is a connection
-        if (mPhoneConnected) {
-            return gColorIndicatorActive;
-        } else {
-            return gColorIndicatorInactive;
-        }
-    }
-    
-    public function getBackgroundColor() {
-        return gColorBackground;
+        return mPhoneConnected;
     }
     
     public function getIconCharacter() {
         return 'A';
+    }
+    
+    public function getValue() {
+        return "Bla";
     }
     
 }
