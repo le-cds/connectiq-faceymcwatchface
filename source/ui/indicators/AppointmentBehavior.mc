@@ -38,6 +38,7 @@ class AppointmentBehavior extends ValueBehavior {
     }
     
     public function getIconCharacter() {
+        // TODO Change icon if there is an upcoming appointment
         return "G";
     }
     
