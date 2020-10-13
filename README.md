@@ -2,7 +2,7 @@
 
 A watchface for Garmin smartwatches with a focus on communication instead of fitness. Looks something like this:
 
-![Watchface design](design/face.png)
+![Watchface design](promo/cover.png)
 
 
 ## Main Feature: Time of Upcoming Appointment
