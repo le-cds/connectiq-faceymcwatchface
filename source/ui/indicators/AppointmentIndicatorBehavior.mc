@@ -25,8 +25,11 @@ class AppointmentIndicatorBehavior extends DefaultIndicatorBehavior {
     }
     
     public function getIconCharacter() {
-        // TODO Change icon if there is an upcoming appointment
-        return "G";
+        if (mNextAppointment == null) {
+            return "G";
+        } else {
+            return "H";
+        }
     }
     
     public function getValue() {

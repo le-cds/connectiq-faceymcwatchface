@@ -39,8 +39,7 @@ class HeartRateIndicatorBehavior extends DefaultIndicatorBehavior {
     }
     
     public function getIconCharacter() {
-        // TODO Proper heart icon
-        return 'C';
+        return 'I';
     }
     
     public function getValue() {
