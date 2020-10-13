@@ -1,7 +1,7 @@
 <layout id="WatchFace">
     <drawable class="Background" />
 
-	<drawable id="LeftGoalMeter" class="Meter">
+	<drawable id="MeterLeft" class="Meter">
 		<param name="side">:left</param>
 		<param name="style">0</param>
 		<param name="stroke">4</param>
@@ -11,7 +11,7 @@
 		<param name="iconY">24</param>
 	</drawable>
 
-	<drawable id="RightGoalMeter" class="Meter">
+	<drawable id="MeterRight" class="Meter">
 		<param name="side">:right</param>
 		<param name="style">0</param>
 		<param name="stroke">4</param>
@@ -19,16 +19,6 @@
 		<param name="separator">2</param>
 		<param name="iconX">176</param>
 		<param name="iconY">24</param>
-	</drawable>
-	
-	<drawable id="TopLeftIndicator" class="Indicator">
-		<param name="centerX">96</param>
-		<param name="topY">8</param>
-	</drawable>
-	
-	<drawable id="TopRightIndicator" class="Indicator">
-		<param name="centerX">144</param>
-		<param name="topY">8</param>
 	</drawable>
 
 	<drawable id="Date" class="DateLine">
@@ -42,25 +32,35 @@
 		<param name="secondsClipHeight">14</param>
 	</drawable>
 	
-	<drawable id="CenterIndicator" class="Indicator">
+	<drawable id="IndicatorTopLeft" class="Indicator">
+		<param name="centerX">96</param>
+		<param name="topY">8</param>
+	</drawable>
+	
+	<drawable id="IndicatorTopRight" class="Indicator">
+		<param name="centerX">144</param>
+		<param name="topY">8</param>
+	</drawable>
+	
+	<drawable id="IndicatorCenter" class="Indicator">
 		<param name="centerX">120</param>
 		<param name="topY">148</param>
 		<param name="topYValueOffset">16</param>
 	</drawable>
 	
-	<drawable id="BottomLeftIndicator" class="Indicator">
+	<drawable id="IndicatorBottomLeft" class="Indicator">
 		<param name="centerX">74</param>
 		<param name="topY">194</param>
 		<param name="topYValueOffset">16</param>
 	</drawable>
 	
-	<drawable id="BottomCenterIndicator" class="Indicator">
+	<drawable id="IndicatorBottomCenter" class="Indicator">
 		<param name="centerX">120</param>
 		<param name="topY">194</param>
 		<param name="topYValueOffset">16</param>
 	</drawable>
 	
-	<drawable id="BottomRightIndicator" class="Indicator">
+	<drawable id="IndicatorBottomRight" class="Indicator">
 		<param name="centerX">166</param>
 		<param name="topY">194</param>
 		<param name="topYValueOffset">16</param>

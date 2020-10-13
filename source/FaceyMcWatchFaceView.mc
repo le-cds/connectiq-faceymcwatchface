@@ -15,16 +15,8 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
     // Cache references to drawables immediately after layout, to avoid expensive findDrawableById()
     // calls later WHEN TIME IS SCARCE!!!
     private var mTimeLine;
-    
-    private var mTopLeftIndicator;
-    private var mTopRightIndicator;
-    private var mCenterIndicator;
-    private var mBottomLeftIndicator;
-    private var mBottomCenterIndicator;
-    private var mBottomRightIndicator;
-    
-    private var mLeftGoalMeter;
-    private var mRightGoalMeter;
+    private var mIndicators;
+    private var mMeters;
 
 
     /**
@@ -44,34 +36,39 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
         setLayout(Rez.Layouts.WatchFace(dc));
 
         // Remember drawables
-        mTopLeftIndicator = View.findDrawableById("TopLeftIndicator");
-        mTopRightIndicator = View.findDrawableById("TopRightIndicator");
         mTimeLine = View.findDrawableById("Time");
-        mCenterIndicator = View.findDrawableById("CenterIndicator");
-        mBottomLeftIndicator = View.findDrawableById("BottomLeftIndicator");
-        mBottomCenterIndicator = View.findDrawableById("BottomCenterIndicator");
-        mBottomRightIndicator = View.findDrawableById("BottomRightIndicator");
-        mLeftGoalMeter = View.findDrawableById("LeftGoalMeter");
-        mRightGoalMeter = View.findDrawableById("RightGoalMeter");
+        mIndicators = assembleDrawables(INDICATOR_COUNT, INDICATOR_NAMES);
+        mMeters = assembleDrawables(METER_COUNT, METER_NAMES);
         
-        mTopLeftIndicator.setBehavior(new BluetoothIndicatorBehavior());
-        mTopRightIndicator.setBehavior(new DoNotDisturbIndicatorBehavior());
-        mCenterIndicator.setBehavior(new AppointmentIndicatorBehavior());
-        mBottomLeftIndicator.setBehavior(new NotificationsIndicatorBehavior());
-        mBottomCenterIndicator.setBehavior(new BatteryIndicatorBehavior());
-        mBottomRightIndicator.setBehavior(new AlarmsIndicatorBehavior());
-        mLeftGoalMeter.setBehavior(new StepsMeterBehavior());
-        mRightGoalMeter.setBehavior(new StairsMeterBehavior());
+        // Initialize with behaviors
+        onSettingsChanged();
+    }
+    
+    /**
+     * Returns an array containing the drawables with the given names.
+     */
+    private function assembleDrawables(number, names) {
+        var result = new [number];
+        for (var i = 0; i < number; i++) {
+            result[i] = View.findDrawableById(names[i]);
+        }
+        return result;
     }
 
     /**
      * Called by the app whenever the settings have changed.
      */
     function onSettingsChanged() {
-        if (Properties.getValue(ACTIVATE_APPOINTMENTS)) {
-            mCenterIndicator.setBehavior(new AppointmentIndicatorBehavior());
-        } else {
-            mCenterIndicator.setBehavior(null);
+        for (var i = 0; i < INDICATOR_COUNT; i++) {
+            var behaviorId = Application.getApp().getProperty(INDICATOR_NAMES[i]);
+            var behavior = createIndicatorBehavior(behaviorId);
+            mIndicators[i].setBehavior(behavior);
+        }
+        
+        for (var i = 0; i < METER_COUNT; i++) {
+            var behaviorId = Application.getApp().getProperty(METER_NAMES[i]);
+            var behavior = createMeterBehavior(behaviorId);
+            mMeters[i].setBehavior(behavior);
         }
     }
 
@@ -106,11 +103,11 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      */
     function onPartialUpdate(dc) {
         mTimeLine.drawSeconds(dc, true);
-        mTopRightIndicator.partialDraw(dc);
-        mCenterIndicator.partialDraw(dc);
-        mBottomLeftIndicator.partialDraw(dc);
-        mBottomCenterIndicator.partialDraw(dc);
-        mBottomRightIndicator.partialDraw(dc);
+        
+        // Give indicators a chance for partial updates
+        for (var i = 0; i < INDICATOR_COUNT; i++) {
+            mIndicators[i].partialDraw(dc);
+        }
     }
 
     /**
