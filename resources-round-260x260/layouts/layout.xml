@@ -1,0 +1,68 @@
+<layout id="WatchFace">
+    <drawable class="Background" />
+
+	<drawable id="MeterLeft" class="Meter">
+		<param name="side">:left</param>
+		<param name="style">0</param>
+		<param name="stroke">4</param>
+		<param name="height">200</param>
+		<param name="separator">2</param>
+		<param name="iconX">62</param>
+		<param name="iconY">18</param>
+	</drawable>
+
+	<drawable id="MeterRight" class="Meter">
+		<param name="side">:right</param>
+		<param name="style">0</param>
+		<param name="stroke">4</param>
+		<param name="height">200</param>
+		<param name="separator">2</param>
+		<param name="iconX">182</param>
+		<param name="iconY">18</param>
+	</drawable>
+
+	<drawable id="Date" class="DateLine">
+		<param name="y">48</param>
+	</drawable>
+	
+	<drawable id="Time" class="TimeLine">
+		<param name="timeY">62</param>
+		<param name="detailsOffsetY">48</param>
+		<param name="secondsClipOffsetY">6</param>
+		<param name="secondsClipHeight">14</param>
+	</drawable>
+	
+	<drawable id="IndicatorTopLeft" class="Indicator">
+		<param name="centerX">115</param>
+		<param name="topY">4</param>
+	</drawable>
+	
+	<drawable id="IndicatorTopRight" class="Indicator">
+		<param name="centerX">145</param>
+		<param name="topY">4</param>
+	</drawable>
+	
+	<drawable id="IndicatorCenter" class="Indicator">
+		<param name="centerX">130</param>
+		<param name="topY">150</param>
+		<param name="topYValueOffset">16</param>
+	</drawable>
+	
+	<drawable id="IndicatorBottomLeft" class="Indicator">
+		<param name="centerX">80</param>
+		<param name="topY">200</param>
+		<param name="topYValueOffset">16</param>
+	</drawable>
+	
+	<drawable id="IndicatorBottomCenter" class="Indicator">
+		<param name="centerX">130</param>
+		<param name="topY">200</param>
+		<param name="topYValueOffset">16</param>
+	</drawable>
+	
+	<drawable id="IndicatorBottomRight" class="Indicator">
+		<param name="centerX">180</param>
+		<param name="topY">200</param>
+		<param name="topYValueOffset">16</param>
+	</drawable>
+</layout>
