@@ -1,11 +1,107 @@
 <settings>
 
+	<!-- Appointment Settings -->
+
     <setting propertyKey="@Properties.ActivateAppointments" title="@Strings.ActivateAppointments_Title">
     	<settingConfig type="boolean"/>
     </setting>
     
     <setting propertyKey="@Properties.AppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval_Title" prompt="@Strings.AppointmentUpdateInterval_Prompt">
     	<settingConfig type="numeric" min="15" max="1440" errorMessage="@Strings.AppointmentUpdateInterval_Error" />
+    </setting>
+    
+    
+    <!-- Indicator Settings -->
+    
+    <setting propertyKey="@Properties.IndicatorTopLeft" title="@Strings.IndicatorTopLeft_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.IndicatorAlarms</listEntry>
+    		<listEntry value="1">@Strings.IndicatorAppointments</listEntry>
+    		<listEntry value="2">@Strings.IndicatorBattery</listEntry>
+    		<listEntry value="3">@Strings.IndicatorBluetooth</listEntry>
+    		<listEntry value="4">@Strings.IndicatorDnD</listEntry>
+    		<listEntry value="5">@Strings.IndicatorHeartRate</listEntry>
+    		<listEntry value="6">@Strings.IndicatorNotifications</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.IndicatorTopRight" title="@Strings.IndicatorTopRight_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.IndicatorAlarms</listEntry>
+    		<listEntry value="1">@Strings.IndicatorAppointments</listEntry>
+    		<listEntry value="2">@Strings.IndicatorBattery</listEntry>
+    		<listEntry value="3">@Strings.IndicatorBluetooth</listEntry>
+    		<listEntry value="4">@Strings.IndicatorDnD</listEntry>
+    		<listEntry value="5">@Strings.IndicatorHeartRate</listEntry>
+    		<listEntry value="6">@Strings.IndicatorNotifications</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.IndicatorCenter" title="@Strings.IndicatorCenter_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.IndicatorAlarms</listEntry>
+    		<listEntry value="1">@Strings.IndicatorAppointments</listEntry>
+    		<listEntry value="2">@Strings.IndicatorBattery</listEntry>
+    		<listEntry value="3">@Strings.IndicatorBluetooth</listEntry>
+    		<listEntry value="4">@Strings.IndicatorDnD</listEntry>
+    		<listEntry value="5">@Strings.IndicatorHeartRate</listEntry>
+    		<listEntry value="6">@Strings.IndicatorNotifications</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.IndicatorBottomLeft" title="@Strings.IndicatorBottomLeft_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.IndicatorAlarms</listEntry>
+    		<listEntry value="1">@Strings.IndicatorAppointments</listEntry>
+    		<listEntry value="2">@Strings.IndicatorBattery</listEntry>
+    		<listEntry value="3">@Strings.IndicatorBluetooth</listEntry>
+    		<listEntry value="4">@Strings.IndicatorDnD</listEntry>
+    		<listEntry value="5">@Strings.IndicatorHeartRate</listEntry>
+    		<listEntry value="6">@Strings.IndicatorNotifications</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.IndicatorBottomCenter" title="@Strings.IndicatorBottomCenter_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.IndicatorAlarms</listEntry>
+    		<listEntry value="1">@Strings.IndicatorAppointments</listEntry>
+    		<listEntry value="2">@Strings.IndicatorBattery</listEntry>
+    		<listEntry value="3">@Strings.IndicatorBluetooth</listEntry>
+    		<listEntry value="4">@Strings.IndicatorDnD</listEntry>
+    		<listEntry value="5">@Strings.IndicatorHeartRate</listEntry>
+    		<listEntry value="6">@Strings.IndicatorNotifications</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.IndicatorBottomRight" title="@Strings.IndicatorBottomRight_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.IndicatorAlarms</listEntry>
+    		<listEntry value="1">@Strings.IndicatorAppointments</listEntry>
+    		<listEntry value="2">@Strings.IndicatorBattery</listEntry>
+    		<listEntry value="3">@Strings.IndicatorBluetooth</listEntry>
+    		<listEntry value="4">@Strings.IndicatorDnD</listEntry>
+    		<listEntry value="5">@Strings.IndicatorHeartRate</listEntry>
+    		<listEntry value="6">@Strings.IndicatorNotifications</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    
+    <!-- Meter Settings -->
+    
+    <setting propertyKey="@Properties.MeterLeft" title="@Strings.MeterLeft_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.MeterBattery</listEntry>
+    		<listEntry value="1">@Strings.MeterStairs</listEntry>
+    		<listEntry value="2">@Strings.MeterSteps</listEntry>
+    	</settingConfig>
+    </setting>
+    
+    <setting propertyKey="@Properties.MeterRight" title="@Strings.MeterRight_Title">
+    	<settingConfig type="list">
+    		<listEntry value="0">@Strings.MeterBattery</listEntry>
+    		<listEntry value="1">@Strings.MeterStairs</listEntry>
+    		<listEntry value="2">@Strings.MeterSteps</listEntry>
+    	</settingConfig>
     </setting>
 
 </settings>

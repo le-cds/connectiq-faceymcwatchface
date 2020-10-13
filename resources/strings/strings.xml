@@ -3,12 +3,39 @@
     <string id="AppName">FaceyMcWatchFace</string>
     
     
-    <!-- Settings -->
+    <!-- Appointment Settings -->
     <string id="ActivateAppointments_Title">Show next appointment (requires Android app)</string>
     
     <string id="AppointmentUpdateInterval_Title">Appointment update interval</string>
     <string id="AppointmentUpdateInterval_Prompt">Number of minutes between appointment updates.</string>
     <string id="AppointmentUpdateInterval_Error">We need at least 5 minutes between successive updates.</string>
+    
+    
+    <!-- Indicator Settings -->
+    
+    <string id="IndicatorTopLeft_Title">Top left indicator</string>
+    <string id="IndicatorTopRight_Title">Top right indicator</string>
+    <string id="IndicatorCenter_Title">Center indicator</string>
+    <string id="IndicatorBottomLeft_Title">Bottom left indicator</string>
+    <string id="IndicatorBottomCenter_Title">Bottom center indicator</string>
+    <string id="IndicatorBottomRight_Title">Bottom right indicator</string>
+    
+    <string id="IndicatorAlarms">Active alarms</string>
+    <string id="IndicatorAppointments">Appointments</string>
+    <string id="IndicatorBattery">Battery charge</string>
+    <string id="IndicatorBluetooth">Bluetooth</string>
+    <string id="IndicatorDnD">Do not disturb</string>
+    <string id="IndicatorHeartRate">Heart rate</string>
+    <string id="IndicatorNotifications">Unread notifications</string>
+    
+    
+    <!-- Meter Settings -->
+    <string id="MeterLeft_Title">Left meter</string>
+    <string id="MeterRight_Title">Right meter</string>
+    
+    <string id="MeterBattery">Battery charge</string>
+    <string id="MeterStairs">Floors climbed</string>
+    <string id="MeterSteps">Steps stepped</string>
     
     
 	<!-- Strings for the date indicator. -->
