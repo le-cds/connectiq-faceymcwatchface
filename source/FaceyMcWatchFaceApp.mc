@@ -73,7 +73,17 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
      * with the active settings.
      */
     function initializeCalendarService() {
-        if (Properties.getValue(ACTIVATE_APPOINTMENTS)) {
+        // We need to check whether any of the indicators is supposed to show appointments
+        var appointments = false;
+        for (var i = 0; i < INDICATOR_COUNT; i++) {
+            if (getProperty(INDICATOR_NAMES[i]) == INDICATOR_APPOINTMENTS) {
+                appointments = true;
+                break;
+            }
+        }
+        
+        // If so, make sure the calendar background service is running
+        if (appointments) {
             registerCalendarService(Properties.getValue(APPOINTMENT_UPDATE_INTERVAL));
         } else {
             unregisterCalendarService();

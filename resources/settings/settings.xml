@@ -2,10 +2,6 @@
 
 	<!-- Appointment Settings -->
 
-    <setting propertyKey="@Properties.ActivateAppointments" title="@Strings.ActivateAppointments_Title">
-    	<settingConfig type="boolean"/>
-    </setting>
-    
     <setting propertyKey="@Properties.AppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval_Title" prompt="@Strings.AppointmentUpdateInterval_Prompt">
     	<settingConfig type="numeric" min="15" max="1440" errorMessage="@Strings.AppointmentUpdateInterval_Error" />
     </setting>

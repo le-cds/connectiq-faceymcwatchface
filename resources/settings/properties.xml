@@ -1,7 +1,6 @@
 <properties>
 
     <!-- Properties exported as settings. -->
-    <property id="ActivateAppointments" type="boolean">true</property>
     <property id="AppointmentUpdateInterval" type="number">15</property>
     
     <!-- Indicators -->
