@@ -2,7 +2,11 @@
  * Implements several of the MeterBehavior functions with default values. Adds
  * another function, isIndicating(), to check which icon color to use.
  */
-class DefaultMeterBehavior {
+class DefaultMeterBehavior extends MeterBehavior {
+
+    public function initialize() {
+        MeterBehavior.initialize();
+    }
 
     public function getIconFont() {
         return gSymbolsFont;
