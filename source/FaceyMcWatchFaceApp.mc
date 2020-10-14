@@ -43,6 +43,11 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
         mView = new FaceyMcWatchFaceView();
         return [mView];
     }
+    
+    // Returns our current view.
+    function getView() {
+        return mView;
+    }
 
     // New app settings have been received.
     function onSettingsChanged() {

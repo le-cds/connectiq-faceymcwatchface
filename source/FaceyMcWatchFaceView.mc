@@ -11,6 +11,9 @@ using Toybox.WatchUi;
  * https://github.com/warmsound/crystal-face
  */
 class FaceyMcWatchFaceView extends WatchUi.WatchFace {
+    
+    // Whether the watch is in high or low power mode.
+    private var mHighPowerMode = true;
 
     // Cache references to drawables immediately after layout, to avoid expensive findDrawableById()
     // calls later WHEN TIME IS SCARCE!!!
@@ -114,6 +117,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      * Terminate any active timers and prepare for slow updates.
      */
     function onEnterSleep() {
+        mHighPowerMode = false;
     }
 
     /**
@@ -121,6 +125,11 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      * be started here.
      */
     function onExitSleep() {
+        mHighPowerMode = true;
     }
-
+    
+    function isHighPowerMode() {
+        return mHighPowerMode;
+    }
+    
 }

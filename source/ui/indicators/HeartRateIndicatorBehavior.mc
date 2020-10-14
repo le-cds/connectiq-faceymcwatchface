@@ -1,14 +1,14 @@
 using Toybox.ActivityMonitor;
+using Toybox.Application;
 using Toybox.System;
 
 /**
- * Indicates the heart rate. Supports partial updates.
+ * Indicates the heart rate. Supports partial updates with a 10-seconds update
+ * interval while the watch is sleeping and 1 second while it's awake.
  */
 class HeartRateIndicatorBehavior extends DefaultIndicatorBehavior {
 
-    // Last known heart rate. When the current number differs it is time to redraw.
-    // The only reason for this optimization is to disable partial updates while
-    // the watch is not being worn
+    // Last known heart rate.
     private var mHeartRate = 0;
     
     public function initialize() {
@@ -16,11 +16,10 @@ class HeartRateIndicatorBehavior extends DefaultIndicatorBehavior {
     }
 
     public function wantsPartialUpdate() {
-        var heartRateIterator = ActivityMonitor.getHeartRateHistory(1, true);
-        var heartRateSample = heartRateIterator.next();
-        var newHeartRate = (heartRateSample != null) ? heartRateSample.heartRate : 0;
-        
-        return getCurrentHeartRate() != mHeartRate;
+        // We always want a partial update if the watch is in high power mode;
+        // otherwise only every 10 seconds
+        return Application.getApp().getView().isHighPowerMode()
+            || System.getClockTime().sec % 10 == 0;
     }
     
     public function update() {
@@ -28,9 +27,22 @@ class HeartRateIndicatorBehavior extends DefaultIndicatorBehavior {
     }
     
     private function getCurrentHeartRate() {
-        var heartRateIterator = ActivityMonitor.getHeartRateHistory(1, true);
-        var heartRateSample = heartRateIterator.next();
-        return (heartRateSample != null) ? heartRateSample.heartRate : 0;
+        // Attempt to retrieve current heart rate via activity info first (thanks
+        // to the Crystal watchface for the idea!)
+        var info = Activity.getActivityInfo();
+        var hr = info.currentHeartRate;
+        
+        if (hr == null) {
+            // That hasn't worked; try again with the activity monitor's history,
+            // which does not seem to be updated as often
+            var sample = ActivityMonitor.getHeartRateHistory(1, true).next();
+            
+            if (sample != null && sample != ActivityMonitor.INVALID_HR_SAMPLE) {
+                hr = sample.heartRate;
+            }
+        }
+        
+        return (hr != null) ? hr : 0;
     }
     
     public function isIndicating() {
