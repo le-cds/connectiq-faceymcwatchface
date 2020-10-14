@@ -102,7 +102,7 @@ class FaceyMcWatchFaceView extends WatchUi.WatchFace {
      * Update only the most pressing things here.
      */
     function onPartialUpdate(dc) {
-        mTimeLine.drawSeconds(dc, true);
+        mTimeLine.drawSeconds(dc);
         
         // Give indicators a chance for partial updates
         for (var i = 0; i < INDICATOR_COUNT; i++) {

@@ -58,7 +58,7 @@ class TimeLine extends WatchUi.Drawable {
         }
 
         drawEverythingExceptSeconds(dc);
-        drawSeconds(dc, false);
+        drawSeconds(dc);
     }
 
     /**
@@ -127,27 +127,12 @@ class TimeLine extends WatchUi.Drawable {
     }
 
     /**
-     * Draws the seconds. If this is called during a partial update we reset the background
-     * before drawing the seconds so that they don't overlap the old seconds.
+     * Draws the seconds. This is done on partial updates.
      */
-    function drawSeconds(dc, isPartialUpdate) {
+    function drawSeconds(dc) {
         var seconds = System.getClockTime().sec.format("%02d");
 
-        if (isPartialUpdate) {
-            // Clear the last seconds displayed
-            dc.setClip(
-                mSecondsX,
-                mSecondsClipY,
-                mSecondsClipWidth,
-                mSecondsClipHeight
-            );
-
-            //dc.setColor(gColorSeconds, Graphics.COLOR_RED);
-            dc.setColor(gColorSeconds, gColorBackground);
-            dc.clear();
-        }
-
-        dc.setColor(gColorSeconds, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(gColorSeconds, gColorBackground);
         dc.drawText(
             mSecondsX,
             mDetailsY,
