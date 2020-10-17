@@ -1,13 +1,39 @@
 # Facey McWatchface
 
-A watchface for Garmin smartwatches with a focus on communication instead of fitness. Looks something like this:
+A watchface for Garmin smartwatches with a focus on communication. Looks something like this:
 
-![Watchface design](promo/cover.png)
+![Watchface design](promo/diagram.png)
 
 
 ## Main Feature: Time of Upcoming Appointment
 
 The watchface is able to show the time of the upcoming appointment. Only appointments in the upcoming 24 hours (minus 5 minutes) are displayed. The whole thing only works if a companion app, [Calendar IQ Connector](https://github.com/le-cds/android-calendariq), is installed on an Android mobile the watch is connected to. That app will send information on upcoming appointments to the watch in regular intervals.
+
+## Features Everyone Else Has as Well
+
+There are…
+
+* …two indicators at the top that show symbols, but no text.
+* …four indicators at the bottom that show symbols _and_ text, because that is how they roll.
+* …two range meters at the left and the right.
+
+All of them can be freely configured to show stuff.
+
+### Indicators
+
+* Active alarms
+* Time of upcoming appointment
+* Battery charge
+* Bluetooth state
+* Do Not Disturb state
+* Heart rate
+* Unread notifications
+
+### Range Meters
+
+* Batty charge
+* Floors
+* Steps
 
 ## Supported Smartwatches
 
@@ -22,30 +48,24 @@ I have either used the watchface myself on the following devices (successfully, 
 The following devices _should_ work:
 
 * Approach® S62
-* D2™ Charlie
-* D2™ Delta (all variations)
+* D2™ Charlie, Delta (all variations)
 * Darth Vader™
 * Descent™ Mk1
 * fēnix® 5 (Plus, S Plus, X, X Plus)
 * fēnix® 6 (Solar, Dual Power, Pro, Sapphire, Pro Solar, Pro Dual Power, S, S Solar, S Dual Power, S Pro, S Spphire, S Pro Slar, S Pro Dual Power)
 * First Avenger
-* Forerunner® 245 (Music)
-* Forerunner® 645 (Music)
-* Forerunner® 745
-* Forerunner® 935
-* Forerunner® 945
-* MARQ™ Adventurer
-* MARQ™ Athlete
-* MARQ™ Aviator
-* MARQ® Captain (American Magic Edition)
-* MARQ™ Commander
-* MARQ™ Driver
-* MARQ™ Expedition
-* MARQ™ Golfer
-* quatix® 5
-* quatix® 6
+* Forerunner® 245 (Music), 645 (Music), 745, 935, 945
+* MARQ™ Adventurer, Athlete, Aviator, Captain (American Magic Edition), Commander, Driver, Expedition, Golfer
+* quatix® 5 and 6
 * tactix® Charlie
 * vívoactive® 4
+
+## For Developers
+
+Here’s two notes for my fellow developers:
+
+* There might be a few interesting bits of code hidden inside this code base. Look at [the `highiq` folder](https://github.com/le-cds/connectiq-faceymcwatchface/tree/master/source/highiq) for inspiration! Should you use some of the code in there, please drop me a line – it’s always nice to know if code’s been helpful to others!
+* If you’re interested in contributing, head over to the contributions documentation file for details. Nothing surprising in there, though, so you might as well skip it and start coding right away…
 
 ## Attributions
 
