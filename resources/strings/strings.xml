@@ -33,6 +33,7 @@
     <string id="MeterLeft_Title">Left meter</string>
     <string id="MeterRight_Title">Right meter</string>
     
+    <string id="MeterActiveMinutes">Active minutes this week</string>
     <string id="MeterBattery">Battery charge</string>
     <string id="MeterFloorsClimbed">Floors climbed</string>
     <string id="MeterMoveBar">Move bar</string>

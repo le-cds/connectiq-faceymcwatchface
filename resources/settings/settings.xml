@@ -86,6 +86,7 @@
     
     <setting propertyKey="@Properties.MeterLeft" title="@Strings.MeterLeft_Title">
     	<settingConfig type="list">
+    		<listEntry value="4">@Strings.MeterActiveMinutes</listEntry>
     		<listEntry value="0">@Strings.MeterBattery</listEntry>
     		<listEntry value="1">@Strings.MeterFloorsClimbed</listEntry>
     		<listEntry value="3">@Strings.MeterMoveBar</listEntry>
@@ -95,6 +96,7 @@
     
     <setting propertyKey="@Properties.MeterRight" title="@Strings.MeterRight_Title">
     	<settingConfig type="list">
+    		<listEntry value="4">@Strings.MeterActiveMinutes</listEntry>
     		<listEntry value="0">@Strings.MeterBattery</listEntry>
     		<listEntry value="1">@Strings.MeterFloorsClimbed</listEntry>
     		<listEntry value="3">@Strings.MeterMoveBar</listEntry>

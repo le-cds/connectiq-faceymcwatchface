@@ -44,7 +44,8 @@ enum /* METER_BEHAVIORS */ {
     METER_BATTERY,
     METER_FLOORS_CLIMBED,
     METER_STEPS,
-    METER_MOVE_BAR
+    METER_MOVE_BAR,
+    METER_ACTIVE_MINUTES
 }
 
 /**
@@ -53,6 +54,8 @@ enum /* METER_BEHAVIORS */ {
  */
 function createMeterBehavior(id) {
     switch (id) {
+        case METER_ACTIVE_MINUTES:
+            return new ActiveMinutesMeterBehavior();
         case METER_BATTERY:
             return new BatteryMeterBehavior();
         case METER_MOVE_BAR:
