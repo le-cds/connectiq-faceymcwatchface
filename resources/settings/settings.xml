@@ -88,6 +88,7 @@
     	<settingConfig type="list">
     		<listEntry value="0">@Strings.MeterBattery</listEntry>
     		<listEntry value="1">@Strings.MeterStairs</listEntry>
+    		<listEntry value="3">@Strings.MeterMoveBar</listEntry>
     		<listEntry value="2">@Strings.MeterSteps</listEntry>
     	</settingConfig>
     </setting>
@@ -96,6 +97,7 @@
     	<settingConfig type="list">
     		<listEntry value="0">@Strings.MeterBattery</listEntry>
     		<listEntry value="1">@Strings.MeterStairs</listEntry>
+    		<listEntry value="3">@Strings.MeterMoveBar</listEntry>
     		<listEntry value="2">@Strings.MeterSteps</listEntry>
     	</settingConfig>
     </setting>
