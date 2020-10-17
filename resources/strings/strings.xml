@@ -34,7 +34,7 @@
     <string id="MeterRight_Title">Right meter</string>
     
     <string id="MeterBattery">Battery charge</string>
-    <string id="MeterStairs">Floors climbed</string>
+    <string id="MeterFloorsClimbed">Floors climbed</string>
     <string id="MeterMoveBar">Move bar</string>
     <string id="MeterSteps">Steps stepped</string>
     

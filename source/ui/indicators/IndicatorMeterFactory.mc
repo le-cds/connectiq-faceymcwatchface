@@ -42,7 +42,7 @@ function createIndicatorBehavior(id) {
 // to them.
 enum /* METER_BEHAVIORS */ {
     METER_BATTERY,
-    METER_STAIRS,
+    METER_FLOORS_CLIMBED,
     METER_STEPS,
     METER_MOVE_BAR
 }
@@ -57,8 +57,8 @@ function createMeterBehavior(id) {
             return new BatteryMeterBehavior();
         case METER_MOVE_BAR:
             return new MoveBarMeterBehavior();
-        case METER_STAIRS:
-            return new StairsMeterBehavior();
+        case METER_FLOORS_CLIMBED:
+            return new FloorsClimbedMeterBehavior();
         case METER_STEPS:
             return new StepsMeterBehavior();
         default:

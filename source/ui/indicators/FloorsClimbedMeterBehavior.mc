@@ -1,11 +1,11 @@
 /**
- * Implements behavior for displaying the number of steps.
+ * Implements behavior for displaying the number of floors climbed.
  */
-class StairsMeterBehavior extends DefaultMeterBehavior {
+class FloorsClimbedMeterBehavior extends DefaultMeterBehavior {
     
     // Cache most recent values
-    private var mStairs = 0;
-    private var mStairsGoal = 1;
+    private var mFloors = 0;
+    private var mFloorsGoal = 1;
 
     function initialize() {
         DefaultMeterBehavior.initialize();
@@ -15,18 +15,18 @@ class StairsMeterBehavior extends DefaultMeterBehavior {
         var info = ActivityMonitor.getInfo();
         
         if (info has :floorsClimbed) {
-            mStairs = info.floorsClimbed;
-            mStairsGoal = info.floorsClimbedGoal;
+            mFloors = info.floorsClimbed;
+            mFloorsGoal = info.floorsClimbedGoal;
             
-            if (mStairsGoal < 1) {
-                mStairsGoal = 1;
+            if (mFloorsGoal < 1) {
+                mFloorsGoal = 1;
             }
         }
     }
     
     public function isIndicating() {
         // Light up if the steps goal has been reached
-        return mStairs >= mStairsGoal;
+        return mFloors >= mFloorsGoal;
     }
     
     public function getIconCharacter() {
@@ -34,11 +34,11 @@ class StairsMeterBehavior extends DefaultMeterBehavior {
     }
     
     public function getCurrValue() {
-        return mStairs;
+        return mFloors;
     }
     
     public function getMaxValue() {
-        return mStairsGoal;
+        return mFloorsGoal;
     }
     
 }
