@@ -48,6 +48,11 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     function getView() {
         return mView;
     }
+    
+    // Returns a view that allows for changing the watch settings
+    function getSettingsView() {
+        return [ new SettingsMenu(), new SettingsMenuInputDelegate() ];
+    }
 
     // New app settings have been received.
     function onSettingsChanged() {
