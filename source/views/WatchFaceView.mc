@@ -10,7 +10,7 @@ using Toybox.WatchUi;
  * This code is based on code from the Crystal watch face, which can be found at:
  * https://github.com/warmsound/crystal-face
  */
-class FaceyMcWatchFaceView extends WatchUi.WatchFace {
+class WatchFaceView extends WatchUi.WatchFace {
     
     // Whether the watch is in high or low power mode.
     private var mHighPowerMode = true;

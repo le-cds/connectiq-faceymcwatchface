@@ -40,7 +40,7 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
         initializeCalendarService();
         loadAppointments();
 
-        mView = new FaceyMcWatchFaceView();
+        mView = new WatchFaceView();
         return [mView];
     }
     
