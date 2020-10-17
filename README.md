@@ -72,4 +72,6 @@ Here’s two notes for my fellow developers:
 This project stands on the shoulders of the following people:
 
 - The [Crystal](https://apps.garmin.com/en-GB/apps/9fd04d09-8c80-4c81-9257-17cfa0f0081b) watchface ([GitHub repository](https://github.com/warmsound/crystal-face)).
-- Eugen Belyakoff from the Noun Project, whose [Steps](https://thenounproject.com/term/steps/87667/) icon is used.
+- [Activity](https://thenounproject.com/term/activity/1955073/) icon by shashank singh from the Noun Project
+- [Arrow](https://thenounproject.com/term/arrow/3257700/) icon by agus raharjo from the Noun Project
+- [Steps](https://thenounproject.com/term/steps/87667/) icon by Eugen Belyakoff from the Noun Project
