@@ -1,4 +1,6 @@
 using Toybox.WatchUi;
+using FaceyIndicatorConstants as FIC;
+using FaceyMeterConstants as FMC;
 
 /**
  * Implements the top-level settings menu and acts as its input delegate.
@@ -24,15 +26,15 @@ class SettingsMenu extends WatchUi.Menu2 {
         addItem(mAppointmentUpdateIntervalItem);
         
         // Indicators
-        mIndicatorItems = new [INDICATOR_COUNT];
-        for (var i = 0; i < INDICATOR_COUNT; i++) {
+        mIndicatorItems = new [FIC.INDICATOR_COUNT];
+        for (var i = 0; i < FIC.INDICATOR_COUNT; i++) {
             mIndicatorItems[i] = createIndicatorSetting(i);
             addItem(mIndicatorItems[i]);
         }
         
         // Meters
-        mMeterItems = new [METER_COUNT];
-        for (var i = 0; i < METER_COUNT; i++) {
+        mMeterItems = new [FMC.METER_COUNT];
+        for (var i = 0; i < FMC.METER_COUNT; i++) {
             mMeterItems[i] = createMeterSetting(i);
             addItem(mMeterItems[i]);
         }
@@ -41,18 +43,18 @@ class SettingsMenu extends WatchUi.Menu2 {
     private function createIndicatorSetting(indicatorId) {
         // We need to map the ID to a String resource to be displayed
         return new WatchUi.MenuItem(
-            loadResource(INDICATOR_TO_STRING_RESOURCE[indicatorId]),
+            loadResource(FIC.INDICATOR_TO_STRING_RESOURCE[indicatorId]),
             "",
-            INDICATOR_NAMES[indicatorId],
+            FIC.INDICATOR_NAMES[indicatorId],
             {});
     }
     
     private function createMeterSetting(meterId) {
         // We need to map the ID to a String resource to be displayed
         return new WatchUi.MenuItem(
-            loadResource(METER_TO_STRING_RESOURCE[meterId]),
+            loadResource(FMC.METER_TO_STRING_RESOURCE[meterId]),
             "",
-            METER_NAMES[meterId],
+            FMC.METER_NAMES[meterId],
             {});
     }
     
@@ -65,16 +67,16 @@ class SettingsMenu extends WatchUi.Menu2 {
         mAppointmentUpdateIntervalItem.setSubLabel(appointmentUpdateSubtitle);
         
         // Indicators
-        for (var i = 0; i < INDICATOR_COUNT; i++) {
-            var behaviorId = Application.getApp().getProperty(INDICATOR_NAMES[i]);
-            var subLabel = loadResource(INDICATOR_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
+        for (var i = 0; i < FIC.INDICATOR_COUNT; i++) {
+            var behaviorId = Application.getApp().getProperty(FIC.INDICATOR_NAMES[i]);
+            var subLabel = loadResource(FIC.INDICATOR_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
             mIndicatorItems[i].setSubLabel(subLabel);
         }
         
         // Meters
-        for (var i = 0; i < METER_COUNT; i++) {
-            var behaviorId = Application.getApp().getProperty(METER_NAMES[i]);
-            var subLabel = loadResource(METER_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
+        for (var i = 0; i < FMC.METER_COUNT; i++) {
+            var behaviorId = Application.getApp().getProperty(FMC.METER_NAMES[i]);
+            var subLabel = loadResource(FMC.METER_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
             mMeterItems[i].setSubLabel(subLabel);
         }
     }
@@ -99,25 +101,25 @@ class SettingsMenuInputDelegate extends WatchUi.Menu2InputDelegate {
         }
         
         // Check if it's one of the indicator configuration items
-        var indicatorIdx = INDICATOR_NAMES.indexOf(item.getId());
+        var indicatorIdx = FIC.INDICATOR_NAMES.indexOf(item.getId());
         if (indicatorIdx >= 0) {
             WatchUi.pushView(
                 new Rez.Menus.SettingsMenuIndicatorSelection(),
                 new SettingsMenuIndicatorMeterSelectionInputDelegate(
-                    INDICATOR_NAMES[indicatorIdx],
-                    INDICATOR_BEHAVIOR_NAMES),
+                    FIC.INDICATOR_NAMES[indicatorIdx],
+                    FIC.INDICATOR_BEHAVIOR_NAMES),
                 WatchUi.SLIDE_LEFT);
             return;
         }
         
         // Check if it's one of the meter configuration items
-        var meterIdx = METER_NAMES.indexOf(item.getId());
+        var meterIdx = FMC.METER_NAMES.indexOf(item.getId());
         if (meterIdx >= 0) {
             WatchUi.pushView(
                 new Rez.Menus.SettingsMenuMeterSelection(),
                 new SettingsMenuIndicatorMeterSelectionInputDelegate(
-                    METER_NAMES[meterIdx],
-                    METER_BEHAVIOR_NAMES),
+                    FMC.METER_NAMES[meterIdx],
+                    FMC.METER_BEHAVIOR_NAMES),
                 WatchUi.SLIDE_LEFT);
             return;
         }

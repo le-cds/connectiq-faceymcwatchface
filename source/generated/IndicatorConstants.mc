@@ -1,5 +1,7 @@
 // This is a generated file. Do not edit manually or suffer the consequences...
 
+module FaceyIndicatorConstants {
+
 // Number of things and behaviors
 const INDICATOR_COUNT = 6;
 const INDICATOR_BEHAVIOR_COUNT = 7;
@@ -64,3 +66,4 @@ const INDICATOR_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.IndicatorBehaviorNotifications
 ];
 
+}

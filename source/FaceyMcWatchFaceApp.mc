@@ -3,6 +3,7 @@ using Toybox.Application.Properties;
 using Toybox.Background;
 using Toybox.Time;
 using Toybox.WatchUi;
+using FaceyIndicatorConstants as FIC;
 
 (:background)
 class FaceyMcWatchFaceApp extends Application.AppBase {
@@ -56,13 +57,15 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
 
     // New app settings have been received.
     function onSettingsChanged() {
-        // The calendar service might have had its settings changed
-        initializeCalendarService();
-
-        mView.onSettingsChanged();
-
-        // Trigger a UI update to reflect the new settings
-        WatchUi.requestUpdate();
+        if (!mIsBackground) {
+            // The calendar service might have had its settings changed
+            initializeCalendarService();
+    
+            mView.onSettingsChanged();
+    
+            // Trigger a UI update to reflect the new settings
+            WatchUi.requestUpdate();
+        }
     }
 
     // Returns the background service to run.
@@ -85,8 +88,8 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     function initializeCalendarService() {
         // We need to check whether any of the indicators is supposed to show appointments
         var appointments = false;
-        for (var i = 0; i < INDICATOR_COUNT; i++) {
-            if (getProperty(INDICATOR_NAMES[i]) == INDICATOR_BEHAVIOR_APPOINTMENTS) {
+        for (var i = 0; i < FIC.INDICATOR_COUNT; i++) {
+            if (getProperty(FIC.INDICATOR_NAMES[i]) == FIC.INDICATOR_BEHAVIOR_APPOINTMENTS) {
                 appointments = true;
                 break;
             }

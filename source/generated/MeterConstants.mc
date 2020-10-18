@@ -1,5 +1,7 @@
 // This is a generated file. Do not edit manually or suffer the consequences...
 
+module FaceyMeterConstants {
+
 // Number of things and behaviors
 const METER_COUNT = 2;
 const METER_BEHAVIOR_COUNT = 5;
@@ -46,3 +48,4 @@ const METER_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.MeterBehaviorActiveMinutes
 ];
 
+}

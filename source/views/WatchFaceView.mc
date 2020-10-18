@@ -2,6 +2,8 @@ using Toybox.Application;
 using Toybox.Lang;
 using Toybox.System;
 using Toybox.WatchUi;
+using FaceyIndicatorConstants as FIC;
+using FaceyMeterConstants as FMC;
 
 
 /**
@@ -40,8 +42,8 @@ class WatchFaceView extends WatchUi.WatchFace {
 
         // Remember drawables
         mTimeLine = View.findDrawableById("Time");
-        mIndicators = assembleDrawables(INDICATOR_COUNT, INDICATOR_NAMES);
-        mMeters = assembleDrawables(METER_COUNT, METER_NAMES);
+        mIndicators = assembleDrawables(FIC.INDICATOR_COUNT, FIC.INDICATOR_NAMES);
+        mMeters = assembleDrawables(FMC.METER_COUNT, FMC.METER_NAMES);
         
         // Initialize with behaviors
         onSettingsChanged();
@@ -62,14 +64,14 @@ class WatchFaceView extends WatchUi.WatchFace {
      * Called by the app whenever the settings have changed.
      */
     function onSettingsChanged() {
-        for (var i = 0; i < INDICATOR_COUNT; i++) {
-            var behaviorId = Application.getApp().getProperty(INDICATOR_NAMES[i]);
+        for (var i = 0; i < FIC.INDICATOR_COUNT; i++) {
+            var behaviorId = Application.getApp().getProperty(FIC.INDICATOR_NAMES[i]);
             var behavior = createIndicatorBehavior(behaviorId);
             mIndicators[i].setBehavior(behavior);
         }
         
-        for (var i = 0; i < METER_COUNT; i++) {
-            var behaviorId = Application.getApp().getProperty(METER_NAMES[i]);
+        for (var i = 0; i < FMC.METER_COUNT; i++) {
+            var behaviorId = Application.getApp().getProperty(FMC.METER_NAMES[i]);
             var behavior = createMeterBehavior(behaviorId);
             mMeters[i].setBehavior(behavior);
         }
@@ -108,7 +110,7 @@ class WatchFaceView extends WatchUi.WatchFace {
         mTimeLine.drawSeconds(dc);
         
         // Give indicators a chance for partial updates
-        for (var i = 0; i < INDICATOR_COUNT; i++) {
+        for (var i = 0; i < FIC.INDICATOR_COUNT; i++) {
             mIndicators[i].partialDraw(dc);
         }
     }
