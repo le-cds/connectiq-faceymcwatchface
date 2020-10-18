@@ -15,8 +15,8 @@
     
     <!-- Settings Menu -->
     <string id="SettingsMenuTitle">Settings</string>
-    <string id="Indicator_Title">Indicator</string>
-    <string id="Meter_Title">Meter</string>
+    <string id="Indicator">Indicator</string>
+    <string id="Meter">Meter</string>
     
     
     <!-- Strings for the date indicator. -->

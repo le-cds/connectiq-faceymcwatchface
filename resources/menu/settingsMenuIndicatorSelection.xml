@@ -1,9 +1,10 @@
-<menu2 id="SettingsMenuIndicatorSelection" title="@Strings.Indicator_Title">
-	<icon-menu-item id="IndicatorAlarms" label="@Strings.IndicatorBehaviorAlarms" icon="@Drawables.IndicatorBehaviorAlarms" />
-	<icon-menu-item id="IndicatorAppointments" label="@Strings.IndicatorBehaviorAppointments" icon="@Drawables.IndicatorBehaviorAppointments" />
-	<icon-menu-item id="IndicatorBattery" label="@Strings.IndicatorBehaviorBattery" icon="@Drawables.IndicatorBehaviorBattery" />
-	<icon-menu-item id="IndicatorBluetooth" label="@Strings.IndicatorBehaviorBluetooth" icon="@Drawables.IndicatorBehaviorBluetooth" />
-	<icon-menu-item id="IndicatorDnD" label="@Strings.IndicatorBehaviorDnD" icon="@Drawables.IndicatorBehaviorDnD" />
-	<icon-menu-item id="IndicatorHeartRate" label="@Strings.IndicatorBehaviorHeartRate" icon="@Drawables.IndicatorBehaviorHeartRate" />
-	<icon-menu-item id="IndicatorNotifications" label="@Strings.IndicatorBehaviorNotifications" icon="@Drawables.IndicatorBehaviorNotifications" />
+<!-- This is a generated file. Do not edit manually or suffer the consequences... -->
+<menu2 id="SettingsMenuIndicatorSelection" title="@Strings.Indicator">
+    <icon-menu-item id="IndicatorBehaviorAlarms" label="@Strings.IndicatorBehaviorAlarms" icon="@Drawables.IndicatorBehaviorAlarms" />
+    <icon-menu-item id="IndicatorBehaviorBattery" label="@Strings.IndicatorBehaviorBattery" icon="@Drawables.IndicatorBehaviorBattery" />
+    <icon-menu-item id="IndicatorBehaviorBluetooth" label="@Strings.IndicatorBehaviorBluetooth" icon="@Drawables.IndicatorBehaviorBluetooth" />
+    <icon-menu-item id="IndicatorBehaviorDnD" label="@Strings.IndicatorBehaviorDnD" icon="@Drawables.IndicatorBehaviorDnD" />
+    <icon-menu-item id="IndicatorBehaviorHeartRate" label="@Strings.IndicatorBehaviorHeartRate" icon="@Drawables.IndicatorBehaviorHeartRate" />
+    <icon-menu-item id="IndicatorBehaviorAppointments" label="@Strings.IndicatorBehaviorAppointments" icon="@Drawables.IndicatorBehaviorAppointments" />
+    <icon-menu-item id="IndicatorBehaviorNotifications" label="@Strings.IndicatorBehaviorNotifications" icon="@Drawables.IndicatorBehaviorNotifications" />
 </menu2>

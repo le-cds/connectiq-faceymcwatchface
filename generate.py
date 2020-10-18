@@ -14,6 +14,21 @@ GENERATED_FILE_WARNING = "This is a generated file. Do not edit manually or suff
 #     #   #   # #      #   #   # #      #    # 
  #####    #   # ###### #   #   # ######  ####  
 
+def add_index_field(items):
+    """Adds an index field to all dictionaries in the given list of dictionaries."""
+
+    for index, item in enumerate(items):
+        item["index"] = index
+
+
+def sorted_by_localized_name(items):
+    """Returns a view on the given items that is sorted by their English language names."""
+
+    return sorted(
+        items,
+        key=lambda item: item["languages"]["en"])
+
+
 def to_file_name_suffix(config):
     """Generates the suffix to be used for output files."""
 
@@ -45,7 +60,7 @@ def to_behavior_id(config, id):
 def generate_drawables(config):
     """Generate the drawables for the given config."""
 
-    with open(F"resources/drawables/drawables{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8") as out_file:
+    with open(F"resources/drawables/drawables{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
         print(F"<drawables>", file=out_file)
 
@@ -101,9 +116,9 @@ def generate_strings(config):
         if language_code != "en":
             dir_name += F"-{language_code}"
         
-        with open(F"{dir_name}/strings/strings{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8") as out_file:
+        with open(F"{dir_name}/strings/strings{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
             print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
-            print(F"<strings>", file=out_file)
+            print("<strings>", file=out_file)
 
             # We need to generate a string for each drawable
             print("    <!-- Drawables -->", file=out_file)
@@ -117,10 +132,34 @@ def generate_strings(config):
                 behaviorId = to_behavior_id(config, behavior["id"])
                 generate_string(behavior, behaviorId, language_code, out_file)
 
-            print(F"</strings>", file=out_file)
+            print("</strings>", file=out_file)
 
 
 
+
+#     #                             
+##   ## ###### #    # #    #  ####  
+# # # # #      ##   # #    # #      
+#  #  # #####  # #  # #    #  ####  
+#     # #      #  # # #    #      # 
+#     # #      #   ## #    # #    # 
+#     # ###### #    #  ####   ####  
+
+def generate_menus(config):
+    """Generates a selection menu for the available behaviors, sorted by English name."""
+
+    with open(F"resources/menu/settingsMenu{config['category']}Selection.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+        print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
+        print(F'<menu2 id="SettingsMenu{config["category"]}Selection" title="@Strings.{config["category"]}">', file=out_file)
+
+        for behavior in sorted_by_localized_name(config["behaviors"]):
+            behavior_id = to_behavior_id(config, behavior["id"])
+            print(F'    <icon-menu-item id="{behavior_id}" label="@Strings.{behavior_id}" icon="@Drawables.{behavior_id}" />', file=out_file)
+
+        print(F'</menu2>', file=out_file)
+
+
+        
 
 #     #                     #####                               
 ##   ##   ##   # #    #    #     #  ####  #####  # #####  ##### 
@@ -137,6 +176,11 @@ for file in config_files:
     with open(F"source/{file}.json") as json_file:
         config = json.load(json_file)
 
+        # We will probably shuffle lists around, so remember the original order
+        add_index_field(config["drawables"])
+        add_index_field(config["behaviors"])
+
         # Generate all the code we need
         generate_drawables(config)
         generate_strings(config)
+        generate_menus(config)
