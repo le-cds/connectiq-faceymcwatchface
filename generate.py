@@ -47,6 +47,16 @@ def to_behavior_id(config, id):
     return F"{config['category']}Behavior{id}"
 
 
+def item_with_id(items, id):
+    """From the given list of items, returns the item with the given ID or None if there is... well... none."""
+
+    for item in items:
+        if item["id"] == id:
+            return item
+    else:
+        return None
+
+
 
 
 ######                                                          
@@ -156,7 +166,67 @@ def generate_menus(config):
             behavior_id = to_behavior_id(config, behavior["id"])
             print(F'    <icon-menu-item id="{behavior_id}" label="@Strings.{behavior_id}" icon="@Drawables.{behavior_id}" />', file=out_file)
 
-        print(F'</menu2>', file=out_file)
+        print('</menu2>', file=out_file)
+
+
+
+
+ #####                                            
+#     # ###### ##### ##### # #    #  ####   ####  
+#       #        #     #   # ##   # #    # #      
+ #####  #####    #     #   # # #  # #       ####  
+      # #        #     #   # #  # # #  ###      # 
+#     # #        #     #   # #   ## #    # #    # 
+ #####  ######   #     #   # #    #  ####   ####  
+
+def generate_properties(config):
+    """Generate property files for the given configuration, including proper default values."""
+
+    with open(F"resources/settings/properties{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+        print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
+        print("<properties>", file=out_file)
+
+        for drawable in config["drawables"]:
+            drawable_id = to_drawable_id(config, drawable["id"])
+            default_behavior = item_with_id(config["behaviors"], drawable["defaultBehavior"])
+
+            print(F'    <property id="{drawable_id}" type="number">{default_behavior["index"]}</property> <!-- {default_behavior["id"]} -->', file=out_file)
+
+        print('</properties>', file=out_file)
+
+
+def generate_settings_behvaior_list(config):
+    """Generates the proper settingConfig for the behaviors in the given config."""
+
+    result = '        <settingConfig type="list">\n'
+
+    for behavior in sorted_by_localized_name(config["behaviors"]):
+        behavior_id = to_behavior_id(config, behavior["id"])
+        result += F'            <listEntry value="{behavior["index"]}">@Strings.{behavior_id}</listEntry>\n'
+    
+    result += '        </settingConfig>'
+
+    return result
+
+
+def generate_settings(config):
+    """Generate settings files for the given configuration, including properly sorted value lists."""
+
+    # We'll be writing the same behavior list a lot, so simply generate it once and paste it
+    behavior_list = generate_settings_behvaior_list(config)
+
+    with open(F"resources/settings/settings{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+        print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
+        print("<settings>", file=out_file)
+
+        for drawable in config["drawables"]:
+            drawable_id = to_drawable_id(config, drawable["id"])
+
+            print(F'    <setting propertyKey="@Properties.{drawable_id}" title="@Strings.{drawable_id}">', file=out_file)
+            print(behavior_list, file=out_file)
+            print('    </setting>', file=out_file)
+
+        print('</settings>', file=out_file)
 
 
         
@@ -184,3 +254,5 @@ for file in config_files:
         generate_drawables(config)
         generate_strings(config)
         generate_menus(config)
+        generate_properties(config)
+        generate_settings(config)

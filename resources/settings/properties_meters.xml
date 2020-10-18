@@ -1,6 +1,5 @@
+<!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <properties>
-
     <property id="MeterLeft" type="number">2</property> <!-- Steps -->
-    <property id="MeterRight" type="number">1</property> <!-- Floors climbed -->
-    
+    <property id="MeterRight" type="number">1</property> <!-- FloorsClimbed -->
 </properties>
