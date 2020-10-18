@@ -86,7 +86,7 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
         // We need to check whether any of the indicators is supposed to show appointments
         var appointments = false;
         for (var i = 0; i < INDICATOR_COUNT; i++) {
-            if (getProperty(INDICATOR_NAMES[i]) == INDICATOR_APPOINTMENTS) {
+            if (getProperty(INDICATOR_NAMES[i]) == INDICATOR_BEHAVIOR_APPOINTMENTS) {
                 appointments = true;
                 break;
             }

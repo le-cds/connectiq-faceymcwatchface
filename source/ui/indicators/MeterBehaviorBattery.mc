@@ -3,7 +3,7 @@ using Toybox.System;
 /**
  * Implements behavior for displaying the battery state.
  */
-class BatteryMeterBehavior extends DefaultMeterBehavior {
+class MeterBehaviorBattery extends DefaultMeterBehavior {
 
     function initialize() {
         DefaultMeterBehavior.initialize();

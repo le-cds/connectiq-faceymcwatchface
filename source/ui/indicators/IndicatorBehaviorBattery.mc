@@ -4,7 +4,7 @@ using Toybox.System;
  * Indicator for the watch's battery state. Does not support partial updates
  * since updating the battery state once per minute is enough.
  */
-class BatteryIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorBattery extends DefaultIndicatorBehavior {
 
     // I wasn't able to find out how (and if) character arithmetic works, so this
     // array is a workaround

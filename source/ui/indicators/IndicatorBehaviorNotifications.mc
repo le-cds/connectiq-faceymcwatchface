@@ -3,7 +3,7 @@ using Toybox.System;
 /**
  * Indicates the number of unread notifications. Supports partial updates.
  */
-class NotificationsIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorNotifications extends DefaultIndicatorBehavior {
 
     // Last known number of notifications. When the current number differs it
     // is time to redraw.

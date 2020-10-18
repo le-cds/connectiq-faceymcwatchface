@@ -5,38 +5,6 @@ using Toybox.WatchUi;
  */
 class SettingsMenu extends WatchUi.Menu2 {
     
-    // Map of IDs to resource IDs of displayable names
-    private const INDICATOR_TO_RESOURCE_ID = {
-        INDICATOR_TOP_LEFT => Rez.Strings.IndicatorTopLeft,
-        INDICATOR_TOP_RIGHT => Rez.Strings.IndicatorTopRight,
-        INDICATOR_CENTER => Rez.Strings.IndicatorCenter,
-        INDICATOR_BOTTOM_LEFT => Rez.Strings.IndicatorBottomLeft,
-        INDICATOR_BOTTOM_CENTER => Rez.Strings.IndicatorBottomCenter,
-        INDICATOR_BOTTOM_RIGHT => Rez.Strings.IndicatorBottomRight
-    };
-    private const METER_TO_RESOURCE_ID = {
-        METER_LEFT => Rez.Strings.MeterLeft,
-        METER_RIGHT => Rez.Strings.MeterRight
-    };
-    
-    // Lists that map behavior IDs to resource IDs of displayable names
-    private const INDICATOR_BEHAVIOR_TO_RESOURCE_ID = [
-        Rez.Strings.IndicatorBehaviorAlarms,
-        Rez.Strings.IndicatorBehaviorAppointments,
-        Rez.Strings.IndicatorBehaviorBattery,
-        Rez.Strings.IndicatorBehaviorBluetooth,
-        Rez.Strings.IndicatorBehaviorDnD,
-        Rez.Strings.IndicatorBehaviorHeartRate,
-        Rez.Strings.IndicatorBehaviorNotifications
-    ];
-    private const METER_BEHAVIOR_TO_RESOURCE_ID = [
-        Rez.Strings.MeterBehaviorBattery,
-        Rez.Strings.MeterBehaviorFloorsClimbed,
-        Rez.Strings.MeterBehaviorSteps,
-        Rez.Strings.MeterBehaviorMoveBar,
-        Rez.Strings.MeterBehaviorActiveMinutes
-    ];
-
     // Our fine selection of menu items which we'll update from time to time
     private var mAppointmentUpdateIntervalItem;
     private var mIndicatorItems;
@@ -73,7 +41,7 @@ class SettingsMenu extends WatchUi.Menu2 {
     private function createIndicatorSetting(indicatorId) {
         // We need to map the ID to a String resource to be displayed
         return new WatchUi.MenuItem(
-            loadResource(INDICATOR_TO_RESOURCE_ID[indicatorId]),
+            loadResource(INDICATOR_TO_STRING_RESOURCE[indicatorId]),
             "",
             INDICATOR_NAMES[indicatorId],
             {});
@@ -82,7 +50,7 @@ class SettingsMenu extends WatchUi.Menu2 {
     private function createMeterSetting(meterId) {
         // We need to map the ID to a String resource to be displayed
         return new WatchUi.MenuItem(
-            loadResource(METER_TO_RESOURCE_ID[meterId]),
+            loadResource(METER_TO_STRING_RESOURCE[meterId]),
             "",
             METER_NAMES[meterId],
             {});
@@ -99,14 +67,14 @@ class SettingsMenu extends WatchUi.Menu2 {
         // Indicators
         for (var i = 0; i < INDICATOR_COUNT; i++) {
             var behaviorId = Application.getApp().getProperty(INDICATOR_NAMES[i]);
-            var subLabel = loadResource(INDICATOR_BEHAVIOR_TO_RESOURCE_ID[behaviorId]);
+            var subLabel = loadResource(INDICATOR_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
             mIndicatorItems[i].setSubLabel(subLabel);
         }
         
         // Meters
         for (var i = 0; i < METER_COUNT; i++) {
             var behaviorId = Application.getApp().getProperty(METER_NAMES[i]);
-            var subLabel = loadResource(METER_BEHAVIOR_TO_RESOURCE_ID[behaviorId]);
+            var subLabel = loadResource(METER_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
             mMeterItems[i].setSubLabel(subLabel);
         }
     }

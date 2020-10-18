@@ -13,7 +13,7 @@
     <string id="IndicatorBehaviorAppointments">Next appointment</string>
     <string id="IndicatorBehaviorBattery">Battery charge</string>
     <string id="IndicatorBehaviorBluetooth">Bluetooth</string>
-    <string id="IndicatorBehaviorDnD">Do not Disturb</string>
+    <string id="IndicatorBehaviorDND">Do not Disturb</string>
     <string id="IndicatorBehaviorHeartRate">Heart rate</string>
     <string id="IndicatorBehaviorNotifications">Unread notifications</string>
 </strings>

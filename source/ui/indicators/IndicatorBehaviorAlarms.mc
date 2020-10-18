@@ -4,7 +4,7 @@ using Toybox.System;
  * Indicator for the watch's active alarms. Does not support partial updates
  * since if the number of alarms changes, the watchface will be redrawn anyway.
  */
-class AlarmsIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorAlarms extends DefaultIndicatorBehavior {
 
     public function initialize() {
         DefaultIndicatorBehavior.initialize(false);

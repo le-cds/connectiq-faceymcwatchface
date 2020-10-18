@@ -4,7 +4,7 @@ using Toybox.System;
  * Indicates whether the phone is currently connected or not. Supports partial
  * updates.
  */
-class BluetoothIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorBluetooth extends DefaultIndicatorBehavior {
 
     // Last known state of Bluetooth connection. When the current state differs
     // it is time to redraw.

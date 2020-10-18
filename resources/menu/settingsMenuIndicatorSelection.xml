@@ -3,7 +3,7 @@
     <icon-menu-item id="IndicatorBehaviorAlarms" label="@Strings.IndicatorBehaviorAlarms" icon="@Drawables.IndicatorBehaviorAlarms" />
     <icon-menu-item id="IndicatorBehaviorBattery" label="@Strings.IndicatorBehaviorBattery" icon="@Drawables.IndicatorBehaviorBattery" />
     <icon-menu-item id="IndicatorBehaviorBluetooth" label="@Strings.IndicatorBehaviorBluetooth" icon="@Drawables.IndicatorBehaviorBluetooth" />
-    <icon-menu-item id="IndicatorBehaviorDnD" label="@Strings.IndicatorBehaviorDnD" icon="@Drawables.IndicatorBehaviorDnD" />
+    <icon-menu-item id="IndicatorBehaviorDND" label="@Strings.IndicatorBehaviorDND" icon="@Drawables.IndicatorBehaviorDND" />
     <icon-menu-item id="IndicatorBehaviorHeartRate" label="@Strings.IndicatorBehaviorHeartRate" icon="@Drawables.IndicatorBehaviorHeartRate" />
     <icon-menu-item id="IndicatorBehaviorAppointments" label="@Strings.IndicatorBehaviorAppointments" icon="@Drawables.IndicatorBehaviorAppointments" />
     <icon-menu-item id="IndicatorBehaviorNotifications" label="@Strings.IndicatorBehaviorNotifications" icon="@Drawables.IndicatorBehaviorNotifications" />

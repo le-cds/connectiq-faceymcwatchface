@@ -1,7 +1,7 @@
 <!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <properties>
     <property id="IndicatorTopLeft" type="number">3</property> <!-- Bluetooth -->
-    <property id="IndicatorTopRight" type="number">4</property> <!-- DnD -->
+    <property id="IndicatorTopRight" type="number">4</property> <!-- DND -->
     <property id="IndicatorCenter" type="number">1</property> <!-- Appointments -->
     <property id="IndicatorBottomLeft" type="number">6</property> <!-- Notifications -->
     <property id="IndicatorBottomCenter" type="number">2</property> <!-- Battery -->

@@ -1,7 +1,7 @@
 /**
  * Implements behavior for displaying the movement bar.
  */
-class MoveBarMeterBehavior extends DefaultMeterBehavior {
+class MeterBehaviorMoveBar extends DefaultMeterBehavior {
 
     /** Maximum move bar level. */    
     private var mMoveBarMax = 1;

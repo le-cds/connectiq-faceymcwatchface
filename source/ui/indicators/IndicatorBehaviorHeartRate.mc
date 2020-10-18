@@ -6,7 +6,7 @@ using Toybox.System;
  * Indicates the heart rate. Supports partial updates with a 10-seconds update
  * interval while the watch is sleeping and 1 second while it's awake.
  */
-class HeartRateIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
 
     // Last known heart rate.
     private var mHeartRate = 0;

@@ -4,7 +4,7 @@ using Toybox.System;
  * Indicator for the watch's Do Not Disturb setting. Does not support partial
  * updates since changing this setting entails leaving the watchface.
  */
-class DoNotDisturbIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorDND extends DefaultIndicatorBehavior {
     
     public function initialize() {
         DefaultIndicatorBehavior.initialize(false);

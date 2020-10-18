@@ -4,7 +4,7 @@
     <bitmap id="IndicatorBehaviorAppointments" filename="icon_IndicatorBehaviorAppointments.png" />
     <bitmap id="IndicatorBehaviorBattery" filename="icon_IndicatorBehaviorBattery.png" />
     <bitmap id="IndicatorBehaviorBluetooth" filename="icon_IndicatorBehaviorBluetooth.png" />
-    <bitmap id="IndicatorBehaviorDnD" filename="icon_IndicatorBehaviorDnD.png" />
+    <bitmap id="IndicatorBehaviorDND" filename="icon_IndicatorBehaviorDND.png" />
     <bitmap id="IndicatorBehaviorHeartRate" filename="icon_IndicatorBehaviorHeartRate.png" />
     <bitmap id="IndicatorBehaviorNotifications" filename="icon_IndicatorBehaviorNotifications.png" />
 </drawables>

@@ -1,7 +1,7 @@
 /**
  * Implements behavior for displaying the number of floors climbed.
  */
-class FloorsClimbedMeterBehavior extends DefaultMeterBehavior {
+class MeterBehaviorFloorsClimbed extends DefaultMeterBehavior {
     
     // Cache most recent values
     private var mFloors = 0;

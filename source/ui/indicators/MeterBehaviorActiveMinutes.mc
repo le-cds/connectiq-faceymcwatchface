@@ -1,7 +1,7 @@
 /**
  * Implements behavior for displaying the active minutes per week.
  */
-class ActiveMinutesMeterBehavior extends DefaultMeterBehavior {
+class MeterBehaviorActiveMinutes extends DefaultMeterBehavior {
 
     private var mActivity = 0;
     private var mActivityGoal = 1;

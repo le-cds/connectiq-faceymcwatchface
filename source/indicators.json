@@ -10,7 +10,7 @@
         },
         {
             "id": "TopRight",
-            "defaultBehavior": "DnD",
+            "defaultBehavior": "DND",
             "languages": {
                 "en": "Top Right indicator"
             }
@@ -70,7 +70,7 @@
             }
         },
         {
-            "id": "DnD",
+            "id": "DND",
             "languages": {
                 "en": "Do not Disturb"
             }

@@ -1,4 +1,5 @@
 import json
+import re
 
 
 GENERATED_FILE_WARNING = "This is a generated file. Do not edit manually or suffer the consequences..."
@@ -55,6 +56,20 @@ def item_with_id(items, id):
             return item
     else:
         return None
+
+
+def to_constant_name(id):
+    """Turns an ID into a constant name (snake and upper case)."""
+
+    # See https://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
+
+    # Take care of capital letters followed by non-capitals (except at string start); precede with underscore.
+    id = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', id)
+
+    # Insert remaining required underscores
+    id = re.sub('([a-z0-9])([A-Z])', r'\1_\2', id)
+
+    return id.upper()
 
 
 
@@ -229,7 +244,136 @@ def generate_settings(config):
         print('</settings>', file=out_file)
 
 
+
+
+ #####                                                        
+#     #  ####  #    #  ####  #####   ##   #    # #####  ####  
+#       #    # ##   # #        #    #  #  ##   #   #   #      
+#       #    # # #  #  ####    #   #    # # #  #   #    ####  
+#       #    # #  # #      #   #   ###### #  # #   #        # 
+#     # #    # #   ## #    #   #   #    # #   ##   #   #    # 
+ #####   ####  #    #  ####    #   #    # #    #   #    ####  
+
+
+def generate_count_constants(config, out_file):
+    """Generates name-related constants and writes them to the given output file."""
+
+    print(F"const {to_constant_name(config['category'] + 'Count')} = {len(config['drawables'])};", file=out_file)
+    print(F"const {to_constant_name(config['category'] + 'BehaviorCount')} = {len(config['behaviors'])};", file=out_file)
+    print("", file=out_file)
+
+
+def generate_name_constants(config, out_file):
+    """Generates name-related constants and writes them to the given output file."""
+
+    # Generate the names of the drawables
+    print(F"const {to_constant_name(config['category'] + 'Names')} = [", file=out_file)
+
+    drawable_strings = ',\n    '.join( [ F'"{to_drawable_id(config, drawable["id"])}"' for drawable in config["drawables"] ] )
+    print(F"    {drawable_strings}", file=out_file)
+
+    print("];\n", file=out_file)
+
+    # Generate the names of the behaviors
+    print(F"const {to_constant_name(config['category'] + 'BehaviorNames')} = [", file=out_file)
+
+    behavior_strings = ',\n    '.join( [ F'"{to_behavior_id(config, behavior["id"])}"' for behavior in config["behaviors"] ] )
+    print(F"    {behavior_strings}", file=out_file)
+
+    print("];\n", file=out_file)
+
+
+def generate_enum_constants(config, out_file):
+    """Generates enumeration-related constants and writes them to the given output file."""
+
+    # Generate enumerations of the drawables
+    print(F"enum /* {config['category'].upper()} */ " + "{", file=out_file)
+
+    drawable_constants = ',\n    '.join( [ to_constant_name(to_drawable_id(config, drawable["id"])) for drawable in config["drawables"] ] )
+    print(F"    {drawable_constants}", file=out_file)
+
+    print("}\n", file=out_file)
+
+    # Generate enumerations of the behaviors
+    print(F"enum /* {config['category'].upper()}_BEHAVIORS */ " + "{", file=out_file)
+
+    behavior_constants = ',\n    '.join( [ to_constant_name(to_behavior_id(config, behavior["id"])) for behavior in config["behaviors"] ] )
+    print(F"    {behavior_constants}", file=out_file)
+
+    print("}\n", file=out_file)
+
+
+def generate_resource_map(config, out_file):
+    """Generates arrays that will map drawable and behavior IDs to the string resource ID
+       that contains the properly localized name."""
+    
+    # Generate resource map of the drawables
+    print(F"const {to_constant_name(config['category'] + 'ToStringResource')} = [", file=out_file)
+
+    drawable_resources = ',\n    '.join( [ F'Rez.Strings.{to_drawable_id(config, drawable["id"])}' for drawable in config["drawables"] ] )
+    print(F"    {drawable_resources}", file=out_file)
+
+    print("];\n", file=out_file)
+    
+    # Generate resource map of the behaviors
+    print(F"const {to_constant_name(config['category'] + 'BehaviorToStringResource')} = [", file=out_file)
+
+    behavior_resources = ',\n    '.join( [ F'Rez.Strings.{to_behavior_id(config, behavior["id"])}' for behavior in config["behaviors"] ] )
+    print(F"    {behavior_resources}", file=out_file)
+
+    print("];\n", file=out_file)
+
+                                                               
+def generate_constants(config):
+    """Generates a file with a whole bunch of constants that may come in handy."""
+
+    with open(F"source/generated/{(config['category'])}Constants.mc", mode="w", encoding="utf8", newline="\n") as out_file:
+        print(F"// {GENERATED_FILE_WARNING}", file=out_file)
+        print("", file=out_file)
+
+        print("// Number of things and behaviors", file=out_file);
+        generate_count_constants(config, out_file)
+
+        print("// Enumerations of available things and behaviors to index into the other arrays", file=out_file)
+        generate_enum_constants(config, out_file)
         
+        print("// Names used in all sorts of properties, settings, drawables...", file=out_file)
+        generate_name_constants(config, out_file)
+        
+        print("// String resource IDs that belong to things. Use these to generate names in the UI.", file=out_file)
+        generate_resource_map(config, out_file)
+
+
+
+
+#######                                                   
+#         ##    ####  #####  ####  #####  # ######  ####  
+#        #  #  #    #   #   #    # #    # # #      #      
+#####   #    # #        #   #    # #    # # #####   ####  
+#       ###### #        #   #    # #####  # #           # 
+#       #    # #    #   #   #    # #   #  # #      #    # 
+#       #    #  ####    #    ####  #    # # ######  ####  
+
+def generate_factories(config):
+    """Generates behavior factory functions."""
+    
+    with open(F"source/generated/{(config['category'])}Factory.mc", mode="w", encoding="utf8", newline="\n") as out_file:
+        print("/**", file=out_file)
+        print(" * Turns a behavior ID into an instance of the class that implements the behavior.", file=out_file)
+        print(" */", file=out_file)
+        print(F"function create{config['category']}Behavior(id)" + "{", file=out_file)
+        print("    switch (id) {", file=out_file)
+        
+        for behavior in config["behaviors"]:
+            behavior_id = to_behavior_id(config, behavior["id"])
+            print(F"        case {to_constant_name(behavior_id)}:", file=out_file)
+            print(F"            return new {behavior_id}();", file=out_file)
+
+        print("    }", file=out_file)
+        print("}", file=out_file)
+
+
+
 
 #     #                     #####                               
 ##   ##   ##   # #    #    #     #  ####  #####  # #####  ##### 
@@ -256,3 +400,5 @@ for file in config_files:
         generate_menus(config)
         generate_properties(config)
         generate_settings(config)
+        generate_constants(config)
+        generate_factories(config)

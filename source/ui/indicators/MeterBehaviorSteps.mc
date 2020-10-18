@@ -1,7 +1,7 @@
 /**
  * Implements behavior for displaying the number of steps.
  */
-class StepsMeterBehavior extends DefaultMeterBehavior {
+class MeterBehaviorSteps extends DefaultMeterBehavior {
     
     // Cache most recent values
     private var mSteps = 0;

@@ -5,7 +5,7 @@
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="4">@Strings.IndicatorBehaviorDnD</listEntry>
+            <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
@@ -16,7 +16,7 @@
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="4">@Strings.IndicatorBehaviorDnD</listEntry>
+            <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
@@ -27,7 +27,7 @@
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="4">@Strings.IndicatorBehaviorDnD</listEntry>
+            <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
@@ -38,7 +38,7 @@
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="4">@Strings.IndicatorBehaviorDnD</listEntry>
+            <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
@@ -49,7 +49,7 @@
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="4">@Strings.IndicatorBehaviorDnD</listEntry>
+            <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
@@ -60,7 +60,7 @@
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="4">@Strings.IndicatorBehaviorDnD</listEntry>
+            <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>

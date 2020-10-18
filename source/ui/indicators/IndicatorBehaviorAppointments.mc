@@ -4,7 +4,7 @@ using Toybox.System;
  * Indicator for upcoming appointments. Does not support partial updates because
  * appointments will only happen one a minute at most anyway.
  */
-class AppointmentIndicatorBehavior extends DefaultIndicatorBehavior {
+class IndicatorBehaviorAppointments extends DefaultIndicatorBehavior {
     
     /**
      * We cache the next appointment during update() to avoid having to retrieve
