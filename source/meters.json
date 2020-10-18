@@ -1,0 +1,51 @@
+{
+    "category": "Meter",
+    "drawables": [
+        {
+            "id": "Left",
+            "defaultBehavior": "Steps",
+            "languages": {
+                "en": "Left meter"
+            }
+        },
+        {
+            "id": "Right",
+            "defaultBehavior": "FloorsClimbed",
+            "languages": {
+                "en": "Right meter"
+            }
+        }
+    ],
+    "behaviors": [
+        {
+            "id": "Battery",
+            "languages": {
+                "en": "Battery charge"
+            }
+        },
+        {
+            "id": "FloorsClimbed",
+            "languages": {
+                "en": "Floors climbed"
+            }
+        },
+        {
+            "id": "Steps",
+            "languages": {
+                "en": "Steps stepped"
+            }
+        },
+        {
+            "id": "MoveBar",
+            "languages": {
+                "en": "Move bar"
+            }
+        },
+        {
+            "id": "ActiveMinutes",
+            "languages": {
+                "en": "Activ"
+            }
+        }
+    ]
+}

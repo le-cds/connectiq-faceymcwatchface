@@ -1,0 +1,91 @@
+{
+    "category": "Indicator",
+    "drawables": [
+        {
+            "id": "TopLeft",
+            "defaultBehavior": "Bluetooth",
+            "languages": {
+                "en": "Top left indicator"
+            }
+        },
+        {
+            "id": "TopRight",
+            "defaultBehavior": "DnD",
+            "languages": {
+                "en": "Top Right indicator"
+            }
+        },
+        {
+            "id": "Center",
+            "defaultBehavior": "Appointments",
+            "languages": {
+                "en": "Center indicator"
+            }
+        },
+        {
+            "id": "BottomLeft",
+            "defaultBehavior": "Notifications",
+            "languages": {
+                "en": "Bottom left indicator"
+            }
+        },
+        {
+            "id": "BottomCenter",
+            "defaultBehavior": "Battery",
+            "languages": {
+                "en": "Bottom center indicator"
+            }
+        },
+        {
+            "id": "BottomRight",
+            "defaultBehavior": "Alarms",
+            "languages": {
+                "en": "Bottom right indicator"
+            }
+        }
+    ],
+    "behaviors": [
+        {
+            "id": "Alarms",
+            "languages": {
+                "en": "Active alarms"
+            }
+        },
+        {
+            "id": "Appointments",
+            "languages": {
+                "en": "Next appointment"
+            }
+        },
+        {
+            "id": "Battery",
+            "languages": {
+                "en": "Battery charge"
+            }
+        },
+        {
+            "id": "Bluetooth",
+            "languages": {
+                "en": "Bluetooth"
+            }
+        },
+        {
+            "id": "DnD",
+            "languages": {
+                "en": "Do not Disturb"
+            }
+        },
+        {
+            "id": "HeartRate",
+            "languages": {
+                "en": "Heart rate"
+            }
+        },
+        {
+            "id": "Notifications",
+            "languages": {
+                "en": "Unread notifications"
+            }
+        }
+    ]
+}
