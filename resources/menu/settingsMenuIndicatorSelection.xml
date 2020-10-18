@@ -1,0 +1,9 @@
+<menu2 id="SettingsMenuIndicatorSelection" title="@Strings.Indicator_Title">
+	<icon-menu-item id="IndicatorAlarms" label="@Strings.IndicatorAlarms" icon="@Drawables.IndicatorAlarms" />
+	<icon-menu-item id="IndicatorAppointments" label="@Strings.IndicatorAppointments" icon="@Drawables.IndicatorAppointments" />
+	<icon-menu-item id="IndicatorBattery" label="@Strings.IndicatorBattery" icon="@Drawables.IndicatorBattery" />
+	<icon-menu-item id="IndicatorBluetooth" label="@Strings.IndicatorBluetooth" icon="@Drawables.IndicatorBluetooth" />
+	<icon-menu-item id="IndicatorDnD" label="@Strings.IndicatorDnD" icon="@Drawables.IndicatorDnD" />
+	<icon-menu-item id="IndicatorHeartRate" label="@Strings.IndicatorHeartRate" icon="@Drawables.IndicatorHeartRate" />
+	<icon-menu-item id="IndicatorNotifications" label="@Strings.IndicatorNotifications" icon="@Drawables.IndicatorNotifications" />
+</menu2>

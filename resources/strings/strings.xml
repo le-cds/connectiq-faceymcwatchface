@@ -14,7 +14,8 @@
     
     
     <!-- Indicator Settings -->
-    
+
+    <string id="Indicator_Title">Indicator</string>
     <string id="IndicatorTopLeft_Title">Top left indicator</string>
     <string id="IndicatorTopRight_Title">Top right indicator</string>
     <string id="IndicatorCenter_Title">Center indicator</string>
@@ -32,6 +33,7 @@
     
     
     <!-- Meter Settings -->
+    <string id="Meter_Title">Meter</string>
     <string id="MeterLeft_Title">Left meter</string>
     <string id="MeterRight_Title">Right meter</string>
     
