@@ -34,14 +34,13 @@ def to_behavior_id(config, id):
 
 
 
- #####                           #####                                                           
-#     #  ####  #####  ######    #     # ###### #    # ###### #####    ##   ##### #  ####  #    # 
-#       #    # #    # #         #       #      ##   # #      #    #  #  #    #   # #    # ##   # 
-#       #    # #    # #####     #  #### #####  # #  # #####  #    # #    #   #   # #    # # #  # 
-#       #    # #    # #         #     # #      #  # # #      #####  ######   #   # #    # #  # # 
-#     # #    # #    # #         #     # #      #   ## #      #   #  #    #   #   # #    # #   ## 
- #####   ####  #####  ######     #####  ###### #    # ###### #    # #    #   #   #  ####  #    # 
-                                                                                                  
+######                                                          
+#     # #####    ##   #    #   ##   #####  #      ######  ####  
+#     # #    #  #  #  #    #  #  #  #    # #      #      #      
+#     # #    # #    # #    # #    # #####  #      #####   ####  
+#     # #####  ###### # ## # ###### #    # #      #           # 
+#     # #   #  #    # ##  ## #    # #    # #      #      #    # 
+######  #    # #    # #    # #    # #####  ###### ######  ####  
 
 def generate_drawables(config):
     """Generate the drawables for the given config."""
@@ -56,6 +55,69 @@ def generate_drawables(config):
             print(F'    <bitmap id="{behaviorId}" filename="icon_{behaviorId}.png" />', file=out_file)
 
         print(F"</drawables>", file=out_file)
+
+
+
+
+ #####                                      
+#     # ##### #####  # #    #  ####   ####  
+#         #   #    # # ##   # #    # #      
+ #####    #   #    # # # #  # #       ####  
+      #   #   #####  # #  # # #  ###      # 
+#     #   #   #   #  # #   ## #    # #    # 
+ #####    #   #    # # #    #  ####   ####  
+
+def assemble_languages(config):
+    """Assembles all language codes used in the given config."""
+
+    # We always want English
+    language_codes = { "en" }
+
+    for drawable in config["drawables"]:
+        for language_code in drawable["languages"]:
+            language_codes.add(language_code)
+
+    for behavior in config["behaviors"]:
+        for language_code in behavior["languages"]:
+            language_codes.add(language_code)
+    
+    return language_codes
+
+
+def generate_string(item, item_id, language_code, out_file):
+    # Check if this item has a translation
+    if not language_code in item["languages"]:
+        print(F"{item_id} has no translation for {language_code}")
+    else:
+        print(F'    <string id="{item_id}">{item["languages"][language_code]}</string>', file=out_file)
+
+
+
+def generate_strings(config):
+    """Generates language definitions for the given config."""
+
+    for language_code in assemble_languages(config):
+        dir_name = "resources"
+        if language_code != "en":
+            dir_name += F"-{language_code}"
+        
+        with open(F"{dir_name}/strings/strings{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8") as out_file:
+            print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
+            print(F"<strings>", file=out_file)
+
+            # We need to generate a string for each drawable
+            print("    <!-- Drawables -->", file=out_file)
+            for drawable in config["drawables"]:
+                drawableId = to_drawable_id(config, drawable["id"])
+                generate_string(drawable, drawableId, language_code, out_file)
+
+            print("", file=out_file)
+            print("    <!-- Behaviors -->", file=out_file)
+            for behavior in config["behaviors"]:
+                behaviorId = to_behavior_id(config, behavior["id"])
+                generate_string(behavior, behaviorId, language_code, out_file)
+
+            print(F"</strings>", file=out_file)
 
 
 
@@ -77,3 +139,4 @@ for file in config_files:
 
         # Generate all the code we need
         generate_drawables(config)
+        generate_strings(config)

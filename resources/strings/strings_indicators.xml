@@ -1,18 +1,19 @@
+<!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <strings>
+    <!-- Drawables -->
+    <string id="IndicatorTopLeft">Top left indicator</string>
+    <string id="IndicatorTopRight">Top Right indicator</string>
+    <string id="IndicatorCenter">Center indicator</string>
+    <string id="IndicatorBottomLeft">Bottom left indicator</string>
+    <string id="IndicatorBottomCenter">Bottom center indicator</string>
+    <string id="IndicatorBottomRight">Bottom right indicator</string>
 
-    <string id="IndicatorTopLeft_Title">Top left indicator</string>
-    <string id="IndicatorTopRight_Title">Top right indicator</string>
-    <string id="IndicatorCenter_Title">Center indicator</string>
-    <string id="IndicatorBottomLeft_Title">Bottom left indicator</string>
-    <string id="IndicatorBottomCenter_Title">Bottom center indicator</string>
-    <string id="IndicatorBottomRight_Title">Bottom right indicator</string>
-    
-    <string id="IndicatorAlarms">Active alarms</string>
-    <string id="IndicatorAppointments">Appointments</string>
-    <string id="IndicatorBattery">Battery charge</string>
-    <string id="IndicatorBluetooth">Bluetooth</string>
-    <string id="IndicatorDnD">Do not disturb</string>
-    <string id="IndicatorHeartRate">Heart rate</string>
-    <string id="IndicatorNotifications">Unread notifications</string>
-    
+    <!-- Behaviors -->
+    <string id="IndicatorBehaviorAlarms">Active alarms</string>
+    <string id="IndicatorBehaviorAppointments">Next appointment</string>
+    <string id="IndicatorBehaviorBattery">Battery charge</string>
+    <string id="IndicatorBehaviorBluetooth">Bluetooth</string>
+    <string id="IndicatorBehaviorDnD">Do not Disturb</string>
+    <string id="IndicatorBehaviorHeartRate">Heart rate</string>
+    <string id="IndicatorBehaviorNotifications">Unread notifications</string>
 </strings>

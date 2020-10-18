@@ -1,7 +1,7 @@
 <menu2 id="SettingsMenuMeterSelection" title="@Strings.Meter_Title">
-	<icon-menu-item id="MeterActiveMinutes" label="@Strings.MeterActiveMinutes" icon="@Drawables.MeterBehaviorActiveMinutes" />
-	<icon-menu-item id="MeterBattery" label="@Strings.MeterBattery" icon="@Drawables.MeterBehaviorBattery" />
-	<icon-menu-item id="MeterFloorsClimbed" label="@Strings.MeterFloorsClimbed" icon="@Drawables.MeterBehaviorFloorsClimbed" />
-	<icon-menu-item id="MeterMoveBar" label="@Strings.MeterMoveBar" icon="@Drawables.MeterBehaviorMoveBar" />
-	<icon-menu-item id="MeterSteps" label="@Strings.MeterSteps" icon="@Drawables.MeterBehaviorSteps" />
+	<icon-menu-item id="MeterBehaviorActiveMinutes" label="@Strings.MeterBehaviorActiveMinutes" icon="@Drawables.MeterBehaviorActiveMinutes" />
+	<icon-menu-item id="MeterBehaviorBattery" label="@Strings.MeterBehaviorBattery" icon="@Drawables.MeterBehaviorBattery" />
+	<icon-menu-item id="MeterBehaviorFloorsClimbed" label="@Strings.MeterBehaviorFloorsClimbed" icon="@Drawables.MeterBehaviorFloorsClimbed" />
+	<icon-menu-item id="MeterBehaviorMoveBar" label="@Strings.MeterBehaviorMoveBar" icon="@Drawables.MeterBehaviorMoveBar" />
+	<icon-menu-item id="MeterBehaviorSteps" label="@Strings.MeterBehaviorSteps" icon="@Drawables.MeterBehaviorSteps" />
 </menu2>

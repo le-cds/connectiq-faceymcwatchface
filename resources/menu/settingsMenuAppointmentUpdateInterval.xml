@@ -1,4 +1,4 @@
-<menu2 id="SettingsMenuAppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval_Title">
+<menu2 id="SettingsMenuAppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval">
 	<menu-item id="AppointmentUpdateInterval_5" label="@Strings.AppointmentUpdateInterval_5" />
 	<menu-item id="AppointmentUpdateInterval_10" label="@Strings.AppointmentUpdateInterval_10" />
 	<menu-item id="AppointmentUpdateInterval_15" label="@Strings.AppointmentUpdateInterval_15" />

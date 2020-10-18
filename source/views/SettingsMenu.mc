@@ -7,34 +7,34 @@ class SettingsMenu extends WatchUi.Menu2 {
     
     // Map of IDs to resource IDs of displayable names
     private const INDICATOR_TO_RESOURCE_ID = {
-        INDICATOR_TOP_LEFT => Rez.Strings.IndicatorTopLeft_Title,
-        INDICATOR_TOP_RIGHT => Rez.Strings.IndicatorTopRight_Title,
-        INDICATOR_CENTER => Rez.Strings.IndicatorCenter_Title,
-        INDICATOR_BOTTOM_LEFT => Rez.Strings.IndicatorBottomLeft_Title,
-        INDICATOR_BOTTOM_CENTER => Rez.Strings.IndicatorBottomCenter_Title,
-        INDICATOR_BOTTOM_RIGHT => Rez.Strings.IndicatorBottomRight_Title
+        INDICATOR_TOP_LEFT => Rez.Strings.IndicatorTopLeft,
+        INDICATOR_TOP_RIGHT => Rez.Strings.IndicatorTopRight,
+        INDICATOR_CENTER => Rez.Strings.IndicatorCenter,
+        INDICATOR_BOTTOM_LEFT => Rez.Strings.IndicatorBottomLeft,
+        INDICATOR_BOTTOM_CENTER => Rez.Strings.IndicatorBottomCenter,
+        INDICATOR_BOTTOM_RIGHT => Rez.Strings.IndicatorBottomRight
     };
     private const METER_TO_RESOURCE_ID = {
-        METER_LEFT => Rez.Strings.MeterLeft_Title,
-        METER_RIGHT => Rez.Strings.MeterRight_Title
+        METER_LEFT => Rez.Strings.MeterLeft,
+        METER_RIGHT => Rez.Strings.MeterRight
     };
     
     // Lists that map behavior IDs to resource IDs of displayable names
     private const INDICATOR_BEHAVIOR_TO_RESOURCE_ID = [
-        Rez.Strings.IndicatorAlarms,
-        Rez.Strings.IndicatorAppointments,
-        Rez.Strings.IndicatorBattery,
-        Rez.Strings.IndicatorBluetooth,
-        Rez.Strings.IndicatorDnD,
-        Rez.Strings.IndicatorHeartRate,
-        Rez.Strings.IndicatorNotifications
+        Rez.Strings.IndicatorBehaviorAlarms,
+        Rez.Strings.IndicatorBehaviorAppointments,
+        Rez.Strings.IndicatorBehaviorBattery,
+        Rez.Strings.IndicatorBehaviorBluetooth,
+        Rez.Strings.IndicatorBehaviorDnD,
+        Rez.Strings.IndicatorBehaviorHeartRate,
+        Rez.Strings.IndicatorBehaviorNotifications
     ];
     private const METER_BEHAVIOR_TO_RESOURCE_ID = [
-        Rez.Strings.MeterBattery,
-        Rez.Strings.MeterFloorsClimbed,
-        Rez.Strings.MeterSteps,
-        Rez.Strings.MeterMoveBar,
-        Rez.Strings.MeterActiveMinutes
+        Rez.Strings.MeterBehaviorBattery,
+        Rez.Strings.MeterBehaviorFloorsClimbed,
+        Rez.Strings.MeterBehaviorSteps,
+        Rez.Strings.MeterBehaviorMoveBar,
+        Rez.Strings.MeterBehaviorActiveMinutes
     ];
 
     // Our fine selection of menu items which we'll update from time to time
@@ -49,7 +49,7 @@ class SettingsMenu extends WatchUi.Menu2 {
         
         // Appointment Update Interval
         mAppointmentUpdateIntervalItem = new WatchUi.MenuItem(
-            loadResource(Rez.Strings.AppointmentUpdateInterval_Title),
+            loadResource(Rez.Strings.AppointmentUpdateInterval),
             "",
             APPOINTMENT_UPDATE_INTERVAL,
             {});

@@ -4,7 +4,7 @@
     
     
     <!-- Appointment Settings -->
-    <string id="AppointmentUpdateInterval_Title">Update Appointments</string>
+    <string id="AppointmentUpdateInterval">Update Appointments</string>
     <string id="AppointmentUpdateInterval_5">Every 5 minutes</string>
     <string id="AppointmentUpdateInterval_10">Every 10 minutes</string>
     <string id="AppointmentUpdateInterval_15">Every 15 minutes</string>

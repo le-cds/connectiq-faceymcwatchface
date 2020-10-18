@@ -2,7 +2,7 @@
 
 	<!-- Appointment Settings -->
 
-    <setting propertyKey="@Properties.AppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval_Title">
+    <setting propertyKey="@Properties.AppointmentUpdateInterval" title="@Strings.AppointmentUpdateInterval">
     	<settingConfig type="list">
     		<listEntry value="5">@Strings.AppointmentUpdateInterval_5</listEntry>
     		<listEntry value="10">@Strings.AppointmentUpdateInterval_10</listEntry>

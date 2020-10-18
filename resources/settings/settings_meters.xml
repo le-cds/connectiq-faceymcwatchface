@@ -1,22 +1,22 @@
 <settings>
 
-    <setting propertyKey="@Properties.MeterLeft" title="@Strings.MeterLeft_Title">
+    <setting propertyKey="@Properties.MeterLeft" title="@Strings.MeterLeft">
     	<settingConfig type="list">
-    		<listEntry value="4">@Strings.MeterActiveMinutes</listEntry>
-    		<listEntry value="0">@Strings.MeterBattery</listEntry>
-    		<listEntry value="1">@Strings.MeterFloorsClimbed</listEntry>
-    		<listEntry value="3">@Strings.MeterMoveBar</listEntry>
-    		<listEntry value="2">@Strings.MeterSteps</listEntry>
+    		<listEntry value="4">@Strings.MeterBehaviorActiveMinutes</listEntry>
+    		<listEntry value="0">@Strings.MeterBehaviorBattery</listEntry>
+    		<listEntry value="1">@Strings.MeterBehaviorFloorsClimbed</listEntry>
+    		<listEntry value="3">@Strings.MeterBehaviorMoveBar</listEntry>
+    		<listEntry value="2">@Strings.MeterBehaviorSteps</listEntry>
     	</settingConfig>
     </setting>
     
-    <setting propertyKey="@Properties.MeterRight" title="@Strings.MeterRight_Title">
+    <setting propertyKey="@Properties.MeterRight" title="@Strings.MeterRight">
     	<settingConfig type="list">
-    		<listEntry value="4">@Strings.MeterActiveMinutes</listEntry>
-    		<listEntry value="0">@Strings.MeterBattery</listEntry>
-    		<listEntry value="1">@Strings.MeterFloorsClimbed</listEntry>
-    		<listEntry value="3">@Strings.MeterMoveBar</listEntry>
-    		<listEntry value="2">@Strings.MeterSteps</listEntry>
+    		<listEntry value="4">@Strings.MeterBehaviorActiveMinutes</listEntry>
+    		<listEntry value="0">@Strings.MeterBehaviorBattery</listEntry>
+    		<listEntry value="1">@Strings.MeterBehaviorFloorsClimbed</listEntry>
+    		<listEntry value="3">@Strings.MeterBehaviorMoveBar</listEntry>
+    		<listEntry value="2">@Strings.MeterBehaviorSteps</listEntry>
     	</settingConfig>
     </setting>
 
