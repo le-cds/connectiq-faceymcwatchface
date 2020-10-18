@@ -13,35 +13,10 @@
     <string id="AppointmentUpdateInterval_Generic">Every $1$ minutes</string>
     
     
-    <!-- Indicator Settings -->
-
+    <!-- Settings Menu -->
+    <string id="SettingsMenuTitle">Settings</string>
     <string id="Indicator_Title">Indicator</string>
-    <string id="IndicatorTopLeft_Title">Top left indicator</string>
-    <string id="IndicatorTopRight_Title">Top right indicator</string>
-    <string id="IndicatorCenter_Title">Center indicator</string>
-    <string id="IndicatorBottomLeft_Title">Bottom left indicator</string>
-    <string id="IndicatorBottomCenter_Title">Bottom center indicator</string>
-    <string id="IndicatorBottomRight_Title">Bottom right indicator</string>
-    
-    <string id="IndicatorAlarms">Active alarms</string>
-    <string id="IndicatorAppointments">Appointments</string>
-    <string id="IndicatorBattery">Battery charge</string>
-    <string id="IndicatorBluetooth">Bluetooth</string>
-    <string id="IndicatorDnD">Do not disturb</string>
-    <string id="IndicatorHeartRate">Heart rate</string>
-    <string id="IndicatorNotifications">Unread notifications</string>
-    
-    
-    <!-- Meter Settings -->
     <string id="Meter_Title">Meter</string>
-    <string id="MeterLeft_Title">Left meter</string>
-    <string id="MeterRight_Title">Right meter</string>
-    
-    <string id="MeterActiveMinutes">Active minutes this week</string>
-    <string id="MeterBattery">Battery charge</string>
-    <string id="MeterFloorsClimbed">Floors climbed</string>
-    <string id="MeterMoveBar">Move bar</string>
-    <string id="MeterSteps">Steps stepped</string>
     
     
     <!-- Strings for the date indicator. -->
@@ -65,9 +40,5 @@
     <string id="Oct">Oct</string>
     <string id="Nov">Nov</string>
     <string id="Dec">Dec</string>
-    
-    
-    <!-- Settings Menu -->
-    <string id="SettingsMenuTitle">Settings</string>
 
 </strings>

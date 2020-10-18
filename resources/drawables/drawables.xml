@@ -1,18 +1,3 @@
 <drawables>
-    <bitmap id="LauncherIcon" filename="icon_launcher.png" />
-    
-    <!-- Menu icons for the different indicators and meters. -->
-    <bitmap id="IndicatorAlarms" filename="icon_alarms.png" />
-    <bitmap id="IndicatorAppointments" filename="icon_appointment.png" />
-    <bitmap id="IndicatorBattery" filename="icon_battery.png" />
-    <bitmap id="IndicatorBluetooth" filename="icon_bluetooth.png" />
-    <bitmap id="IndicatorDnD" filename="icon_dnd.png" />
-    <bitmap id="IndicatorHeartRate" filename="icon_heartrate.png" />
-    <bitmap id="IndicatorNotifications" filename="icon_notifications.png" />
-    
-    <bitmap id="MeterActiveMinutes" filename="icon_activity.png" />
-    <bitmap id="MeterBattery" filename="icon_battery.png" />
-    <bitmap id="MeterFloorsClimbed" filename="icon_floors.png" />
-    <bitmap id="MeterMoveBar" filename="icon_movebar.png" />
-    <bitmap id="MeterSteps" filename="icon_steps.png" />
+    <bitmap id="LauncherIcon" filename="launcher.png" />
 </drawables>

@@ -1,0 +1,7 @@
+<drawables>
+    <bitmap id="MeterActiveMinutes" filename="icon_activity.png" />
+    <bitmap id="MeterBattery" filename="icon_battery.png" />
+    <bitmap id="MeterFloorsClimbed" filename="icon_floors.png" />
+    <bitmap id="MeterMoveBar" filename="icon_movebar.png" />
+    <bitmap id="MeterSteps" filename="icon_steps.png" />
+</drawables>

@@ -1,0 +1,9 @@
+<drawables>
+    <bitmap id="IndicatorAlarms" filename="icon_alarms.png" />
+    <bitmap id="IndicatorAppointments" filename="icon_appointment.png" />
+    <bitmap id="IndicatorBattery" filename="icon_battery.png" />
+    <bitmap id="IndicatorBluetooth" filename="icon_bluetooth.png" />
+    <bitmap id="IndicatorDnD" filename="icon_dnd.png" />
+    <bitmap id="IndicatorHeartRate" filename="icon_heartrate.png" />
+    <bitmap id="IndicatorNotifications" filename="icon_notifications.png" />
+</drawables>

@@ -3,16 +3,4 @@
     <!-- Properties exported as settings. -->
     <property id="AppointmentUpdateInterval" type="number">15</property>
     
-    <!-- Indicators -->
-    <property id="IndicatorTopLeft" type="number">3</property> <!-- Bluetooth -->
-    <property id="IndicatorTopRight" type="number">4</property> <!-- DnD -->
-    <property id="IndicatorCenter" type="number">1</property> <!-- Appointments -->
-    <property id="IndicatorBottomLeft" type="number">6</property> <!-- Notifications -->
-    <property id="IndicatorBottomCenter" type="number">2</property> <!-- Battery -->
-    <property id="IndicatorBottomRight" type="number">0</property> <!-- Alarms -->
-    
-    <!-- Meters -->
-    <property id="MeterLeft" type="number">2</property> <!-- Steps -->
-    <property id="MeterRight" type="number">1</property> <!-- Floors climbed -->
-    
 </properties>

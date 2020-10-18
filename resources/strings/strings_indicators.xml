@@ -1,0 +1,18 @@
+<strings>
+
+    <string id="IndicatorTopLeft_Title">Top left indicator</string>
+    <string id="IndicatorTopRight_Title">Top right indicator</string>
+    <string id="IndicatorCenter_Title">Center indicator</string>
+    <string id="IndicatorBottomLeft_Title">Bottom left indicator</string>
+    <string id="IndicatorBottomCenter_Title">Bottom center indicator</string>
+    <string id="IndicatorBottomRight_Title">Bottom right indicator</string>
+    
+    <string id="IndicatorAlarms">Active alarms</string>
+    <string id="IndicatorAppointments">Appointments</string>
+    <string id="IndicatorBattery">Battery charge</string>
+    <string id="IndicatorBluetooth">Bluetooth</string>
+    <string id="IndicatorDnD">Do not disturb</string>
+    <string id="IndicatorHeartRate">Heart rate</string>
+    <string id="IndicatorNotifications">Unread notifications</string>
+    
+</strings>

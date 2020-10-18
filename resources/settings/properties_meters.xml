@@ -1,0 +1,6 @@
+<properties>
+
+    <property id="MeterLeft" type="number">2</property> <!-- Steps -->
+    <property id="MeterRight" type="number">1</property> <!-- Floors climbed -->
+    
+</properties>
