@@ -1,17 +1,4 @@
 
-// Enumeration of all available indicator behaviors. New behaviors must be
-// appended to ensure that existing ones don't get new numbers assigned to
-// them.
-enum /* INDICATOR_BEHAVIORS */ {
-    INDICATOR_ALARMS,
-    INDICATOR_APPOINTMENTS,
-    INDICATOR_BATTERY,
-    INDICATOR_BLUETOOTH,
-    INDICATOR_DND,
-    INDICATOR_HEART_RATE,
-    INDICATOR_NOTIFICATIONS
-}
-
 /**
  * Returns an indicator behavior instance that corresponds to the given ID.
  * IDs are defined by the enumeration above.
@@ -35,17 +22,6 @@ function createIndicatorBehavior(id) {
         default:
             return null;
     }
-}
-
-// Enumeration of all available meter behaviors. New behaviors must be
-// appended to ensure that existing ones don't get new numbers assigned
-// to them.
-enum /* METER_BEHAVIORS */ {
-    METER_BATTERY,
-    METER_FLOORS_CLIMBED,
-    METER_STEPS,
-    METER_MOVE_BAR,
-    METER_ACTIVE_MINUTES
 }
 
 /**
