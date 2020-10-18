@@ -26,7 +26,13 @@ We currently support a whole bunch of devices, but we might support more as long
 
 ## Translations
 
-We currently don’t support as many languages as we could, which is mainly due to my limited knowledge of said languages. While learning all of them is certainly something I’ve considered to add to my agenda, I just haven’t gotten around to that yet. If you happen to be able to decipher English and translate it to another language, feel free to provide a version of [the strings file](https://github.com/le-cds/connectiq-faceymcwatchface/blob/master/resources/strings/strings.xml) and either [create a new issue](https://github.com/le-cds/connectiq-faceymcwatchface/issues) with the new file attached, or provide a pull request.
+We currently don’t support as many languages as the world offers, which is mainly due to my spectacularly limited knowledge of said languages. If you happen to be able to decipher English and translate it to another language, feel free to provide a version of the following files:
+
+* `resources/strings/strings.xml`
+* `sources/indicators.json`
+* `sources/meters.json`
+
+Either [create a new issue](https://github.com/le-cds/connectiq-faceymcwatchface/issues) with the new files attached, or better yet: provide a pull request.
 
 ## Confirmations of the Watchface Working on Devices
 

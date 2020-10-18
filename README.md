@@ -4,10 +4,15 @@ A watchface for Garmin smartwatches with a focus on communication. Looks somethi
 
 ![Watchface design](promo/diagram.png)
 
+## Highlights
 
-## Main Feature: Time of Upcoming Appointment
+### Upcoming Appointment
 
-The watchface is able to show the time of the upcoming appointment. Only appointments in the upcoming 24 hours (minus 5 minutes) are displayed. The whole thing only works if a companion app, [Calendar IQ Connector](https://github.com/le-cds/android-calendariq), is installed on an Android mobile the watch is connected to. That app will send information on upcoming appointments to the watch in regular intervals.
+Oh yes: The watchface is able to show the time of the upcoming appointment! Only appointments in the upcoming 24 hours (minus 5 minutes) are displayed. The whole thing only works if a companion app, [Calendar IQ Connector](https://github.com/le-cds/android-calendariq), is installed on an Android mobile the watch is connected to. That app will send information on upcoming appointments to the watch in regular intervals.
+
+### On-Device Configuration
+
+Tired of using external apps to configure your watch face? So am I, which is why Facey McWatchface has a configuration UI, similar to Garmin’s pre-installed watch faces. This is only supported on newer devices, such as the vívoactive® 4 (I think), not on my personal watch. Had I known that before, I would have been like “Not on my watch, kind Sir!”, and I would have been right…
 
 ## Features Everyone Else Has as Well
 
@@ -64,8 +69,8 @@ The following devices _should_ work:
 
 Here’s two notes for my fellow developers:
 
-* There might be a few interesting bits of code hidden inside this code base. Look at [the `highiq` folder](https://github.com/le-cds/connectiq-faceymcwatchface/tree/master/source/highiq) for inspiration! Should you use some of the code in there, please drop me a line – it’s always nice to know if code’s been helpful to others!
-* If you’re interested in contributing, head over to the contributions documentation file for details. Nothing surprising in there, though, so you might as well skip it and start coding right away…
+* There might be a few interesting bits of code hidden inside this code base. Start at the `source/highiq` folder for inspiration. There’s also a code generator that provides the foundation for Facey McWatchface’s configurable indicators and meters. Should you use some of the code in there, please drop me a line – it’s always nice to know if code’s been helpful to others!
+* If you’re interested in contributing, head over to the contributions documentation file for details. Nothing surprising in there, though. There’s also the cookbook which explains common development tasks because I have no memory that I know of.
 
 ## Attributions
 

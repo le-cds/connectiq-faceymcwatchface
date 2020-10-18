@@ -4,22 +4,13 @@ Facey McWatchface has become surprisingly complex. This cook book provides a few
 
 ## Adding a Indicator / Meter Behaviour
 
-Adding behaviours is rather annoying since it touches upon a lot of pieces of code. The project might better off generating most of that code from some sort of description, but then again there are only so many behaviours that will be added and it would make the development process more complex, so…
+Adding behaviours rather simple if you have a Python 3 installation at hand. Get one and do this:
 
-Anyway, this is what one has to do to add a new behavior.
-
-1. Find and add an appropriate icon to `resources/fonts/symbols_font.afdesign`.
-2. Export the new icon as part of the font and edit `symbols_font.fnt`.
-3. Export the new icon as a 32x32 pixel icon in `resources/drawables` and register it in `drawables.xml`. Note that the ID is important and will be used throughout other files as well.
-4. Using the same ID, add a displayable string for the behaviour in `resources/strings/strings.xml`.
-5. Add it as a possible indicator or meter setting value in `resources/settings/settings.xml`.
-6. Add the behaviour to the appropriate menu in `resources/menu` to make it available via the watch face configuration menu.
-7. Add the behaviour to the appropriate maps and lists in `source/ui/views/SettingsMenu.mc`.
-8. Register the behaviour in `source/config/Properties.mc`. Be sure to re-use the ID given to the drawable.
-9. Implement a new behaviour class in `source/ui/indicators`.
-10. Let `source/ui/indicators/IndicatorMeterFactory.mc` know about the new class.
-
-10 steps… Most of this should really be automated…
+1. Add your behaviour definition to `source/indicators.json` or `source/meters.json`, whichever is appropriate. Always add new behaviours to the end of the list.
+2. Run the `generate.py` script in the project’s root folder. This will register your behaviour in all the necessary places. Boom!
+3. Find and add an appropriate icon to `resources/fonts/symbols_font.afdesign`, export the font bitmap and register your icon in `symbols_font.fnt`.
+4. Export the new icon as a 32x32 pixel icon in `resources/drawables`. You’ll find the expected file name in the appropriate `drawables_xxx.xml` file.
+5. Implement your behaviour by adding a class in `source/ui/indicators` or `source/ui/meters`. The expected class name can be found in the appropriate factory function in `source/generated/XXXFactory.mc`.
 
 ## Performing a Release
 
