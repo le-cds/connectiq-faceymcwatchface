@@ -1,6 +1,7 @@
 // This is a generated file. Do not edit manually or suffer the consequences...
 
-module FaceyMeterConstants {
+module FaceyMcWatchface {
+module Meters {
 
 // Number of things and behaviors
 const METER_COUNT = 2;
@@ -48,4 +49,22 @@ const METER_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.MeterBehaviorActiveMinutes
 ];
 
+/**
+ * Turns a behavior ID into an instance of the class that implements the behavior.
+ */
+function createMeterBehavior(id) {
+    switch (id) {
+        case METER_BEHAVIOR_BATTERY:
+            return new MeterBehaviorBattery();
+        case METER_BEHAVIOR_FLOORS_CLIMBED:
+            return new MeterBehaviorFloorsClimbed();
+        case METER_BEHAVIOR_STEPS:
+            return new MeterBehaviorSteps();
+        case METER_BEHAVIOR_MOVE_BAR:
+            return new MeterBehaviorMoveBar();
+        case METER_BEHAVIOR_ACTIVE_MINUTES:
+            return new MeterBehaviorActiveMinutes();
+    }
 }
+
+} }

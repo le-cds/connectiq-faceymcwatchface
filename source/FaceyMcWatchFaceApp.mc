@@ -3,7 +3,7 @@ using Toybox.Application.Properties;
 using Toybox.Background;
 using Toybox.Time;
 using Toybox.WatchUi;
-using FaceyIndicatorConstants as FIC;
+using FaceyMcWatchface.Indicators as Ind;
 
 (:background)
 class FaceyMcWatchFaceApp extends Application.AppBase {
@@ -88,8 +88,8 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     function initializeCalendarService() {
         // We need to check whether any of the indicators is supposed to show appointments
         var appointments = false;
-        for (var i = 0; i < FIC.INDICATOR_COUNT; i++) {
-            if (getProperty(FIC.INDICATOR_NAMES[i]) == FIC.INDICATOR_BEHAVIOR_APPOINTMENTS) {
+        for (var i = 0; i < Ind.INDICATOR_COUNT; i++) {
+            if (getProperty(Ind.INDICATOR_NAMES[i]) == Ind.INDICATOR_BEHAVIOR_APPOINTMENTS) {
                 appointments = true;
                 break;
             }

@@ -323,14 +323,33 @@ def generate_resource_map(config, out_file):
 
     print("];\n", file=out_file)
 
+
+def generate_factories(config, out_file):
+    """Generates behavior factory functions."""
+    
+    print("/**", file=out_file)
+    print(" * Turns a behavior ID into an instance of the class that implements the behavior.", file=out_file)
+    print(" */", file=out_file)
+    print(F"function create{config['category']}Behavior(id)" + " {", file=out_file)
+    print("    switch (id) {", file=out_file)
+    
+    for behavior in config["behaviors"]:
+        behavior_id = to_behavior_id(config, behavior["id"])
+        print(F"        case {to_constant_name(behavior_id)}:", file=out_file)
+        print(F"            return new {behavior_id}();", file=out_file)
+
+    print("    }", file=out_file)
+    print("}\n", file=out_file)
+
                                                                
 def generate_constants(config):
     """Generates a file with a whole bunch of constants that may come in handy."""
 
-    with open(F"source/generated/{(config['category'])}Constants.mc", mode="w", encoding="utf8", newline="\n") as out_file:
+    with open(F"source/generated/{(config['category'])}s.mc", mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"// {GENERATED_FILE_WARNING}", file=out_file)
         print("", file=out_file)
-        print(F"module Facey{config['category']}Constants " + "{", file=out_file)
+        print("module FaceyMcWatchface {", file=out_file)
+        print(F"module {config['category']}s " + "{", file=out_file)
         print("", file=out_file)
 
         print("// Number of things and behaviors", file=out_file);
@@ -345,38 +364,9 @@ def generate_constants(config):
         print("// String resource IDs that belong to things. Use these to generate names in the UI.", file=out_file)
         generate_resource_map(config, out_file)
 
-        print("}", file=out_file)
+        generate_factories(config, out_file)
 
-
-
-
-#######                                                   
-#         ##    ####  #####  ####  #####  # ######  ####  
-#        #  #  #    #   #   #    # #    # # #      #      
-#####   #    # #        #   #    # #    # # #####   ####  
-#       ###### #        #   #    # #####  # #           # 
-#       #    # #    #   #   #    # #   #  # #      #    # 
-#       #    #  ####    #    ####  #    # # ######  ####  
-
-def generate_factories(config):
-    """Generates behavior factory functions."""
-    
-    with open(F"source/generated/{(config['category'])}Factory.mc", mode="w", encoding="utf8", newline="\n") as out_file:
-        print(F"using Facey{config['category']}Constants as FC;", file=out_file)
-        print("", file=out_file)
-        print("/**", file=out_file)
-        print(" * Turns a behavior ID into an instance of the class that implements the behavior.", file=out_file)
-        print(" */", file=out_file)
-        print(F"function create{config['category']}Behavior(id)" + "{", file=out_file)
-        print("    switch (id) {", file=out_file)
-        
-        for behavior in config["behaviors"]:
-            behavior_id = to_behavior_id(config, behavior["id"])
-            print(F"        case FC.{to_constant_name(behavior_id)}:", file=out_file)
-            print(F"            return new {behavior_id}();", file=out_file)
-
-        print("    }", file=out_file)
-        print("}", file=out_file)
+        print("} }", file=out_file)
 
 
 
@@ -407,4 +397,3 @@ for file in config_files:
         generate_properties(config)
         generate_settings(config)
         generate_constants(config)
-        generate_factories(config)
