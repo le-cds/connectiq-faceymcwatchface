@@ -1,6 +1,7 @@
 using Toybox.System;
 using Toybox.Time.Gregorian;
 using Toybox.WatchUi;
+using FaceyMcWatchface.UiResources as UiRes;
 
 /**
  * Displays the date line, centered at the y coordinate supplied through the layout.
@@ -67,22 +68,22 @@ class TimeLine extends WatchUi.Drawable {
     function initializeCoordinates(dc) {
         // Where to draw the colon
         mColonMidX = dc.getWidth() / 2;
-        var halfColonWidth = dc.getTextWidthInPixels(":", gHoursFont) / 2;
+        var halfColonWidth = dc.getTextWidthInPixels(":", UiRes.gHoursFont) / 2;
 
         // Where to draw the hours and minutes
         mHoursRightX = mColonMidX - halfColonWidth;
         mMinutesX = mColonMidX + halfColonWidth;
 
         // Where to draw the seconds
-        var minutesWidth = dc.getTextWidthInPixels("00", gMinutesFont);
+        var minutesWidth = dc.getTextWidthInPixels("00", UiRes.gMinutesFont);
         mSecondsX = mMinutesX + minutesWidth  + 4;
 
         // Where to draw the AM/PM indicator
-        var hourWidth = dc.getTextWidthInPixels("00", gHoursFont);
+        var hourWidth = dc.getTextWidthInPixels("00", UiRes.gHoursFont);
         mAmPmRightX = mHoursRightX - hourWidth - 4;
 
         // Width of the clip rectangle used to draw seconds during partial updates
-        mSecondsClipWidth = dc.getTextWidthInPixels("00", gDetailsFont);
+        mSecondsClipWidth = dc.getTextWidthInPixels("00", UiRes.gDetailsFont);
     }
 
     function drawEverythingExceptSeconds(dc) {
@@ -90,20 +91,20 @@ class TimeLine extends WatchUi.Drawable {
         var displayTime = displayableTime(time.hour, time.min, time.sec);
 
         // Actually draw stuff
-        dc.setColor(gColorHours, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(UiRes.gColorHours, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mHoursRightX,
             mTimeY,
-            gHoursFont,
+            UiRes.gHoursFont,
             displayTime[:hour],
             Graphics.TEXT_JUSTIFY_RIGHT
         );
 
-        dc.setColor(gColorMinutes, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(UiRes.gColorMinutes, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mColonMidX,
             mTimeY,
-            gHoursFont,
+            UiRes.gHoursFont,
             ":",
             Graphics.TEXT_JUSTIFY_CENTER
         );
@@ -111,16 +112,16 @@ class TimeLine extends WatchUi.Drawable {
         dc.drawText(
             mMinutesX,
             mTimeY,
-            gMinutesFont,
+            UiRes.gMinutesFont,
             displayTime[:minute],
             Graphics.TEXT_JUSTIFY_LEFT
         );
 
-        dc.setColor(gColorSeconds, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(UiRes.gColorSeconds, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mAmPmRightX,
             mDetailsY,
-            gDetailsFont,
+            UiRes.gDetailsFont,
             displayTime[:ampm],
             Graphics.TEXT_JUSTIFY_RIGHT
         );
@@ -132,11 +133,11 @@ class TimeLine extends WatchUi.Drawable {
     function drawSeconds(dc) {
         var seconds = System.getClockTime().sec.format("%02d");
 
-        dc.setColor(gColorSeconds, gColorBackground);
+        dc.setColor(UiRes.gColorSeconds, UiRes.gColorBackground);
         dc.drawText(
             mSecondsX,
             mDetailsY,
-            gDetailsFont,
+            UiRes.gDetailsFont,
             seconds,
             Graphics.TEXT_JUSTIFY_LEFT
         );

@@ -1,3 +1,5 @@
+using FaceyMcWatchface.UiResources as UiRes;
+
 /**
  * Implements several of the MeterBehavior functions with default values. Adds
  * another function, isIndicating(), to check which icon color to use.
@@ -9,14 +11,14 @@ class DefaultMeterBehavior extends MeterBehavior {
     }
 
     public function getIconFont() {
-        return gSymbolsFont;
+        return UiRes.gSymbolsFont;
     }
     
     public function getIconColor() {
         if (isIndicating()) {
-            return gColorIndicatorActive;
+            return UiRes.gColorIndicatorActive;
         } else {
-            return gColorIndicatorInactive;
+            return UiRes.gColorIndicatorInactive;
         }
     }
     
@@ -25,15 +27,15 @@ class DefaultMeterBehavior extends MeterBehavior {
     }
     
     public function getBackgroundColor() {
-        return gColorBackground;
+        return UiRes.gColorBackground;
     }
     
     public function getActiveMeterColor() {
-        return gColorHighlights;
+        return UiRes.gColorHighlights;
     }
     
     public function getInactiveMeterColor() {
-        return gColorMeterBackground;
+        return UiRes.gColorMeterBackground;
     }
     
 }

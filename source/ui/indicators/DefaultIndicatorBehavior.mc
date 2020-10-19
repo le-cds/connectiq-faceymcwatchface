@@ -1,3 +1,5 @@
+using FaceyMcWatchface.UiResources as UiRes;
+
 /**
  * Implements several of the IndicatorBehavior functions with default values. Adds
  * another function, isIndicating(), to check which icon color to use.
@@ -12,14 +14,14 @@ class DefaultIndicatorBehavior extends IndicatorBehavior {
     // Icon Functions
     
     public function getIconFont() {
-        return gSymbolsFont;
+        return UiRes.gSymbolsFont;
     }
     
     public function getIconColor() {
         if (isIndicating()) {
-            return gColorIndicatorActive;
+            return UiRes.gColorIndicatorActive;
         } else {
-            return gColorIndicatorInactive;
+            return UiRes.gColorIndicatorInactive;
         }
     }
     
@@ -28,7 +30,7 @@ class DefaultIndicatorBehavior extends IndicatorBehavior {
     }
     
     public function getBackgroundColor() {
-        return gColorBackground;
+        return UiRes.gColorBackground;
     }
     
     public function getIconSize() {
@@ -39,11 +41,11 @@ class DefaultIndicatorBehavior extends IndicatorBehavior {
     // Value Functions
     
     public function getValueFont() {
-        return gIndicatorFont;
+        return UiRes.gIndicatorFont;
     }
     
     public function getValueColor() {
-        return gColorIndicatorText;
+        return UiRes.gColorIndicatorText;
     }
     
 }

@@ -1,5 +1,6 @@
 using Toybox.Time.Gregorian;
 using Toybox.WatchUi;
+using FaceyMcWatchface.UiResources as UiRes;
 
 /**
  * Displays the date line, centered at the y coordinate supplied through the layout.
@@ -98,15 +99,15 @@ class DateLine extends WatchUi.Drawable {
             [mDayOfWeekString, mMonthString, mDay]);
 
         // Compute the x coordinate such that the string ends up being centered
-        var length = dc.getTextWidthInPixels(dateString, gDateFont);
+        var length = dc.getTextWidthInPixels(dateString, UiRes.gDateFont);
         var x = (dc.getWidth() - length) / 2;
 
         // Draw the actual text
-        dc.setColor(gColorDate, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(UiRes.gColorDate, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             x,
             mY,
-            gDateFont,
+            UiRes.gDateFont,
             dateString,
             Graphics.TEXT_JUSTIFY_LEFT
         );
