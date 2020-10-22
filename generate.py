@@ -85,7 +85,10 @@ def to_constant_name(id):
 def generate_drawables(config):
     """Generate the drawables for the given config."""
 
-    with open(F"resources/drawables/drawables{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+    file_name = F"resources/drawables/drawables{to_file_name_suffix(config)}.xml"
+    print(F"Generating drawables: {file_name}")
+
+    with open(file_name, mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
         print(F"<drawables>", file=out_file)
 
@@ -141,7 +144,10 @@ def generate_strings(config):
         if language_code != "en":
             dir_name += F"-{language_code}"
         
-        with open(F"{dir_name}/strings/strings{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+        file_name = F"{dir_name}/strings/strings{to_file_name_suffix(config)}.xml"
+        print(F"Generating strings for language code {language_code}: {file_name}")
+        
+        with open(file_name, mode="w", encoding="utf8", newline="\n") as out_file:
             print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
             print("<strings>", file=out_file)
 
@@ -173,7 +179,10 @@ def generate_strings(config):
 def generate_menus(config):
     """Generates a selection menu for the available behaviors, sorted by English name."""
 
-    with open(F"resources/menu/settingsMenu{config['category']}Selection.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+    file_name = F"resources/menu/settingsMenu{config['category']}Selection.xml"
+    print(F"Generating menus: {file_name}")
+
+    with open(file_name, mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
         print(F'<menu2 id="SettingsMenu{config["category"]}Selection" title="@Strings.{config["category"]}">', file=out_file)
 
@@ -197,7 +206,10 @@ def generate_menus(config):
 def generate_properties(config):
     """Generate property files for the given configuration, including proper default values."""
 
-    with open(F"resources/settings/properties{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+    file_name = F"resources/settings/properties{to_file_name_suffix(config)}.xml"
+    print(F"Generating properties: {file_name}")
+
+    with open(file_name, mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
         print("<properties>", file=out_file)
 
@@ -230,7 +242,10 @@ def generate_settings(config):
     # We'll be writing the same behavior list a lot, so simply generate it once and paste it
     behavior_list = generate_settings_behvaior_list(config)
 
-    with open(F"resources/settings/settings{to_file_name_suffix(config)}.xml", mode="w", encoding="utf8", newline="\n") as out_file:
+    file_name = F"resources/settings/settings{to_file_name_suffix(config)}.xml"
+    print(F"Generating settings: {file_name}")
+
+    with open(file_name, mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
         print("<settings>", file=out_file)
 
@@ -345,7 +360,10 @@ def generate_factories(config, out_file):
 def generate_constants(config):
     """Generates a file with a whole bunch of constants that may come in handy."""
 
-    with open(F"source/generated/{(config['category'])}s.mc", mode="w", encoding="utf8", newline="\n") as out_file:
+    file_name = F"source/generated/{(config['category'])}s.mc"
+    print(F"Generating constants: {file_name}")
+
+    with open(file_name, mode="w", encoding="utf8", newline="\n") as out_file:
         print(F"// {GENERATED_FILE_WARNING}", file=out_file)
         print("", file=out_file)
         print("module FaceyMcWatchface {", file=out_file)
@@ -385,6 +403,8 @@ config_files = [ "indicators", "meters" ]
 for file in config_files:
     with open(F"source/{file}.json") as json_file:
         config = json.load(json_file)
+
+        print(config["category"])
 
         # We will probably shuffle lists around, so remember the original order
         add_index_field(config["drawables"])
