@@ -16,4 +16,5 @@
     <string id="IndicatorBehaviorDND">Do not Disturb</string>
     <string id="IndicatorBehaviorHeartRate">Heart rate</string>
     <string id="IndicatorBehaviorNotifications">Unread notifications</string>
+    <string id="IndicatorBehaviorSteps">Steps stepped</string>
 </strings>

@@ -8,6 +8,7 @@
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
+            <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
         </settingConfig>
     </setting>
@@ -19,6 +20,7 @@
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
+            <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
         </settingConfig>
     </setting>
@@ -30,6 +32,7 @@
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
+            <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
         </settingConfig>
     </setting>
@@ -41,6 +44,7 @@
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
+            <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
         </settingConfig>
     </setting>
@@ -52,6 +56,7 @@
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
+            <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
         </settingConfig>
     </setting>
@@ -63,6 +68,7 @@
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
+            <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
         </settingConfig>
     </setting>

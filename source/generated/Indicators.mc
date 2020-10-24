@@ -5,7 +5,7 @@ module Indicators {
 
 // Number of things and behaviors
 const INDICATOR_COUNT = 6;
-const INDICATOR_BEHAVIOR_COUNT = 7;
+const INDICATOR_BEHAVIOR_COUNT = 8;
 
 // Enumerations of available things and behaviors to index into the other arrays
 enum /* INDICATOR */ {
@@ -24,7 +24,8 @@ enum /* INDICATOR_BEHAVIORS */ {
     INDICATOR_BEHAVIOR_BLUETOOTH,
     INDICATOR_BEHAVIOR_DND,
     INDICATOR_BEHAVIOR_HEART_RATE,
-    INDICATOR_BEHAVIOR_NOTIFICATIONS
+    INDICATOR_BEHAVIOR_NOTIFICATIONS,
+    INDICATOR_BEHAVIOR_STEPS
 }
 
 // Names used in all sorts of properties, settings, drawables...
@@ -44,7 +45,8 @@ const INDICATOR_BEHAVIOR_NAMES = [
     "IndicatorBehaviorBluetooth",
     "IndicatorBehaviorDND",
     "IndicatorBehaviorHeartRate",
-    "IndicatorBehaviorNotifications"
+    "IndicatorBehaviorNotifications",
+    "IndicatorBehaviorSteps"
 ];
 
 // String resource IDs that belong to things. Use these to generate names in the UI.
@@ -64,7 +66,8 @@ const INDICATOR_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.IndicatorBehaviorBluetooth,
     Rez.Strings.IndicatorBehaviorDND,
     Rez.Strings.IndicatorBehaviorHeartRate,
-    Rez.Strings.IndicatorBehaviorNotifications
+    Rez.Strings.IndicatorBehaviorNotifications,
+    Rez.Strings.IndicatorBehaviorSteps
 ];
 
 /**
@@ -86,6 +89,8 @@ function createIndicatorBehavior(id) {
             return new IndicatorBehaviorHeartRate();
         case INDICATOR_BEHAVIOR_NOTIFICATIONS:
             return new IndicatorBehaviorNotifications();
+        case INDICATOR_BEHAVIOR_STEPS:
+            return new IndicatorBehaviorSteps();
     }
 }
 

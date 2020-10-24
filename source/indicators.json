@@ -86,6 +86,12 @@
             "languages": {
                 "en": "Unread notifications"
             }
+        },
+        {
+            "id": "Steps",
+            "languages": {
+                "en": "Steps stepped"
+            }
         }
     ]
 }
