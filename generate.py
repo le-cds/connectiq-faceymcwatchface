@@ -95,7 +95,7 @@ def generate_drawables(config):
         # We need to generate a drawable for each behavior
         for behavior in config["behaviors"]:
             behaviorId = to_behavior_id(config, behavior["id"])
-            print(F'    <bitmap id="{behaviorId}" filename="icon_{behaviorId}.png" />', file=out_file)
+            print(F'    <bitmap id="{behaviorId}" filename="icon_Behavior{behavior["id"]}.png" />', file=out_file)
 
         print(F"</drawables>", file=out_file)
 

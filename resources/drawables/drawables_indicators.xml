@@ -1,10 +1,11 @@
 <!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <drawables>
-    <bitmap id="IndicatorBehaviorAlarms" filename="icon_IndicatorBehaviorAlarms.png" />
-    <bitmap id="IndicatorBehaviorAppointments" filename="icon_IndicatorBehaviorAppointments.png" />
-    <bitmap id="IndicatorBehaviorBattery" filename="icon_IndicatorBehaviorBattery.png" />
-    <bitmap id="IndicatorBehaviorBluetooth" filename="icon_IndicatorBehaviorBluetooth.png" />
-    <bitmap id="IndicatorBehaviorDND" filename="icon_IndicatorBehaviorDND.png" />
-    <bitmap id="IndicatorBehaviorHeartRate" filename="icon_IndicatorBehaviorHeartRate.png" />
-    <bitmap id="IndicatorBehaviorNotifications" filename="icon_IndicatorBehaviorNotifications.png" />
+    <bitmap id="IndicatorBehaviorAlarms" filename="icon_BehaviorAlarms.png" />
+    <bitmap id="IndicatorBehaviorAppointments" filename="icon_BehaviorAppointments.png" />
+    <bitmap id="IndicatorBehaviorBattery" filename="icon_BehaviorBattery.png" />
+    <bitmap id="IndicatorBehaviorBluetooth" filename="icon_BehaviorBluetooth.png" />
+    <bitmap id="IndicatorBehaviorDND" filename="icon_BehaviorDND.png" />
+    <bitmap id="IndicatorBehaviorHeartRate" filename="icon_BehaviorHeartRate.png" />
+    <bitmap id="IndicatorBehaviorNotifications" filename="icon_BehaviorNotifications.png" />
+    <bitmap id="IndicatorBehaviorSteps" filename="icon_BehaviorSteps.png" />
 </drawables>

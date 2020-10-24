@@ -1,8 +1,8 @@
 <!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <drawables>
-    <bitmap id="MeterBehaviorBattery" filename="icon_MeterBehaviorBattery.png" />
-    <bitmap id="MeterBehaviorFloorsClimbed" filename="icon_MeterBehaviorFloorsClimbed.png" />
-    <bitmap id="MeterBehaviorSteps" filename="icon_MeterBehaviorSteps.png" />
-    <bitmap id="MeterBehaviorMoveBar" filename="icon_MeterBehaviorMoveBar.png" />
-    <bitmap id="MeterBehaviorActiveMinutes" filename="icon_MeterBehaviorActiveMinutes.png" />
+    <bitmap id="MeterBehaviorBattery" filename="icon_BehaviorBattery.png" />
+    <bitmap id="MeterBehaviorFloorsClimbed" filename="icon_BehaviorFloorsClimbed.png" />
+    <bitmap id="MeterBehaviorSteps" filename="icon_BehaviorSteps.png" />
+    <bitmap id="MeterBehaviorMoveBar" filename="icon_BehaviorMoveBar.png" />
+    <bitmap id="MeterBehaviorActiveMinutes" filename="icon_BehaviorActiveMinutes.png" />
 </drawables>
