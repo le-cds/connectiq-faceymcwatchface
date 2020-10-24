@@ -1,14 +1,16 @@
+using Toybox.System;
+
 /**
- * Implements behavior for displaying the number of floors climbed.
+ * Indicates the number of floors climbed. Does not support partial updates.
  */
-class MeterBehaviorFloorsClimbed extends DefaultMeterBehavior {
+class IndicatorBehaviorFloorsClimbed extends DefaultIndicatorBehavior {
     
     // Cache most recent values
     private var mFloors = 0;
     private var mFloorsGoal = 1;
-
-    function initialize() {
-        DefaultMeterBehavior.initialize();
+    
+    public function initialize() {
+        DefaultIndicatorBehavior.initialize(false);
     }
     
     public function update() {
@@ -17,6 +19,10 @@ class MeterBehaviorFloorsClimbed extends DefaultMeterBehavior {
         if (info has :floorsClimbed) {
             mFloors = info.floorsClimbed;
             mFloorsGoal = info.floorsClimbedGoal;
+            
+            if (mFloorsGoal < 1) {
+                mFloorsGoal = 1;
+            }
         }
     }
     
@@ -29,12 +35,8 @@ class MeterBehaviorFloorsClimbed extends DefaultMeterBehavior {
         return 'F';
     }
     
-    public function getCurrValue() {
-        return mFloors;
-    }
-    
-    public function getMaxValue() {
-        return mFloorsGoal;
+    public function getValue() {
+        return mFloors.format("%d");
     }
     
 }

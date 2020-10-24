@@ -17,4 +17,6 @@
     <string id="IndicatorBehaviorHeartRate">Heart rate</string>
     <string id="IndicatorBehaviorNotifications">Unread notifications</string>
     <string id="IndicatorBehaviorSteps">Steps stepped</string>
+    <string id="IndicatorBehaviorFloorsClimbed">Floors climbed</string>
+    <string id="IndicatorBehaviorFloorsDescended">Floors descended</string>
 </strings>

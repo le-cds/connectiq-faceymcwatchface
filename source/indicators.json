@@ -92,6 +92,18 @@
             "languages": {
                 "en": "Steps stepped"
             }
+        },
+        {
+            "id": "FloorsClimbed",
+            "languages": {
+                "en": "Floors climbed"
+            }
+        },
+        {
+            "id": "FloorsDescended",
+            "languages": {
+                "en": "Floors descended"
+            }
         }
     ]
 }

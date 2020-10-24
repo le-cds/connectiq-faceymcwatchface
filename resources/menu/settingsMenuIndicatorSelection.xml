@@ -4,6 +4,8 @@
     <icon-menu-item id="IndicatorBehaviorBattery" label="@Strings.IndicatorBehaviorBattery" icon="@Drawables.IndicatorBehaviorBattery" />
     <icon-menu-item id="IndicatorBehaviorBluetooth" label="@Strings.IndicatorBehaviorBluetooth" icon="@Drawables.IndicatorBehaviorBluetooth" />
     <icon-menu-item id="IndicatorBehaviorDND" label="@Strings.IndicatorBehaviorDND" icon="@Drawables.IndicatorBehaviorDND" />
+    <icon-menu-item id="IndicatorBehaviorFloorsClimbed" label="@Strings.IndicatorBehaviorFloorsClimbed" icon="@Drawables.IndicatorBehaviorFloorsClimbed" />
+    <icon-menu-item id="IndicatorBehaviorFloorsDescended" label="@Strings.IndicatorBehaviorFloorsDescended" icon="@Drawables.IndicatorBehaviorFloorsDescended" />
     <icon-menu-item id="IndicatorBehaviorHeartRate" label="@Strings.IndicatorBehaviorHeartRate" icon="@Drawables.IndicatorBehaviorHeartRate" />
     <icon-menu-item id="IndicatorBehaviorAppointments" label="@Strings.IndicatorBehaviorAppointments" icon="@Drawables.IndicatorBehaviorAppointments" />
     <icon-menu-item id="IndicatorBehaviorSteps" label="@Strings.IndicatorBehaviorSteps" icon="@Drawables.IndicatorBehaviorSteps" />

@@ -5,7 +5,7 @@ module Indicators {
 
 // Number of things and behaviors
 const INDICATOR_COUNT = 6;
-const INDICATOR_BEHAVIOR_COUNT = 8;
+const INDICATOR_BEHAVIOR_COUNT = 10;
 
 // Enumerations of available things and behaviors to index into the other arrays
 enum /* INDICATOR */ {
@@ -25,7 +25,9 @@ enum /* INDICATOR_BEHAVIORS */ {
     INDICATOR_BEHAVIOR_DND,
     INDICATOR_BEHAVIOR_HEART_RATE,
     INDICATOR_BEHAVIOR_NOTIFICATIONS,
-    INDICATOR_BEHAVIOR_STEPS
+    INDICATOR_BEHAVIOR_STEPS,
+    INDICATOR_BEHAVIOR_FLOORS_CLIMBED,
+    INDICATOR_BEHAVIOR_FLOORS_DESCENDED
 }
 
 // Names used in all sorts of properties, settings, drawables...
@@ -46,7 +48,9 @@ const INDICATOR_BEHAVIOR_NAMES = [
     "IndicatorBehaviorDND",
     "IndicatorBehaviorHeartRate",
     "IndicatorBehaviorNotifications",
-    "IndicatorBehaviorSteps"
+    "IndicatorBehaviorSteps",
+    "IndicatorBehaviorFloorsClimbed",
+    "IndicatorBehaviorFloorsDescended"
 ];
 
 // String resource IDs that belong to things. Use these to generate names in the UI.
@@ -67,7 +71,9 @@ const INDICATOR_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.IndicatorBehaviorDND,
     Rez.Strings.IndicatorBehaviorHeartRate,
     Rez.Strings.IndicatorBehaviorNotifications,
-    Rez.Strings.IndicatorBehaviorSteps
+    Rez.Strings.IndicatorBehaviorSteps,
+    Rez.Strings.IndicatorBehaviorFloorsClimbed,
+    Rez.Strings.IndicatorBehaviorFloorsDescended
 ];
 
 /**
@@ -91,6 +97,10 @@ function createIndicatorBehavior(id) {
             return new IndicatorBehaviorNotifications();
         case INDICATOR_BEHAVIOR_STEPS:
             return new IndicatorBehaviorSteps();
+        case INDICATOR_BEHAVIOR_FLOORS_CLIMBED:
+            return new IndicatorBehaviorFloorsClimbed();
+        case INDICATOR_BEHAVIOR_FLOORS_DESCENDED:
+            return new IndicatorBehaviorFloorsDescended();
     }
 }
 

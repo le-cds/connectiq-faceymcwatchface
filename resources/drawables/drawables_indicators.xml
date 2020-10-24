@@ -8,4 +8,6 @@
     <bitmap id="IndicatorBehaviorHeartRate" filename="icon_BehaviorHeartRate.png" />
     <bitmap id="IndicatorBehaviorNotifications" filename="icon_BehaviorNotifications.png" />
     <bitmap id="IndicatorBehaviorSteps" filename="icon_BehaviorSteps.png" />
+    <bitmap id="IndicatorBehaviorFloorsClimbed" filename="icon_BehaviorFloorsClimbed.png" />
+    <bitmap id="IndicatorBehaviorFloorsDescended" filename="icon_BehaviorFloorsDescended.png" />
 </drawables>
