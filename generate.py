@@ -222,14 +222,15 @@ def generate_properties(config):
         print('</properties>', file=out_file)
 
 
-def generate_settings_behvaior_list(config):
+def generate_settings_behvaior_list(config, exclude_behaviors_that_require_text):
     """Generates the proper settingConfig for the behaviors in the given config."""
 
     result = '        <settingConfig type="list">\n'
 
     for behavior in sorted_by_localized_name(config["behaviors"]):
-        behavior_id = to_behavior_id(config, behavior["id"])
-        result += F'            <listEntry value="{behavior["index"]}">@Strings.{behavior_id}</listEntry>\n'
+        if not exclude_behaviors_that_require_text or behavior["worksWithoutText"]:
+            behavior_id = to_behavior_id(config, behavior["id"])
+            result += F'            <listEntry value="{behavior["index"]}">@Strings.{behavior_id}</listEntry>\n'
     
     result += '        </settingConfig>'
 
@@ -238,9 +239,6 @@ def generate_settings_behvaior_list(config):
 
 def generate_settings(config):
     """Generate settings files for the given configuration, including properly sorted value lists."""
-
-    # We'll be writing the same behavior list a lot, so simply generate it once and paste it
-    behavior_list = generate_settings_behvaior_list(config)
 
     file_name = F"resources/settings/settings{to_file_name_suffix(config)}.xml"
     print(F"Generating settings: {file_name}")
@@ -251,6 +249,10 @@ def generate_settings(config):
 
         for drawable in config["drawables"]:
             drawable_id = to_drawable_id(config, drawable["id"])
+
+            # If the drawable can display text, we'll assemble a list of all behaviors. If not, we must
+            # exclude those behaviors that do not work without text
+            behavior_list = generate_settings_behvaior_list(config, not drawable["displaysText"])
 
             print(F'    <setting propertyKey="@Properties.{drawable_id}" title="@Strings.{drawable_id}">', file=out_file)
             print(behavior_list, file=out_file)

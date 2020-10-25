@@ -3,6 +3,7 @@
     "drawables": [
         {
             "id": "Left",
+            "displaysText": false,
             "defaultBehavior": "Steps",
             "languages": {
                 "en": "Left meter"
@@ -10,6 +11,7 @@
         },
         {
             "id": "Right",
+            "displaysText": false,
             "defaultBehavior": "FloorsClimbed",
             "languages": {
                 "en": "Right meter"
@@ -19,30 +21,35 @@
     "behaviors": [
         {
             "id": "Battery",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Battery charge"
             }
         },
         {
             "id": "FloorsClimbed",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Floors climbed"
             }
         },
         {
             "id": "Steps",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Steps stepped"
             }
         },
         {
             "id": "MoveBar",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Move bar"
             }
         },
         {
             "id": "ActiveMinutes",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Activ"
             }

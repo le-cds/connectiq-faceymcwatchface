@@ -3,6 +3,7 @@
     "drawables": [
         {
             "id": "TopLeft",
+            "displaysText": false,
             "defaultBehavior": "Bluetooth",
             "languages": {
                 "en": "Top left indicator"
@@ -10,6 +11,7 @@
         },
         {
             "id": "TopRight",
+            "displaysText": false,
             "defaultBehavior": "DND",
             "languages": {
                 "en": "Top Right indicator"
@@ -17,6 +19,7 @@
         },
         {
             "id": "Center",
+            "displaysText": true,
             "defaultBehavior": "Appointments",
             "languages": {
                 "en": "Center indicator"
@@ -24,6 +27,7 @@
         },
         {
             "id": "BottomLeft",
+            "displaysText": true,
             "defaultBehavior": "Notifications",
             "languages": {
                 "en": "Bottom left indicator"
@@ -31,6 +35,7 @@
         },
         {
             "id": "BottomCenter",
+            "displaysText": true,
             "defaultBehavior": "Battery",
             "languages": {
                 "en": "Bottom center indicator"
@@ -38,6 +43,7 @@
         },
         {
             "id": "BottomRight",
+            "displaysText": true,
             "defaultBehavior": "Alarms",
             "languages": {
                 "en": "Bottom right indicator"
@@ -47,78 +53,91 @@
     "behaviors": [
         {
             "id": "Alarms",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Active alarms"
             }
         },
         {
             "id": "Appointments",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Next appointment"
             }
         },
         {
             "id": "Battery",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Battery charge"
             }
         },
         {
             "id": "Bluetooth",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Bluetooth"
             }
         },
         {
             "id": "DND",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Do not Disturb"
             }
         },
         {
             "id": "HeartRate",
+            "worksWithoutText": false,
             "languages": {
                 "en": "Heart rate"
             }
         },
         {
             "id": "Notifications",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Unread notifications"
             }
         },
         {
             "id": "Steps",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Steps stepped"
             }
         },
         {
             "id": "FloorsClimbed",
+            "worksWithoutText": true,
             "languages": {
                 "en": "Floors climbed"
             }
         },
         {
             "id": "FloorsDescended",
+            "worksWithoutText": false,
             "languages": {
                 "en": "Floors descended"
             }
         },
         {
             "id": "Calories",
+            "worksWithoutText": false,
             "languages": {
                 "en": "Calories (kCal)"
             }
         },
         {
             "id": "Altitude",
+            "worksWithoutText": false,
             "languages": {
                 "en": "Altitude"
             }
         },
         {
             "id": "Distance",
+            "worksWithoutText": false,
             "languages": {
                 "en": "Distance"
             }

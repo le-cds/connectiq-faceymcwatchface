@@ -3,15 +3,10 @@
     <setting propertyKey="@Properties.IndicatorTopLeft" title="@Strings.IndicatorTopLeft">
         <settingConfig type="list">
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
-            <listEntry value="11">@Strings.IndicatorBehaviorAltitude</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
-            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
-            <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
-            <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
@@ -20,15 +15,10 @@
     <setting propertyKey="@Properties.IndicatorTopRight" title="@Strings.IndicatorTopRight">
         <settingConfig type="list">
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
-            <listEntry value="11">@Strings.IndicatorBehaviorAltitude</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
-            <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
-            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
-            <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
-            <listEntry value="5">@Strings.IndicatorBehaviorHeartRate</listEntry>
             <listEntry value="1">@Strings.IndicatorBehaviorAppointments</listEntry>
             <listEntry value="7">@Strings.IndicatorBehaviorSteps</listEntry>
             <listEntry value="6">@Strings.IndicatorBehaviorNotifications</listEntry>
