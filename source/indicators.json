@@ -104,6 +104,12 @@
             "languages": {
                 "en": "Floors descended"
             }
+        },
+        {
+            "id": "Calories",
+            "languages": {
+                "en": "Calories (kCal)"
+            }
         }
     ]
 }

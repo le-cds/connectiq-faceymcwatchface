@@ -10,4 +10,5 @@
     <bitmap id="IndicatorBehaviorSteps" filename="icon_BehaviorSteps.png" />
     <bitmap id="IndicatorBehaviorFloorsClimbed" filename="icon_BehaviorFloorsClimbed.png" />
     <bitmap id="IndicatorBehaviorFloorsDescended" filename="icon_BehaviorFloorsDescended.png" />
+    <bitmap id="IndicatorBehaviorCalories" filename="icon_BehaviorCalories.png" />
 </drawables>
