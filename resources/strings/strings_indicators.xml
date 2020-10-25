@@ -20,4 +20,5 @@
     <string id="IndicatorBehaviorFloorsClimbed">Floors climbed</string>
     <string id="IndicatorBehaviorFloorsDescended">Floors descended</string>
     <string id="IndicatorBehaviorCalories">Calories (kCal)</string>
+    <string id="IndicatorBehaviorAltitude">Altitude</string>
 </strings>

@@ -110,6 +110,12 @@
             "languages": {
                 "en": "Calories (kCal)"
             }
+        },
+        {
+            "id": "Altitude",
+            "languages": {
+                "en": "Altitude"
+            }
         }
     ]
 }
