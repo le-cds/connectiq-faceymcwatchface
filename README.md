@@ -12,9 +12,9 @@ Oh yes: The watchface is able to show the time of the upcoming appointment! Only
 
 ### On-Device Configuration
 
-Tired of using external apps to configure your watch face? So am I, which is why Facey McWatchface has a configuration UI, similar to Garmin’s pre-installed watch faces. This is only supported on newer devices, such as the vívoactive® 4 (I think), not on my personal watch. Had I known that before, I would have been like “Not on my watch, kind Sir!”, and I would have been right…
+Tired of using external apps to configure your watch face? So am I, which is why Facey McWatchface has a configuration UI, similar to Garmin’s pre-installed watch faces. This, however, is only supported on newer devices, such as the vívoactive® 4 (I think), not on my personal watch. Had I known that before, I would have been like “Not on my watch, kind Sir!”, and I would have been right…
 
-## Features Everyone Else Has as Well
+## Things This Thing Shows
 
 There are…
 
@@ -22,23 +22,24 @@ There are…
 * …four indicators at the bottom that show symbols _and_ text, because that is how they roll.
 * …two range meters at the left and the right.
 
-All of them can be freely configured to show stuff.
+All of them can be freely configured to show stuff, according to this helpful table:
 
-### Indicators
-
-* Active alarms
-* Time of upcoming appointment
-* Battery charge
-* Bluetooth state
-* Do Not Disturb state
-* Heart rate
-* Unread notifications
-
-### Range Meters
-
-* Batty charge
-* Floors
-* Steps
+| Thing                                                     |                      | Indicator | Meter |
+| --------------------------------------------------------- | -------------------- | --------- | ----- |
+| ![](resources/drawables/icon_BehaviorAlarms.png)          | Active Alarms        | Yes       |       |
+| ![](resources/drawables/icon_BehaviorActiveMinutes.png)   | Active minutes       |           | Yes   |
+| ![](resources/drawables/icon_BehaviorAltitude.png)        | Altitude             | Yes       |       |
+| ![](resources/drawables/icon_BehaviorBattery.png)         | Battery Charge       | Yes       | Yes   |
+| ![](resources/drawables/icon_BehaviorBluetooth.png)       | Bluetooth state      | Yes       |       |
+| ![](resources/drawables/icon_BehaviorCalories.png)        | Calories (kCal)      | Yes       |       |
+| ![](resources/drawables/icon_BehaviorDnD.png)             | Do not Disturb       | Yes       |       |
+| ![](resources/drawables/icon_BehaviorFloorsClimbed.png)   | Floors climbed       | Yes       | Yes   |
+| ![](resources/drawables/icon_BehaviorFloorsDescended.png) | Floors descended     | Yes       |       |
+| ![](resources/drawables/icon_BehaviorHeartRate.png)       | Heart rate           | Yes       |       |
+| ![](resources/drawables/icon_BehaviorMoveBar.png)         | Move bar             |           | Yes   |
+| ![](resources/drawables/icon_BehaviorAppointments.png)    | Next appointment     | Yes       |       |
+| ![](resources/drawables/icon_BehaviorSteps.png)           | Steps stepped        | Yes       | Yes   |
+| ![](resources/drawables/icon_BehaviorNotifications.png)   | Unread notifications | Yes       |       |
 
 ## Supported Smartwatches
 
