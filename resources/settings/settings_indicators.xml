@@ -7,6 +7,7 @@
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
             <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
+            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
             <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
@@ -23,6 +24,7 @@
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
             <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
+            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
             <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
@@ -39,6 +41,7 @@
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
             <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
+            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
             <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
@@ -55,6 +58,7 @@
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
             <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
+            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
             <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
@@ -71,6 +75,7 @@
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
             <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
+            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
             <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>
@@ -87,6 +92,7 @@
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
             <listEntry value="10">@Strings.IndicatorBehaviorCalories</listEntry>
+            <listEntry value="12">@Strings.IndicatorBehaviorDistance</listEntry>
             <listEntry value="4">@Strings.IndicatorBehaviorDND</listEntry>
             <listEntry value="8">@Strings.IndicatorBehaviorFloorsClimbed</listEntry>
             <listEntry value="9">@Strings.IndicatorBehaviorFloorsDescended</listEntry>

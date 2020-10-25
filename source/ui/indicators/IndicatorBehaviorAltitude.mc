@@ -23,7 +23,7 @@ class IndicatorBehaviorAltitude extends DefaultIndicatorBehavior {
                 // The reading is in meters; convert to feet depending on system
                 // settings
                 var settings = System.getDeviceSettings();
-                if (settings.elevationUnits == UNIT_STATUTE) {
+                if (settings.elevationUnits == System.UNIT_STATUTE) {
                     mAltitude *= 3.28084;
                 }
             }

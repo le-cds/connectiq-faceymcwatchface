@@ -32,6 +32,7 @@ All of them can be freely configured to show stuff, according to this helpful ta
 | ![](resources/drawables/icon_BehaviorBattery.png)         | Battery Charge       | Yes       | Yes   |
 | ![](resources/drawables/icon_BehaviorBluetooth.png)       | Bluetooth state      | Yes       |       |
 | ![](resources/drawables/icon_BehaviorCalories.png)        | Calories (kCal)      | Yes       |       |
+| ![](resources/drawables/icon_BehaviorDistance.png)        | Distance travelled   | Yes       |       |
 | ![](resources/drawables/icon_BehaviorDnD.png)             | Do not Disturb       | Yes       |       |
 | ![](resources/drawables/icon_BehaviorFloorsClimbed.png)   | Floors climbed       | Yes       | Yes   |
 | ![](resources/drawables/icon_BehaviorFloorsDescended.png) | Floors descended     | Yes       |       |
@@ -80,4 +81,5 @@ This project stands on the shoulders of the following people:
 - The [Crystal](https://apps.garmin.com/en-GB/apps/9fd04d09-8c80-4c81-9257-17cfa0f0081b) watchface ([GitHub repository](https://github.com/warmsound/crystal-face)).
 - [Activity](https://thenounproject.com/term/activity/1955073/) icon by shashank singh from the Noun Project
 - [Arrow](https://thenounproject.com/term/arrow/3257700/) icon by agus raharjo from the Noun Project
+- [Distance](https://thenounproject.com/term/distance/1514833/) icon by Becris from the Noun Project
 - [Steps](https://thenounproject.com/term/steps/87667/) icon by Eugen Belyakoff from the Noun Project

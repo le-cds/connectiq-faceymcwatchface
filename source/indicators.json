@@ -116,6 +116,12 @@
             "languages": {
                 "en": "Altitude"
             }
+        },
+        {
+            "id": "Distance",
+            "languages": {
+                "en": "Distance"
+            }
         }
     ]
 }
