@@ -14,6 +14,10 @@ Oh yes: The watchface is able to show the time of the upcoming appointment! Only
 
 Tired of using external apps to configure your watch face? So am I, which is why Facey McWatchface has a configuration UI, similar to Garmin’s pre-installed watch faces. This, however, is only supported on newer devices, such as the vívoactive® 4 (I think), not on my personal watch. Had I known that before, I would have been like “Not on my watch, kind Sir!”, and I would have been right…
 
+### Color Themes
+
+Everyone supports color themes nowadays, so Facey McWatchface does, too!
+
 ## Things This Thing Shows
 
 There are…
@@ -71,7 +75,7 @@ The following devices _should_ work:
 
 Here’s two notes for my fellow developers:
 
-* There might be a few interesting bits of code hidden inside this code base. Start at the `source/highiq` folder for inspiration. There’s also a code generator that provides the foundation for Facey McWatchface’s configurable indicators and meters. Should you use some of the code in there, please drop me a line – it’s always nice to know if code’s been helpful to others!
+* There might be a few interesting bits of code hidden inside this code base. Start at the `source/highiq` folder for inspiration. There’s also a code generator that provides the foundation for Facey McWatchface’s configurable indicators, meters and color themes. Should you use some of the code in there, please drop me a line – it’s always nice to know if code’s been helpful to others!
 * If you’re interested in contributing, head over to the contributions documentation file for details. Nothing surprising in there, though. There’s also the cookbook which explains common development tasks because I have no memory that I know of.
 
 ## Attributions

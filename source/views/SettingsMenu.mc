@@ -1,6 +1,7 @@
 using Toybox.WatchUi;
 using FaceyMcWatchface.Indicators as Ind;
 using FaceyMcWatchface.Meters as Met;
+using FaceyMcWatchface.Themes;
 
 /**
  * Implements the top-level settings menu and acts as its input delegate.
@@ -9,6 +10,7 @@ class SettingsMenu extends WatchUi.Menu2 {
     
     // Our fine selection of menu items which we'll update from time to time
     private var mAppointmentUpdateIntervalItem;
+    private var mColorThemeItem;
     private var mIndicatorItems;
     private var mMeterItems;
 
@@ -24,6 +26,14 @@ class SettingsMenu extends WatchUi.Menu2 {
             APPOINTMENT_UPDATE_INTERVAL,
             {});
         addItem(mAppointmentUpdateIntervalItem);
+        
+        // Color theme
+        mColorThemeItem = new WatchUi.MenuItem(
+            loadResource(Rez.Strings.Theme),
+            "",
+            Themes.THEME_PROPERTY,
+            {});
+        addItem(mColorThemeItem);
         
         // Indicators
         mIndicatorItems = new [Ind.INDICATOR_COUNT];
@@ -66,6 +76,11 @@ class SettingsMenu extends WatchUi.Menu2 {
             [ Application.getApp().getProperty(APPOINTMENT_UPDATE_INTERVAL) ]);
         mAppointmentUpdateIntervalItem.setSubLabel(appointmentUpdateSubtitle);
         
+        // Color theme
+        var themeId = Application.getApp().getProperty(Themes.THEME_PROPERTY);
+        var themeLabel = loadResource(Themes.THEME_TO_STRING_RESOURCE[themeId]);
+        mColorThemeItem.setSubLabel(themeLabel);
+        
         // Indicators
         for (var i = 0; i < Ind.INDICATOR_COUNT; i++) {
             var behaviorId = Application.getApp().getProperty(Ind.INDICATOR_NAMES[i]);
@@ -98,6 +113,14 @@ class SettingsMenuInputDelegate extends WatchUi.Menu2InputDelegate {
                 new Rez.Menus.SettingsMenuAppointmentUpdateInterval(),
                 new SettingsMenuAppointmentUpdateIntervalInputDelegate(),
                 WatchUi.SLIDE_LEFT);
+        } else if (item.getId() == Themes.THEME_PROPERTY) {
+            WatchUi.pushView(
+                new Rez.Menus.SettingsMenuThemeSelection(),
+                new SettingsMenuGenericSelectionInputDelegate(
+                    Themes.THEME_PROPERTY,
+                    Themes.THEME_NAMES),
+                WatchUi.SLIDE_LEFT);
+            return;
         }
         
         // Check if it's one of the indicator configuration items
@@ -105,7 +128,7 @@ class SettingsMenuInputDelegate extends WatchUi.Menu2InputDelegate {
         if (indicatorIdx >= 0) {
             WatchUi.pushView(
                 new Rez.Menus.SettingsMenuIndicatorSelection(),
-                new SettingsMenuIndicatorMeterSelectionInputDelegate(
+                new SettingsMenuGenericSelectionInputDelegate(
                     Ind.INDICATOR_NAMES[indicatorIdx],
                     Ind.INDICATOR_BEHAVIOR_NAMES),
                 WatchUi.SLIDE_LEFT);
@@ -117,7 +140,7 @@ class SettingsMenuInputDelegate extends WatchUi.Menu2InputDelegate {
         if (meterIdx >= 0) {
             WatchUi.pushView(
                 new Rez.Menus.SettingsMenuMeterSelection(),
-                new SettingsMenuIndicatorMeterSelectionInputDelegate(
+                new SettingsMenuGenericSelectionInputDelegate(
                     Met.METER_NAMES[meterIdx],
                     Met.METER_BEHAVIOR_NAMES),
                 WatchUi.SLIDE_LEFT);

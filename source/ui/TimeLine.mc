@@ -1,6 +1,7 @@
 using Toybox.System;
 using Toybox.Time.Gregorian;
 using Toybox.WatchUi;
+using FaceyMcWatchface.Themes;
 using FaceyMcWatchface.UiResources as UiRes;
 
 /**
@@ -91,7 +92,7 @@ class TimeLine extends WatchUi.Drawable {
         var displayTime = displayableTime(time.hour, time.min, time.sec);
 
         // Actually draw stuff
-        dc.setColor(UiRes.gColorHours, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Themes.gColorHours, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mHoursRightX,
             mTimeY,
@@ -100,7 +101,7 @@ class TimeLine extends WatchUi.Drawable {
             Graphics.TEXT_JUSTIFY_RIGHT
         );
 
-        dc.setColor(UiRes.gColorMinutes, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Themes.gColorMinutes, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mColonMidX,
             mTimeY,
@@ -117,7 +118,7 @@ class TimeLine extends WatchUi.Drawable {
             Graphics.TEXT_JUSTIFY_LEFT
         );
 
-        dc.setColor(UiRes.gColorSeconds, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Themes.gColorSeconds, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mAmPmRightX,
             mDetailsY,
@@ -133,7 +134,7 @@ class TimeLine extends WatchUi.Drawable {
     function drawSeconds(dc) {
         var seconds = System.getClockTime().sec.format("%02d");
 
-        dc.setColor(UiRes.gColorSeconds, UiRes.gColorBackground);
+        dc.setColor(Themes.gColorSeconds, Themes.gColorBackground);
         dc.drawText(
             mSecondsX,
             mDetailsY,

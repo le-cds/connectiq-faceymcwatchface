@@ -1,5 +1,6 @@
 using Toybox.Time.Gregorian;
 using Toybox.WatchUi;
+using FaceyMcWatchface.Themes;
 using FaceyMcWatchface.UiResources as UiRes;
 
 /**
@@ -103,7 +104,7 @@ class DateLine extends WatchUi.Drawable {
         var x = (dc.getWidth() - length) / 2;
 
         // Draw the actual text
-        dc.setColor(UiRes.gColorDate, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Themes.gColorDate, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             x,
             mY,

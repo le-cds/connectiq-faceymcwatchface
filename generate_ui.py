@@ -1,3 +1,6 @@
+"""Generates code and configuration files for indicators and meters based on the specifications in
+   source/indicators.json and source/meters.json."""
+
 import json
 import re
 
@@ -270,7 +273,6 @@ def generate_settings(config):
 #       #    # #  # #      #   #   ###### #  # #   #        # 
 #     # #    # #   ## #    #   #   #    # #   ##   #   #    # 
  #####   ####  #    #  ####    #   #    # #    #   #    ####  
-
 
 def generate_count_constants(config, out_file):
     """Generates name-related constants and writes them to the given output file."""

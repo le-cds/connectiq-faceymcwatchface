@@ -1,0 +1,9 @@
+<!-- This is a generated file. Do not edit manually or suffer the consequences... -->
+<settings>
+    <setting propertyKey="@Properties.Theme" title="@Strings.Theme">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.Theme1</listEntry>
+            <listEntry value="0">@Strings.Theme0</listEntry>
+        </settingConfig>
+    </setting>
+</settings>

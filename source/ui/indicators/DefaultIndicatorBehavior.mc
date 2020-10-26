@@ -1,3 +1,4 @@
+using FaceyMcWatchface.Themes;
 using FaceyMcWatchface.UiResources as UiRes;
 
 /**
@@ -19,9 +20,9 @@ class DefaultIndicatorBehavior extends IndicatorBehavior {
     
     public function getIconColor() {
         if (isIndicating()) {
-            return UiRes.gColorIndicatorActive;
+            return Themes.gColorIndicatorActive;
         } else {
-            return UiRes.gColorIndicatorInactive;
+            return Themes.gColorIndicatorInactive;
         }
     }
     
@@ -30,7 +31,7 @@ class DefaultIndicatorBehavior extends IndicatorBehavior {
     }
     
     public function getBackgroundColor() {
-        return UiRes.gColorBackground;
+        return Themes.gColorBackground;
     }
     
     public function getIconSize() {
@@ -45,7 +46,7 @@ class DefaultIndicatorBehavior extends IndicatorBehavior {
     }
     
     public function getValueColor() {
-        return UiRes.gColorIndicatorText;
+        return Themes.gColorIndicatorText;
     }
     
 }

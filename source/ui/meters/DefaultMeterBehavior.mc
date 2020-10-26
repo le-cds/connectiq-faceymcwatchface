@@ -1,3 +1,4 @@
+using FaceyMcWatchface.Themes;
 using FaceyMcWatchface.UiResources as UiRes;
 
 /**
@@ -16,9 +17,9 @@ class DefaultMeterBehavior extends MeterBehavior {
     
     public function getIconColor() {
         if (isIndicating()) {
-            return UiRes.gColorIndicatorActive;
+            return Themes.gColorIndicatorActive;
         } else {
-            return UiRes.gColorIndicatorInactive;
+            return Themes.gColorIndicatorInactive;
         }
     }
     
@@ -27,15 +28,15 @@ class DefaultMeterBehavior extends MeterBehavior {
     }
     
     public function getBackgroundColor() {
-        return UiRes.gColorBackground;
+        return Themes.gColorBackground;
     }
     
     public function getActiveMeterColor() {
-        return UiRes.gColorHighlights;
+        return Themes.gColorMeterActive;
     }
     
     public function getInactiveMeterColor() {
-        return UiRes.gColorMeterBackground;
+        return Themes.gColorMeterInactive;
     }
     
 }

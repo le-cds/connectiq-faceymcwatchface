@@ -1,9 +1,9 @@
 using Toybox.WatchUi;
 
 /**
- * Input delegate for the SettingsMenuMeterSelection menu.
+ * Input delegate for generated selection menus.
  */
-class SettingsMenuIndicatorMeterSelectionInputDelegate extends WatchUi.Menu2InputDelegate {
+class SettingsMenuGenericSelectionInputDelegate extends WatchUi.Menu2InputDelegate {
 
     /** Name of the property we'll set. */
     private var mPropertyName;

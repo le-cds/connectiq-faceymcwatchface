@@ -1,0 +1,38 @@
+{
+    "themes": [
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "hours": "COLOR_WHITE",
+                "minutes": "COLOR_WHITE",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "COLOR_WHITE",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "COLOR_WHITE",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Plain Darkness"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "hours": "COLOR_BLACK",
+                "minutes": "COLOR_BLACK",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "COLOR_BLACK",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "COLOR_BLACK",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Fantastic"
+            }
+        }
+    ]
+}

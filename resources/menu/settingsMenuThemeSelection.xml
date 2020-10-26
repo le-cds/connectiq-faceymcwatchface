@@ -1,0 +1,5 @@
+<!-- This is a generated file. Do not edit manually or suffer the consequences... -->
+<menu2 id="SettingsMenuThemeSelection" title="@Strings.Theme">
+    <menu-item id="Theme1" label="@Strings.Theme1" />
+    <menu-item id="Theme0" label="@Strings.Theme0" />
+</menu2>

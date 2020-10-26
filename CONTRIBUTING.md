@@ -6,6 +6,7 @@ Oh please, yes! There are several things your can contribute:
 * Code
 * Support for further devices
 * Translations
+* Color themes
 * Confirmations of the watchface working on devices
 
 All kinds of contributions are managed through GitHub. Here’s how!
@@ -31,8 +32,15 @@ We currently don’t support as many languages as the world offers, which is mai
 * `resources/strings/strings.xml`
 * `sources/indicators.json`
 * `sources/meters.json`
+* `sources/themes.json`
 
 Either [create a new issue](https://github.com/le-cds/connectiq-faceymcwatchface/issues) with the new files attached, or better yet: provide a pull request.
+
+## Color Themes
+
+Feel free to contribute new color themes. How this is done exactly is explained in the cookbook file. Themes should choose from the 64 colors [mentioned here](https://developer.garmin.com/connect-iq/user-experience-guidelines/displays/).
+
+If implementing a theme is not your style, you can always suggest a theme by [creating a new issue](https://github.com/le-cds/connectiq-faceymcwatchface/issues).
 
 ## Confirmations of the Watchface Working on Devices
 

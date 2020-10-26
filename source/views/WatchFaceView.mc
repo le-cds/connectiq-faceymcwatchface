@@ -4,6 +4,7 @@ using Toybox.System;
 using Toybox.WatchUi;
 using FaceyMcWatchface.Indicators as Ind;
 using FaceyMcWatchface.Meters as Met;
+using FaceyMcWatchface.Themes;
 using FaceyMcWatchface.UiResources as UiRes;
 
 
@@ -30,8 +31,6 @@ class WatchFaceView extends WatchUi.WatchFace {
      */
     function initialize() {
         WatchFace.initialize();
-
-        UiRes.updateColors();
     }
 
     /**
@@ -64,6 +63,8 @@ class WatchFaceView extends WatchUi.WatchFace {
      * Called by the app whenever the settings have changed.
      */
     function onSettingsChanged() {
+        Themes.updateColors();
+        
         for (var i = 0; i < Ind.INDICATOR_COUNT; i++) {
             var behaviorId = Application.getApp().getProperty(Ind.INDICATOR_NAMES[i]);
             var behavior = Ind.createIndicatorBehavior(behaviorId);

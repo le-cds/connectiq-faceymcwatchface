@@ -7,10 +7,19 @@ Facey McWatchface has become surprisingly complex. This cook book provides a few
 Adding behaviours rather simple if you have a Python 3 installation at hand. Get one and do this:
 
 1. Add your behaviour definition to `source/indicators.json` or `source/meters.json`, whichever is appropriate. Always add new behaviours to the end of the list.
-2. Run the `generate.py` script in the project’s root folder. This will register your behaviour in all the necessary places. Boom!
+2. Run the `generate_ui.py` script in the project’s root folder. This will register your behaviour in all the necessary places. Boom!
 3. Find and add an appropriate icon to `resources/fonts/symbols_font.afdesign`, export the font bitmap and register your icon in `symbols_font.fnt`.
 4. Export the new icon as a 32x32 pixel icon in `resources/drawables`. You’ll find the expected file name in the appropriate `drawables_xxx.xml` file.
 5. Implement your behaviour by adding a class in `source/ui/indicators` or `source/ui/meters`. The expected class name can be found in the appropriate factory function in `source/generated/XXXFactory.mc`.
+
+## Adding a Color Theme
+
+Adding color themes is almost like adding indicator / meter behaviors, but easier. It does, however, also requires a Python 3 installation. Do this:
+
+1. Add your color theme to `source/themes.json`. Always add new themes to the end of the list.
+2. Run the `generate_themes.py` script in the project's root folder.
+
+Done! Yay!
 
 ## Performing a Release
 
