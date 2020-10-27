@@ -4,6 +4,7 @@
             "colors": {
                 "background": "COLOR_BLACK",
                 "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
                 "hours": "COLOR_WHITE",
                 "minutes": "COLOR_WHITE",
                 "seconds": "COLOR_LT_GRAY",
@@ -14,13 +15,14 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Plain Darkness"
+                "en": "Black Treacle"
             }
         },
         {
             "colors": {
                 "background": "COLOR_WHITE",
                 "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
                 "hours": "COLOR_BLACK",
                 "minutes": "COLOR_BLACK",
                 "seconds": "COLOR_DK_GRAY",
@@ -31,7 +33,133 @@
                 "indicatorText": "COLOR_BLACK"
             },
             "languages": {
-                "en": "Light Fantastic"
+                "en": "White Blank Page"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
+                "hours": "0xff5500",
+                "minutes": "0xff5500",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "0xff5500",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "0xff5500",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Red Flag"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
+                "hours": "0x55FF00",
+                "minutes": "0x55FF00",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "0x55FF00",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "0x55FF00",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Jack-in-the-Green"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
+                "hours": "0x55AAFF",
+                "minutes": "0x55AAFF",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "0x55AAFF",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "0x55AAFF",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Behind Blue Eyes"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
+                "hours": "0xFFFF55",
+                "minutes": "0xFFFF55",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "0xFFFF55",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "0xFFFF55",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Old Yellow Bricks"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
+                "hours": "0xFF00AA",
+                "minutes": "0xFF00AA",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "0xFF00AA",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "0xFF00AA",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Pretty Pink Rose"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_BLACK",
+                "date": "COLOR_LT_GRAY",
+                "ampm": "COLOR_LT_GRAY",
+                "hours": "0x00FFFF",
+                "minutes": "0x00FFFF",
+                "seconds": "COLOR_LT_GRAY",
+                "meterInactive": "COLOR_DK_GRAY",
+                "meterActive": "0x00FFFF",
+                "indicatorInactive": "COLOR_DK_GRAY",
+                "indicatorActive": "0x00FFFF",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Forever in Blue Greens"
+            }
+        },
+        {
+            "colors": {
+                "background": "0xFF55AA",
+                "date": "0xAA0055",
+                "ampm": "0xAA0055",
+                "hours": "COLOR_WHITE",
+                "minutes": "COLOR_WHITE",
+                "seconds": "0xAA0055",
+                "meterInactive": "0xAA0055",
+                "meterActive": "COLOR_WHITE",
+                "indicatorInactive": "0xAA0055",
+                "indicatorActive": "COLOR_WHITE",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Pink Fluffy Unicorns"
             }
         }
     ]

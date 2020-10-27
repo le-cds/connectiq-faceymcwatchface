@@ -62,8 +62,11 @@ def to_color_variable(id):
 def to_color_value(color):
     """Turns a color value into the proper literal to be used in Monkey C."""
 
-    if color[0] == "#":
-        # Hexadecimals are written differently
+    if color.startswith("0x"):
+        # Hexadecimals can be used directly
+        return color
+    elif color[0] == "#":
+        # Convert to hexadeximal notation
         return F"0x{color[1:]}"
     else:
         # Everything else is assumed to be a color constant
