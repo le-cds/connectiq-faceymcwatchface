@@ -18,6 +18,8 @@ Tired of using external apps to configure your watch face? So am I, which is why
 
 Everyone supports color themes nowadays, so Facey McWatchface does, too!
 
+![](promo/themes.png)
+
 ## Things This Thing Shows
 
 There are…
