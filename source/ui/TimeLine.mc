@@ -118,7 +118,7 @@ class TimeLine extends WatchUi.Drawable {
             Graphics.TEXT_JUSTIFY_LEFT
         );
 
-        dc.setColor(Themes.gColorSeconds, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Themes.gColorAmpm, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             mAmPmRightX,
             mDetailsY,
