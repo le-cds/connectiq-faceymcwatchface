@@ -116,6 +116,7 @@ class Meter extends WatchUi.Drawable {
     public function setBehavior(behavior) {
         // Things will be properly reset upon the next draw cycle
         mBehavior = behavior;
+        mBuffersNeedRecreate = true;
         
         if (mBehavior != null) {
             // There is a behavior; cache resources
