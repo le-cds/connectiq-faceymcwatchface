@@ -20,7 +20,7 @@ class IndicatorBehaviorAlarms extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return System.getDeviceSettings().alarmCount.format("%d");
+        return System.getDeviceSettings().alarmCount;
     }
     
 }

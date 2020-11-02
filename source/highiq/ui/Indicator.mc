@@ -104,16 +104,18 @@ class Indicator extends WatchUi.Drawable {
         // Draw the value, if we're configured to do so and if there is any
         if (mTopYValueOffset != null) {
             var value = mBehavior.getValue();
-            if (value != null) {
-                dc.setColor(mBehavior.getValueColor(), mBehavior.getBackgroundColor());
-                dc.drawText(
-                    mCenterX,
-                    mTopY + mTopYValueOffset,
-                    mValueFont,
-                    mBehavior.getValue(),
-                    Graphics.TEXT_JUSTIFY_CENTER
-                );
+            if (value == null) {
+                value = "-";
             }
+            
+            dc.setColor(mBehavior.getValueColor(), mBehavior.getBackgroundColor());
+            dc.drawText(
+                mCenterX,
+                mTopY + mTopYValueOffset,
+                mValueFont,
+                value,
+                Graphics.TEXT_JUSTIFY_CENTER
+            );
         }
     }
 

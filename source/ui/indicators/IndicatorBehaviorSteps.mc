@@ -9,8 +9,8 @@ using Toybox.System;
 class IndicatorBehaviorSteps extends DefaultIndicatorBehavior {
 
     // Cache most recent values
-    private var mSteps = 0;
-    private var mStepsGoal = 1;
+    private var mSteps = null;
+    private var mStepsGoal = null;
     
     public function initialize() {
         DefaultIndicatorBehavior.initialize(true);
@@ -35,7 +35,7 @@ class IndicatorBehaviorSteps extends DefaultIndicatorBehavior {
     
     public function isIndicating() {
         // Light up if the steps goal has been reached
-        return mSteps >= mStepsGoal;
+        return mSteps != null && mSteps >= mStepsGoal;
     }
     
     public function getIconCharacter() {
@@ -43,7 +43,7 @@ class IndicatorBehaviorSteps extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return toShortNumberString(mSteps);
+        return mSteps == null ? mSteps : toShortNumberString(mSteps);
     }
     
 }

@@ -34,6 +34,7 @@ class IndicatorBehaviorAppointments extends DefaultIndicatorBehavior {
     
     public function getValue() {
         if (mNextAppointment == null) {
+            // We do not want to display a "-"
             return "";
         } else {
             var info = displayableMoment(mNextAppointment);

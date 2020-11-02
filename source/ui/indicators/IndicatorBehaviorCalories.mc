@@ -5,7 +5,7 @@ using Toybox.System;
  */
 class IndicatorBehaviorCalories extends DefaultIndicatorBehavior {
     
-    private var mCalories = 0;
+    private var mCalories = null;
 
     public function initialize() {
         DefaultIndicatorBehavior.initialize(false);
@@ -16,10 +16,6 @@ class IndicatorBehaviorCalories extends DefaultIndicatorBehavior {
         
         if (info has :calories) {
             mCalories = info.calories;
-            
-            if (mCalories == null) {
-                mCalories = 0;
-            }
         }
     }
     
@@ -33,7 +29,7 @@ class IndicatorBehaviorCalories extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return toShortNumberString(mCalories);
+        return mCalories == null ? mCalories : toShortNumberString(mCalories);
     }
     
 }

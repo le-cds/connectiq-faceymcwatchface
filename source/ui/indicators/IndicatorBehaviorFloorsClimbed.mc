@@ -6,8 +6,8 @@ using Toybox.System;
 class IndicatorBehaviorFloorsClimbed extends DefaultIndicatorBehavior {
     
     // Cache most recent values
-    private var mFloors = 0;
-    private var mFloorsGoal = 1;
+    private var mFloors = null;
+    private var mFloorsGoal = null;
     
     public function initialize() {
         DefaultIndicatorBehavior.initialize(false);
@@ -28,7 +28,7 @@ class IndicatorBehaviorFloorsClimbed extends DefaultIndicatorBehavior {
     
     public function isIndicating() {
         // Light up if the floors goal has been reached
-        return mFloors >= mFloorsGoal;
+        return mFloors != null && mFloors >= mFloorsGoal;
     }
     
     public function getIconCharacter() {
@@ -36,7 +36,7 @@ class IndicatorBehaviorFloorsClimbed extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return mFloors.format("%d");
+        return mFloors == null ? mFloors : mFloors.format("%d");
     }
     
 }

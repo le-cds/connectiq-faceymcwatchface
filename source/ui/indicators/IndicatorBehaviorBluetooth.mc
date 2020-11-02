@@ -32,7 +32,7 @@ class IndicatorBehaviorBluetooth extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return "Bla";
+        return "";
     }
     
 }

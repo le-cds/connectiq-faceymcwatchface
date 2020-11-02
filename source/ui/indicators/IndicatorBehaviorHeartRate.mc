@@ -23,10 +23,6 @@ class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
     }
     
     public function update() {
-        mHeartRate = getCurrentHeartRate();
-    }
-    
-    private function getCurrentHeartRate() {
         // Attempt to retrieve current heart rate via activity info first (thanks
         // to the Crystal watchface for the idea!)
         var info = Activity.getActivityInfo();
@@ -37,12 +33,17 @@ class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
             // which does not seem to be updated as often
             var sample = ActivityMonitor.getHeartRateHistory(1, true).next();
             
-            if (sample != null && sample != ActivityMonitor.INVALID_HR_SAMPLE) {
+            if (sample != null) {
                 hr = sample.heartRate;
             }
         }
         
-        return (hr != null) ? hr : 0;
+        // The value we obtained might be invalid
+        if (hr == ActivityMonitor.INVALID_HR_SAMPLE) {
+            hr = null;
+        }
+        
+        mHeartRate = hr;
     }
     
     public function isIndicating() {
@@ -55,7 +56,7 @@ class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return mHeartRate.format("%d");
+        return mHeartRate;
     }
     
 }

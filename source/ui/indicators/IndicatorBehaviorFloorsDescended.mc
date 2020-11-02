@@ -6,7 +6,7 @@ using Toybox.System;
 class IndicatorBehaviorFloorsDescended extends DefaultIndicatorBehavior {
     
     // Cache most recent values
-    private var mFloors = 0;
+    private var mFloors = null;
     
     public function initialize() {
         DefaultIndicatorBehavior.initialize(false);
@@ -30,7 +30,7 @@ class IndicatorBehaviorFloorsDescended extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return mFloors.format("%d");
+        return mFloors == null ? mFloors : mFloors.format("%d");
     }
     
 }

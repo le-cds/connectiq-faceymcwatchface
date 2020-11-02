@@ -9,7 +9,7 @@ using Toybox.System;
 class IndicatorBehaviorDistance extends DefaultIndicatorBehavior {
 
     // Cache most recent values
-    private var mDistance = 0;
+    private var mDistance = null;
     
     public function initialize() {
         DefaultIndicatorBehavior.initialize(true);
@@ -26,11 +26,15 @@ class IndicatorBehaviorDistance extends DefaultIndicatorBehavior {
         var info = ActivityMonitor.getInfo();
         
         // The distance field is in cm, which is too high-resolution for us
-        mDistance = info.distance / 100;
+        mDistance = info.distance;
         
-        if (System.getDeviceSettings().distanceUnits == System.UNIT_STATUTE) {
-            // Convert to feet
-            mDistance *= 3.28084;
+        if (mDistance != null) {
+            mDistance /= 100;
+        
+            if (System.getDeviceSettings().distanceUnits == System.UNIT_STATUTE) {
+                // Convert to feet
+                mDistance *= 3.28084;
+            }
         }
     }
     
@@ -44,7 +48,7 @@ class IndicatorBehaviorDistance extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return toShortNumberString(mDistance);
+        return mDistance == null ? mDistance : toShortNumberString(mDistance);
     }
     
 }

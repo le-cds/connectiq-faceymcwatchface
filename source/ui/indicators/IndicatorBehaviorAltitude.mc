@@ -5,7 +5,7 @@ using Toybox.System;
  */
 class IndicatorBehaviorAltitude extends DefaultIndicatorBehavior {
     
-    private var mAltitude = 0;
+    private var mAltitude = null;
 
     public function initialize() {
         DefaultIndicatorBehavior.initialize(false);
@@ -17,9 +17,7 @@ class IndicatorBehaviorAltitude extends DefaultIndicatorBehavior {
         if (info has :altitude) {
             mAltitude = info.altitude;
             
-            if (mAltitude == null) {
-                mAltitude = 0;
-            } else {
+            if (mAltitude != null) {
                 // The reading is in meters; convert to feet depending on system
                 // settings
                 var settings = System.getDeviceSettings();
@@ -40,7 +38,7 @@ class IndicatorBehaviorAltitude extends DefaultIndicatorBehavior {
     }
     
     public function getValue() {
-        return toShortNumberString(mAltitude);
+        return mAltitude == null ? mAltitude : toShortNumberString(mAltitude);
     }
     
 }
