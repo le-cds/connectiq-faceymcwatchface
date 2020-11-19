@@ -4,6 +4,8 @@ A watchface for Garmin smartwatches with a focus on communication. Looks somethi
 
 ![Watchface design](promo/diagram.png)
 
+Facey McWatchface is available at the [Connect IQ Store](https://apps.garmin.com/en-US/apps/3c5eb9f4-0921-43a3-a5f1-12979a9aa3ce).
+
 ## Highlights
 
 ### Upcoming Appointment
