@@ -50,6 +50,16 @@ All of them can be freely configured to show stuff, according to this helpful ta
 | ![](resources/drawables/icon_BehaviorSteps.png)           | Steps stepped        | Yes       | Yes   |
 | ![](resources/drawables/icon_BehaviorNotifications.png)   | Unread notifications | Yes       |       |
 
+## Required permissions
+
+* Run in the background
+
+  If appointments are shown, the watchface regularly checks for messages sent by the accompanying Android app in the background. The only data transmitted are timestamps of upcoming appointments.
+
+* Send/receive information to/from the internet
+
+  Required to receive information from the accompanying Android app in the first place. No information are sent to or received from the internet.
+
 ## Supported Smartwatches
 
 ### Tested
