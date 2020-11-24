@@ -11,12 +11,13 @@ Adding behaviours rather simple if you have a Python 3 installation at hand. Get
 3. Find and add an appropriate icon to `resources/fonts/symbols_font.afdesign`, export the font bitmap and register your icon in `symbols_font.fnt`.
 4. Export the new icon as a 32x32 pixel icon in `resources/drawables`. You’ll find the expected file name in the appropriate `drawables_xxx.xml` file.
 5. Implement your behaviour by adding a class in `source/ui/indicators` or `source/ui/meters`. The expected class name can be found in the appropriate factory function in `source/generated/XXXFactory.mc`.
+6. Mention the new behaviour in `README.md` and `promo/store_description.txt`.
 
-## Adding a Color Theme
+## Adding a Colour Theme
 
-Adding color themes is almost like adding indicator / meter behaviors, but easier. It does, however, also requires a Python 3 installation. Do this:
+Adding colour themes is almost like adding indicator / meter behaviours, but easier. It does, however, also requires a Python 3 installation. Do this:
 
-1. Add your color theme to `source/themes.json`. Always add new themes to the end of the list.
+1. Add your colour theme to `source/themes.json`. Always add new themes to the end of the list.
 2. Run the `generate_themes.py` script in the project's root folder.
 
 Done! Yay!
