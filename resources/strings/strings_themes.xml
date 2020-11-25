@@ -2,11 +2,18 @@
 <strings>
     <string id="Theme0">Black Treacle</string>
     <string id="Theme1">White Blank Page</string>
-    <string id="Theme2">Red Flag</string>
-    <string id="Theme3">Jack-in-the-Green</string>
-    <string id="Theme4">Behind Blue Eyes</string>
-    <string id="Theme5">Old Yellow Bricks</string>
-    <string id="Theme6">Pretty Pink Rose</string>
-    <string id="Theme7">Forever in Blue Greens</string>
-    <string id="Theme8">Pink Fluffy Unicorns</string>
+    <string id="Theme2">Dark Red Flag</string>
+    <string id="Theme3">Dark Jack-in-the-Green</string>
+    <string id="Theme4">Dark Behind Blue Eyes</string>
+    <string id="Theme5">Dark Old Yellow Bricks</string>
+    <string id="Theme6">Dark Pretty Pink Rose</string>
+    <string id="Theme7">Dark Forever in Blue Greens</string>
+    <string id="Theme8">Light Pink Fluffy Unicorns</string>
+    <string id="Theme9">Light Red Flag</string>
+    <string id="Theme10">Light Jack-in-the-Green</string>
+    <string id="Theme11">Light Behind Blue Eyes</string>
+    <string id="Theme12">Light Old Yellow Bricks</string>
+    <string id="Theme13">Light Pretty Pink Rose</string>
+    <string id="Theme14">Light Forever in Blue Greens</string>
+    <string id="Theme15">Dark Pink Fluffy Unicorns</string>
 </strings>

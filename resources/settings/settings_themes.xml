@@ -2,14 +2,21 @@
 <settings>
     <setting propertyKey="@Properties.Theme" title="@Strings.Theme">
         <settingConfig type="list">
-            <listEntry value="4">@Strings.Theme4</listEntry>
             <listEntry value="0">@Strings.Theme0</listEntry>
+            <listEntry value="4">@Strings.Theme4</listEntry>
             <listEntry value="7">@Strings.Theme7</listEntry>
             <listEntry value="3">@Strings.Theme3</listEntry>
             <listEntry value="5">@Strings.Theme5</listEntry>
-            <listEntry value="8">@Strings.Theme8</listEntry>
+            <listEntry value="15">@Strings.Theme15</listEntry>
             <listEntry value="6">@Strings.Theme6</listEntry>
             <listEntry value="2">@Strings.Theme2</listEntry>
+            <listEntry value="11">@Strings.Theme11</listEntry>
+            <listEntry value="14">@Strings.Theme14</listEntry>
+            <listEntry value="10">@Strings.Theme10</listEntry>
+            <listEntry value="12">@Strings.Theme12</listEntry>
+            <listEntry value="8">@Strings.Theme8</listEntry>
+            <listEntry value="13">@Strings.Theme13</listEntry>
+            <listEntry value="9">@Strings.Theme9</listEntry>
             <listEntry value="1">@Strings.Theme1</listEntry>
         </settingConfig>
     </setting>

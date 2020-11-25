@@ -1,12 +1,19 @@
 <!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <menu2 id="SettingsMenuThemeSelection" title="@Strings.Theme">
-    <menu-item id="Theme4" label="@Strings.Theme4" />
     <menu-item id="Theme0" label="@Strings.Theme0" />
+    <menu-item id="Theme4" label="@Strings.Theme4" />
     <menu-item id="Theme7" label="@Strings.Theme7" />
     <menu-item id="Theme3" label="@Strings.Theme3" />
     <menu-item id="Theme5" label="@Strings.Theme5" />
-    <menu-item id="Theme8" label="@Strings.Theme8" />
+    <menu-item id="Theme15" label="@Strings.Theme15" />
     <menu-item id="Theme6" label="@Strings.Theme6" />
     <menu-item id="Theme2" label="@Strings.Theme2" />
+    <menu-item id="Theme11" label="@Strings.Theme11" />
+    <menu-item id="Theme14" label="@Strings.Theme14" />
+    <menu-item id="Theme10" label="@Strings.Theme10" />
+    <menu-item id="Theme12" label="@Strings.Theme12" />
+    <menu-item id="Theme8" label="@Strings.Theme8" />
+    <menu-item id="Theme13" label="@Strings.Theme13" />
+    <menu-item id="Theme9" label="@Strings.Theme9" />
     <menu-item id="Theme1" label="@Strings.Theme1" />
 </menu2>

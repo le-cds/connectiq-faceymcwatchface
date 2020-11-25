@@ -20,7 +20,7 @@ var gColorIndicatorActive;
 var gColorIndicatorText;
 
 // Number of themes
-const THEME_COUNT = 9;
+const THEME_COUNT = 16;
 const THEME_PROPERTY = "Theme";
 
 // Names used in all sorts of properties, settings, drawables...
@@ -33,7 +33,14 @@ const THEME_NAMES = [
     "Theme5",
     "Theme6",
     "Theme7",
-    "Theme8"
+    "Theme8",
+    "Theme9",
+    "Theme10",
+    "Theme11",
+    "Theme12",
+    "Theme13",
+    "Theme14",
+    "Theme15"
 ];
 
 // String resource IDs that belong to things. Use these to generate names in the UI.
@@ -46,7 +53,14 @@ const THEME_TO_STRING_RESOURCE = [
     Rez.Strings.Theme5,
     Rez.Strings.Theme6,
     Rez.Strings.Theme7,
-    Rez.Strings.Theme8
+    Rez.Strings.Theme8,
+    Rez.Strings.Theme9,
+    Rez.Strings.Theme10,
+    Rez.Strings.Theme11,
+    Rez.Strings.Theme12,
+    Rez.Strings.Theme13,
+    Rez.Strings.Theme14,
+    Rez.Strings.Theme15
 ];
 
 /**
@@ -168,6 +182,97 @@ function updateColors() {
             gColorMeterInactive = 0xAA0055;
             gColorMeterActive = Graphics.COLOR_WHITE;
             gColorIndicatorInactive = 0xAA0055;
+            gColorIndicatorActive = Graphics.COLOR_WHITE;
+            gColorIndicatorText = Graphics.COLOR_WHITE;
+            break;
+        case 9:
+            gColorBackground = Graphics.COLOR_WHITE;
+            gColorDate = Graphics.COLOR_DK_GRAY;
+            gColorAmpm = Graphics.COLOR_DK_GRAY;
+            gColorHours = 0xff0000;
+            gColorMinutes = 0xff0000;
+            gColorSeconds = Graphics.COLOR_DK_GRAY;
+            gColorMeterInactive = Graphics.COLOR_LT_GRAY;
+            gColorMeterActive = 0xff0000;
+            gColorIndicatorInactive = Graphics.COLOR_LT_GRAY;
+            gColorIndicatorActive = 0xff0000;
+            gColorIndicatorText = Graphics.COLOR_BLACK;
+            break;
+        case 10:
+            gColorBackground = Graphics.COLOR_WHITE;
+            gColorDate = Graphics.COLOR_DK_GRAY;
+            gColorAmpm = Graphics.COLOR_DK_GRAY;
+            gColorHours = 0x00aa00;
+            gColorMinutes = 0x00aa00;
+            gColorSeconds = Graphics.COLOR_DK_GRAY;
+            gColorMeterInactive = Graphics.COLOR_LT_GRAY;
+            gColorMeterActive = 0x00aa00;
+            gColorIndicatorInactive = Graphics.COLOR_LT_GRAY;
+            gColorIndicatorActive = 0x00aa00;
+            gColorIndicatorText = Graphics.COLOR_BLACK;
+            break;
+        case 11:
+            gColorBackground = Graphics.COLOR_WHITE;
+            gColorDate = Graphics.COLOR_DK_GRAY;
+            gColorAmpm = Graphics.COLOR_DK_GRAY;
+            gColorHours = 0x0000aa;
+            gColorMinutes = 0x0000aa;
+            gColorSeconds = Graphics.COLOR_DK_GRAY;
+            gColorMeterInactive = Graphics.COLOR_LT_GRAY;
+            gColorMeterActive = 0x0000aa;
+            gColorIndicatorInactive = Graphics.COLOR_LT_GRAY;
+            gColorIndicatorActive = 0x0000aa;
+            gColorIndicatorText = Graphics.COLOR_BLACK;
+            break;
+        case 12:
+            gColorBackground = Graphics.COLOR_WHITE;
+            gColorDate = Graphics.COLOR_DK_GRAY;
+            gColorAmpm = Graphics.COLOR_DK_GRAY;
+            gColorHours = 0xffaa00;
+            gColorMinutes = 0xffaa00;
+            gColorSeconds = Graphics.COLOR_DK_GRAY;
+            gColorMeterInactive = Graphics.COLOR_LT_GRAY;
+            gColorMeterActive = 0xffaa00;
+            gColorIndicatorInactive = Graphics.COLOR_LT_GRAY;
+            gColorIndicatorActive = 0xffaa00;
+            gColorIndicatorText = Graphics.COLOR_BLACK;
+            break;
+        case 13:
+            gColorBackground = Graphics.COLOR_WHITE;
+            gColorDate = Graphics.COLOR_DK_GRAY;
+            gColorAmpm = Graphics.COLOR_DK_GRAY;
+            gColorHours = 0xff00aa;
+            gColorMinutes = 0xff00aa;
+            gColorSeconds = Graphics.COLOR_DK_GRAY;
+            gColorMeterInactive = Graphics.COLOR_LT_GRAY;
+            gColorMeterActive = 0xff00aa;
+            gColorIndicatorInactive = Graphics.COLOR_LT_GRAY;
+            gColorIndicatorActive = 0xff00aa;
+            gColorIndicatorText = Graphics.COLOR_BLACK;
+            break;
+        case 14:
+            gColorBackground = Graphics.COLOR_WHITE;
+            gColorDate = Graphics.COLOR_DK_GRAY;
+            gColorAmpm = Graphics.COLOR_DK_GRAY;
+            gColorHours = 0x00aaaa;
+            gColorMinutes = 0x00aaaa;
+            gColorSeconds = Graphics.COLOR_DK_GRAY;
+            gColorMeterInactive = Graphics.COLOR_LT_GRAY;
+            gColorMeterActive = 0x00aaaa;
+            gColorIndicatorInactive = Graphics.COLOR_LT_GRAY;
+            gColorIndicatorActive = 0x00aaaa;
+            gColorIndicatorText = Graphics.COLOR_BLACK;
+            break;
+        case 15:
+            gColorBackground = 0xAA0055;
+            gColorDate = 0xFF55AA;
+            gColorAmpm = 0xFF55AA;
+            gColorHours = Graphics.COLOR_WHITE;
+            gColorMinutes = Graphics.COLOR_WHITE;
+            gColorSeconds = 0xFF55AA;
+            gColorMeterInactive = 0xFF55AA;
+            gColorMeterActive = Graphics.COLOR_WHITE;
+            gColorIndicatorInactive = 0xFF55AA;
             gColorIndicatorActive = Graphics.COLOR_WHITE;
             gColorIndicatorText = Graphics.COLOR_WHITE;
             break;

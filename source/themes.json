@@ -51,7 +51,7 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Red Flag"
+                "en": "Dark Red Flag"
             }
         },
         {
@@ -69,7 +69,7 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Jack-in-the-Green"
+                "en": "Dark Jack-in-the-Green"
             }
         },
         {
@@ -87,7 +87,7 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Behind Blue Eyes"
+                "en": "Dark Behind Blue Eyes"
             }
         },
         {
@@ -105,7 +105,7 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Old Yellow Bricks"
+                "en": "Dark Old Yellow Bricks"
             }
         },
         {
@@ -123,7 +123,7 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Pretty Pink Rose"
+                "en": "Dark Pretty Pink Rose"
             }
         },
         {
@@ -141,7 +141,7 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Forever in Blue Greens"
+                "en": "Dark Forever in Blue Greens"
             }
         },
         {
@@ -159,7 +159,133 @@
                 "indicatorText": "COLOR_WHITE"
             },
             "languages": {
-                "en": "Pink Fluffy Unicorns"
+                "en": "Light Pink Fluffy Unicorns"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
+                "hours": "0xff0000",
+                "minutes": "0xff0000",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "0xff0000",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "0xff0000",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Red Flag"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
+                "hours": "0x00aa00",
+                "minutes": "0x00aa00",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "0x00aa00",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "0x00aa00",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Jack-in-the-Green"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
+                "hours": "0x0000aa",
+                "minutes": "0x0000aa",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "0x0000aa",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "0x0000aa",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Behind Blue Eyes"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
+                "hours": "0xffaa00",
+                "minutes": "0xffaa00",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "0xffaa00",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "0xffaa00",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Old Yellow Bricks"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
+                "hours": "0xff00aa",
+                "minutes": "0xff00aa",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "0xff00aa",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "0xff00aa",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Pretty Pink Rose"
+            }
+        },
+        {
+            "colors": {
+                "background": "COLOR_WHITE",
+                "date": "COLOR_DK_GRAY",
+                "ampm": "COLOR_DK_GRAY",
+                "hours": "0x00aaaa",
+                "minutes": "0x00aaaa",
+                "seconds": "COLOR_DK_GRAY",
+                "meterInactive": "COLOR_LT_GRAY",
+                "meterActive": "0x00aaaa",
+                "indicatorInactive": "COLOR_LT_GRAY",
+                "indicatorActive": "0x00aaaa",
+                "indicatorText": "COLOR_BLACK"
+            },
+            "languages": {
+                "en": "Light Forever in Blue Greens"
+            }
+        },
+        {
+            "colors": {
+                "background": "0xAA0055",
+                "date": "0xFF55AA",
+                "ampm": "0xFF55AA",
+                "hours": "COLOR_WHITE",
+                "minutes": "COLOR_WHITE",
+                "seconds": "0xFF55AA",
+                "meterInactive": "0xFF55AA",
+                "meterActive": "COLOR_WHITE",
+                "indicatorInactive": "0xFF55AA",
+                "indicatorActive": "COLOR_WHITE",
+                "indicatorText": "COLOR_WHITE"
+            },
+            "languages": {
+                "en": "Dark Pink Fluffy Unicorns"
             }
         }
     ]
