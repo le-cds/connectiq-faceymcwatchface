@@ -16,9 +16,9 @@ Oh yes: The watchface is able to show the time of the upcoming appointment! Only
 
 Tired of using external apps to configure your watch face? So am I, which is why Facey McWatchface has a configuration UI, similar to Garmin’s pre-installed watch faces. This, however, is only supported on newer devices, such as the vívoactive® 4 (I think), not on my personal watch. Had I known that before, I would have been like “Not on my watch, kind Sir!”, and I would have been right…
 
-### Color Themes
+### Colour Themes
 
-Everyone supports color themes nowadays, so Facey McWatchface does, too!
+Everyone supports colour themes nowadays, so Facey McWatchface does, too! Each theme comes in a dark and light version, just to boost the number of available themes for marketing, but mainly for bragging purposes.
 
 ![](promo/themes.png)
 
