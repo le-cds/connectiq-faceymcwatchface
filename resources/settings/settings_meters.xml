@@ -2,6 +2,7 @@
 <settings>
     <setting propertyKey="@Properties.MeterLeft" title="@Strings.MeterLeft">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="4">@Strings.MeterBehaviorActiveMinutes</listEntry>
             <listEntry value="0">@Strings.MeterBehaviorBattery</listEntry>
             <listEntry value="1">@Strings.MeterBehaviorFloorsClimbed</listEntry>
@@ -11,6 +12,7 @@
     </setting>
     <setting propertyKey="@Properties.MeterRight" title="@Strings.MeterRight">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="4">@Strings.MeterBehaviorActiveMinutes</listEntry>
             <listEntry value="0">@Strings.MeterBehaviorBattery</listEntry>
             <listEntry value="1">@Strings.MeterBehaviorFloorsClimbed</listEntry>

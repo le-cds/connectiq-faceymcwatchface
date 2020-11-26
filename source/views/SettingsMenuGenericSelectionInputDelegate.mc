@@ -20,12 +20,10 @@ class SettingsMenuGenericSelectionInputDelegate extends WatchUi.Menu2InputDelega
     public function onSelect(item) {
         // Find the index of the value in the array of possible values
         var index = mPropertyValuesArray.indexOf(item.getId().toString());
-        if (index >= 0) {
-            // Store the new behavior ID in the properties
-            Application.getApp().setProperty(mPropertyName, index);
-        } else {
-            System.println("ID " + item.getId().toString() + " not found.");
-        }
+        
+        // Store the new behavior ID in the properties, even if the indexOf
+        // method returned -1.
+        Application.getApp().setProperty(mPropertyName, index);
         
         // We're done here!
         popView(WatchUi.SLIDE_RIGHT);

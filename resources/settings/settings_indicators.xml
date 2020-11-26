@@ -2,6 +2,7 @@
 <settings>
     <setting propertyKey="@Properties.IndicatorTopLeft" title="@Strings.IndicatorTopLeft">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
@@ -14,6 +15,7 @@
     </setting>
     <setting propertyKey="@Properties.IndicatorTopRight" title="@Strings.IndicatorTopRight">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
             <listEntry value="3">@Strings.IndicatorBehaviorBluetooth</listEntry>
@@ -26,6 +28,7 @@
     </setting>
     <setting propertyKey="@Properties.IndicatorCenter" title="@Strings.IndicatorCenter">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="11">@Strings.IndicatorBehaviorAltitude</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
@@ -43,6 +46,7 @@
     </setting>
     <setting propertyKey="@Properties.IndicatorBottomLeft" title="@Strings.IndicatorBottomLeft">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="11">@Strings.IndicatorBehaviorAltitude</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
@@ -60,6 +64,7 @@
     </setting>
     <setting propertyKey="@Properties.IndicatorBottomCenter" title="@Strings.IndicatorBottomCenter">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="11">@Strings.IndicatorBehaviorAltitude</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>
@@ -77,6 +82,7 @@
     </setting>
     <setting propertyKey="@Properties.IndicatorBottomRight" title="@Strings.IndicatorBottomRight">
         <settingConfig type="list">
+            <listEntry value="-1">@Strings.Nothing</listEntry>
             <listEntry value="0">@Strings.IndicatorBehaviorAlarms</listEntry>
             <listEntry value="11">@Strings.IndicatorBehaviorAltitude</listEntry>
             <listEntry value="2">@Strings.IndicatorBehaviorBattery</listEntry>

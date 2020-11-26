@@ -64,6 +64,8 @@ function createMeterBehavior(id) {
             return new MeterBehaviorMoveBar();
         case METER_BEHAVIOR_ACTIVE_MINUTES:
             return new MeterBehaviorActiveMinutes();
+        default:
+            return null;
     }
 }
 

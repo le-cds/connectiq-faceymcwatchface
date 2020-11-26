@@ -1,5 +1,6 @@
 <!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <menu2 id="SettingsMenuMeterSelection" title="@Strings.Meter">
+    <menu-item id="MeterBehaviorNothing" label="@Strings.Nothing" />
     <icon-menu-item id="MeterBehaviorActiveMinutes" label="@Strings.MeterBehaviorActiveMinutes" icon="@Drawables.MeterBehaviorActiveMinutes" />
     <icon-menu-item id="MeterBehaviorBattery" label="@Strings.MeterBehaviorBattery" icon="@Drawables.MeterBehaviorBattery" />
     <icon-menu-item id="MeterBehaviorFloorsClimbed" label="@Strings.MeterBehaviorFloorsClimbed" icon="@Drawables.MeterBehaviorFloorsClimbed" />

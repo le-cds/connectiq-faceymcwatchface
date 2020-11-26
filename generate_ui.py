@@ -189,6 +189,8 @@ def generate_menus(config):
         print(F"<!-- {GENERATED_FILE_WARNING} -->", file=out_file)
         print(F'<menu2 id="SettingsMenu{config["category"]}Selection" title="@Strings.{config["category"]}">', file=out_file)
 
+        print(F'    <menu-item id="{to_behavior_id(config, "Nothing")}" label="@Strings.Nothing" />', file=out_file)
+
         for behavior in sorted_by_localized_name(config["behaviors"]):
             behavior_id = to_behavior_id(config, behavior["id"])
             print(F'    <icon-menu-item id="{behavior_id}" label="@Strings.{behavior_id}" icon="@Drawables.{behavior_id}" />', file=out_file)
@@ -229,6 +231,7 @@ def generate_settings_behvaior_list(config, exclude_behaviors_that_require_text)
     """Generates the proper settingConfig for the behaviors in the given config."""
 
     result = '        <settingConfig type="list">\n'
+    result += '            <listEntry value="-1">@Strings.Nothing</listEntry>\n'
 
     for behavior in sorted_by_localized_name(config["behaviors"]):
         if not exclude_behaviors_that_require_text or behavior["worksWithoutText"]:
@@ -356,6 +359,9 @@ def generate_factories(config, out_file):
         behavior_id = to_behavior_id(config, behavior["id"])
         print(F"        case {to_constant_name(behavior_id)}:", file=out_file)
         print(F"            return new {behavior_id}();", file=out_file)
+    
+    print("        default:", file=out_file)
+    print("            return null;", file=out_file)
 
     print("    }", file=out_file)
     print("}\n", file=out_file)

@@ -1,5 +1,6 @@
 <!-- This is a generated file. Do not edit manually or suffer the consequences... -->
 <menu2 id="SettingsMenuIndicatorSelection" title="@Strings.Indicator">
+    <menu-item id="IndicatorBehaviorNothing" label="@Strings.Nothing" />
     <icon-menu-item id="IndicatorBehaviorAlarms" label="@Strings.IndicatorBehaviorAlarms" icon="@Drawables.IndicatorBehaviorAlarms" />
     <icon-menu-item id="IndicatorBehaviorAltitude" label="@Strings.IndicatorBehaviorAltitude" icon="@Drawables.IndicatorBehaviorAltitude" />
     <icon-menu-item id="IndicatorBehaviorBattery" label="@Strings.IndicatorBehaviorBattery" icon="@Drawables.IndicatorBehaviorBattery" />

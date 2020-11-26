@@ -116,6 +116,8 @@ function createIndicatorBehavior(id) {
             return new IndicatorBehaviorAltitude();
         case INDICATOR_BEHAVIOR_DISTANCE:
             return new IndicatorBehaviorDistance();
+        default:
+            return null;
     }
 }
 

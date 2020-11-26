@@ -84,15 +84,21 @@ class SettingsMenu extends WatchUi.Menu2 {
         // Indicators
         for (var i = 0; i < Ind.INDICATOR_COUNT; i++) {
             var behaviorId = Application.getApp().getProperty(Ind.INDICATOR_NAMES[i]);
-            var subLabel = loadResource(Ind.INDICATOR_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
-            mIndicatorItems[i].setSubLabel(subLabel);
+            if (behaviorId >= 0) {
+                mIndicatorItems[i].setSubLabel(loadResource(Ind.INDICATOR_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]));
+            } else {
+                mIndicatorItems[i].setSubLabel(loadResource(Rez.Strings.Nothing));
+            }
         }
         
         // Meters
         for (var i = 0; i < Met.METER_COUNT; i++) {
             var behaviorId = Application.getApp().getProperty(Met.METER_NAMES[i]);
-            var subLabel = loadResource(Met.METER_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]);
-            mMeterItems[i].setSubLabel(subLabel);
+            if (behaviorId >= 0) {
+                mMeterItems[i].setSubLabel(loadResource(Met.METER_BEHAVIOR_TO_STRING_RESOURCE[behaviorId]));
+            } else {
+                mMeterItems[i].setSubLabel(loadResource(Rez.Strings.Nothing));
+            }
         }
     }
     
