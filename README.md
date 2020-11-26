@@ -67,6 +67,7 @@ All of them can be freely configured to show stuff, according to this helpful ta
 I have either used the watchface myself on the following devices (successfully, I might add), or know of people who have:
 
 * vívoactive® 3 (all variations)
+* vívoactive® 4
 
 ### Untested
 
@@ -83,7 +84,6 @@ The following devices _should_ work:
 * MARQ™ Adventurer, Athlete, Aviator, Captain (American Magic Edition), Commander, Driver, Expedition, Golfer
 * quatix® 5 and 6
 * tactix® Charlie
-* vívoactive® 4
 
 ## For Developers
 
