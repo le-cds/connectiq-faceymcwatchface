@@ -2,10 +2,10 @@
 fileVersion=1
 
 # font settings
-fontName=Roboto Black
+fontName=Roboto Medium
 fontFile=
 charSet=0
-fontSize=19
+fontSize=22
 aa=1
 scaleH=100
 useSmoothing=1
@@ -54,6 +54,6 @@ invB=0
 outlineThickness=0
 
 # selected chars
-chars=37,44,46,48-58,77,97,107,109,112
+chars=37,48-57,97,109,112
 
 # imported icon images
