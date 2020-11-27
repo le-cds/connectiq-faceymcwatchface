@@ -1,0 +1,11 @@
+<fonts>
+	<font id="HoursFont" filename="../../resources/fonts/hours_82.fnt" antialias="true"/>
+	<font id="MinutesFont" filename="../../resources/fonts/minutes_82.fnt" antialias="true"/>
+	<font id="SecondsFont" filename="../../resources/fonts/seconds_26.fnt" antialias="true"/>
+	
+	<font id="DateFont" filename="../../resources/fonts/date_30.fnt" antialias="true"/>
+	
+	<font id="IndicatorFont" filename="../../resources/fonts/indicators_19.fnt" antialias="true"/>
+	
+	<font id="SymbolsFont" filename="../../resources/fonts/symbols_18.fnt" antialias="true"/>
+</fonts>

@@ -22,12 +22,12 @@
 	</drawable>
 
 	<drawable id="Date" class="DateLine">
-		<param name="y">48</param>
+		<param name="y">44</param>
 	</drawable>
 	
 	<drawable id="Time" class="TimeLine">
-		<param name="timeY">62</param>
-		<param name="detailsOffsetY">48</param>
+		<param name="timeY">64</param>
+		<param name="detailsOffsetY">44</param>
 		<param name="secondsClipOffsetY">6</param>
 		<param name="secondsClipHeight">14</param>
 	</drawable>
@@ -45,24 +45,24 @@
 	<drawable id="IndicatorCenter" class="Indicator">
 		<param name="centerX">130</param>
 		<param name="topY">150</param>
-		<param name="topYValueOffset">16</param>
+		<param name="topYValueOffset">20</param>
 	</drawable>
 	
 	<drawable id="IndicatorBottomLeft" class="Indicator">
 		<param name="centerX">80</param>
 		<param name="topY">200</param>
-		<param name="topYValueOffset">16</param>
+		<param name="topYValueOffset">20</param>
 	</drawable>
 	
 	<drawable id="IndicatorBottomCenter" class="Indicator">
 		<param name="centerX">130</param>
 		<param name="topY">200</param>
-		<param name="topYValueOffset">16</param>
+		<param name="topYValueOffset">20</param>
 	</drawable>
 	
 	<drawable id="IndicatorBottomRight" class="Indicator">
 		<param name="centerX">180</param>
 		<param name="topY">200</param>
-		<param name="topYValueOffset">16</param>
+		<param name="topYValueOffset">20</param>
 	</drawable>
 </layout>
