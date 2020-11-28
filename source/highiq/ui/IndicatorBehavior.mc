@@ -110,4 +110,14 @@ class IndicatorBehavior {
         return true;
     }
     
+    /**
+     * If the behavior supports partial updates, this function is used to compute the
+     * clip region that we need to restrict the screen updates to in order to speed up
+     * partial updates. This needs to return the longest string that will conceivably
+     * be displayed by this behavior.
+     */
+    public function getLongestValue() {
+        return null;
+    }
+    
 }

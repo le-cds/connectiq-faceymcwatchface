@@ -3,8 +3,8 @@ using Toybox.Application;
 using Toybox.System;
 
 /**
- * Indicates the heart rate. Supports partial updates with a 10-seconds update
- * interval while the watch is sleeping and 1 second while it's awake.
+ * Indicates the heart rate. Supports partial updates with a 2-second update
+ * interval.
  */
 class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
 
@@ -14,12 +14,13 @@ class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
     public function initialize() {
         DefaultIndicatorBehavior.initialize(true);
     }
+    
+    public function supportsPartialUpdate() {
+        return true;
+    }
 
     public function wantsPartialUpdate() {
-        // We always want a partial update if the watch is in high power mode;
-        // otherwise only every 10 seconds
-        return Application.getApp().getView().isHighPowerMode()
-            || System.getClockTime().sec % 10 == 0;
+        return System.getClockTime().sec % 2 == 0;
     }
     
     public function update() {
@@ -52,11 +53,15 @@ class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
     }
     
     public function getIconCharacter() {
-        return 'I';
+        return "I";
     }
     
     public function getValue() {
         return mHeartRate;
+    }
+    
+    public function getLongestValue() {
+        return "000";
     }
     
 }

@@ -1,7 +1,7 @@
 using Toybox.System;
 
 /**
- * Indicates the number of unread notifications. Supports partial updates.
+ * Indicates the number of unread notifications. Does not support partial updates.
  */
 class IndicatorBehaviorNotifications extends DefaultIndicatorBehavior {
 
@@ -11,10 +11,6 @@ class IndicatorBehaviorNotifications extends DefaultIndicatorBehavior {
     
     public function initialize() {
         DefaultIndicatorBehavior.initialize(true);
-    }
-
-    public function wantsPartialUpdate() {
-        return mNotifications != System.getDeviceSettings().notificationCount;
     }
     
     public function update() {
