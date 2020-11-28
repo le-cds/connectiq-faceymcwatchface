@@ -16,6 +16,11 @@ class Indicator extends WatchUi.Drawable {
     private var mTopY;
     // Offset from the top y position to the value's top border.
     private var mTopYValueOffset;
+
+    // Whether the clip rect has already been initialized.
+    private var mClipInitialized = false;
+    // Size of the clip rect to quickly redraw the indicator during partial updates.
+    private var mClipDimensions = null;
     
     ///////////////////////////////////////////////////////////////////////////////////
     // State
@@ -43,10 +48,16 @@ class Indicator extends WatchUi.Drawable {
             mIconSize = mBehavior.getIconSize();
             mIconFont = mBehavior.getIconFont();
             mValueFont = mBehavior.getValueFont();
+            
+            // The clip is not initialized if the behavior actually supports partial
+            // updates (only then is the clip necessary)
+            mClipInitialized = !mBehavior.supportsPartialUpdate();
+            
         } else {
             // No behavior; release resources
             mIconFont = null;
             mValueFont = null;
+            mClipDimensions = null;
         }
     }
     
@@ -65,11 +76,45 @@ class Indicator extends WatchUi.Drawable {
         mTopYValueOffset = params[:topYValueOffset];
     }
     
+    private function initializeClip(dc) {
+        if (mBehavior.supportsPartialUpdate()) {
+            // Icon dimensions
+            mClipDimensions = dc.getTextDimensions(
+                mBehavior.getIconCharacter(),
+                mIconFont);
+        
+            // Maximum text dimensions, if there is any text
+            var longestValue = mBehavior.getLongestValue();
+            if (longestValue != null) {
+                var valueClipDimensions = dc.getTextDimensions(
+                    mBehavior.getLongestValue(),
+                    mValueFont);
+                
+                if (valueClipDimensions[0] > mClipDimensions[0]) {
+                    mClipDimensions[0] = valueClipDimensions[0];
+                }
+                
+                // This assumes that the value text will always be rendered
+                // below the icon
+                mClipDimensions[1] = mTopYValueOffset + valueClipDimensions[1];
+            }
+                
+        } else {
+            mClipDimensions = null;
+        }
+    }
+    
     /**
      * Draws the indicator.
      */
     public function draw(dc) {
         if (mBehavior != null) {
+            // Update clipping region, if necessary
+            if (!mClipInitialized) {
+                initializeClip(dc);
+                mClipInitialized = true;
+            }
+        
             doDraw(dc, false);
         }
     }
@@ -91,6 +136,15 @@ class Indicator extends WatchUi.Drawable {
      */
     protected function doDraw(dc, partial) {
         mBehavior.update();
+        
+        if (partial && mClipDimensions != null) {
+            dc.setClip(
+                mCenterX - mClipDimensions[0] / 2,
+                mTopY,
+                mClipDimensions[0],
+                mClipDimensions[1]
+            );
+        }
         
         // Draw the icon
         dc.setColor(mBehavior.getIconColor(), mBehavior.getBackgroundColor());
@@ -116,6 +170,10 @@ class Indicator extends WatchUi.Drawable {
                 value,
                 Graphics.TEXT_JUSTIFY_CENTER
             );
+        }
+        
+        if (partial && mClipDimensions != null) {
+            dc.clearClip();
         }
     }
 
