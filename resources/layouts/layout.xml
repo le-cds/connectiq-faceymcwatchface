@@ -28,8 +28,6 @@
 	<drawable id="Time" class="TimeLine">
 		<param name="timeY">66</param>
 		<param name="detailsOffsetY">44</param>
-		<param name="secondsClipOffsetY">6</param>
-		<param name="secondsClipHeight">14</param>
 	</drawable>
 	
 	<drawable id="IndicatorTopLeft" class="Indicator">

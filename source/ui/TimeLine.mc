@@ -30,11 +30,8 @@ class TimeLine extends WatchUi.Drawable {
     // The X coordinate to draw the am/pm indicator at (right-aligned)
     private var mAmPmRightX;
 
-    // Clip rect to quickly redraw the seconds in low-power mode. The Y coordinate
-    // is different from mSecondsY due to the way font coordinates seem to work.
-    private var mSecondsClipY;
-    private var mSecondsClipWidth;
-    private var mSecondsClipHeight;
+    // Size of the clip rect to quickly redraw the seconds during partial updates.
+    private var mSecondsClipDimensions;
 
     /**
      * Initialize the whole thing.
@@ -45,8 +42,6 @@ class TimeLine extends WatchUi.Drawable {
         // Initialize from parameters
         mTimeY = params[:timeY];
         mDetailsY = mTimeY + params[:detailsOffsetY];
-        mSecondsClipY = mDetailsY + params[:secondsClipOffsetY];
-        mSecondsClipHeight = params[:secondsClipHeight];
     }
 
     /**
@@ -84,7 +79,7 @@ class TimeLine extends WatchUi.Drawable {
         mAmPmRightX = mHoursRightX - hourWidth - 4;
 
         // Width of the clip rectangle used to draw seconds during partial updates
-        mSecondsClipWidth = dc.getTextWidthInPixels("00", UiRes.gDetailsFont);
+        mSecondsClipDimensions = dc.getTextDimensions("00", UiRes.gDetailsFont);
     }
 
     function drawEverythingExceptSeconds(dc) {
@@ -129,11 +124,19 @@ class TimeLine extends WatchUi.Drawable {
     }
 
     /**
-     * Draws the seconds. This is done on partial updates.
+     * Draws the seconds. This is also called during partial updates.
      */
     function drawSeconds(dc) {
         var seconds = System.getClockTime().sec.format("%02d");
 
+        // Restrict the area we're dirtying (speeds up partial updates)
+        dc.setClip(
+            mSecondsX,
+            mDetailsY,
+            mSecondsClipDimensions[0],
+            mSecondsClipDimensions[1]
+        );
+        
         dc.setColor(Themes.gColorSeconds, Themes.gColorBackground);
         dc.drawText(
             mSecondsX,
@@ -142,6 +145,8 @@ class TimeLine extends WatchUi.Drawable {
             seconds,
             Graphics.TEXT_JUSTIFY_LEFT
         );
+        
+        dc.clearClip();
     }
 
 }
