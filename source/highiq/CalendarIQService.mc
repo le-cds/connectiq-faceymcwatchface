@@ -5,31 +5,32 @@ using Toybox.Lang;
 using Toybox.System;
 using Toybox.Time;
 
-/* This module provides a calendar appointment service that works in conjunction
- * with a phone app. To use the module, the application must have the background
- * and communication permissions set in its manifest.
+/* This file provides all of the code necessary to receive and parse messages from
+ * the CalendarIQ app. To use it, the application must have the background and
+ * communication permissions set in its manifest.
  *
  *
  * Setup
  *
  * - In your AppBase subclass, call registerCalendarService() in the getInitialView()
  *   function or register for temporal events yourself. Optionally, call the
- *   loadAppointments() function as well. If you don't it will be called automatically
+ *   loadCalendarIQData() function as well. If you don't it will be called automatically
  *   upon the first invocation to getNextAppointment().
  *
  * - Add a getServiceDelegate() function and return a list that contains an instance
  *   of CalendarServiceDelegate.
  *
- * - Add an onBackgroundData(data) function and call processCalendarServiceData(data).
+ * - Add an onBackgroundData(data) function and call processCalendarIQServiceData(data).
  *   If the function returns true, the data came from the calendar service. If not,
- *   they may have come from other delegates an need to be processed further.
+ *   they may have come from other delegates that you're in charge of processing some
+ *   other way.
  *
- * - Add a call to storeAppointments() to your onStop() function so that when the
+ * - Add a call to storeCalendarIQData() to your onStop() function so that when the
  *   app is closed, we store the state of our appointments. To save energy, this
  *   library avoids any access to storage while the app is running.
  *
  *
- * Appointment Retrieval
+ * Data Retrieval
  *
  * - To retrieve the next appointment, call getNextAppointment(). The method will
  *   return null if we have no information about a next appointment, or a Time.Moment
@@ -39,6 +40,10 @@ using Toybox.Time;
  *   time components that can be displayed on screen.
  */
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// CONSTANTS
+
 /**
  * UTC time zone offset. Subtract from local time to get UTC time, add to
  * UTC time to get local time.
@@ -46,21 +51,18 @@ using Toybox.Time;
 const UTC_OFFSET = System.getClockTime().timeZoneOffset;
 
 /** Identifier of the calendar service. */
-const CALENDAR_SERVICE_ID = "calendarservice";
+const CALENDAR_IQ_SERVICE_ID = "calendariqservice";
 
 /** Property key under which the time of the most recent update is stored. */
-const PROP_LAST_REFRESH = CALENDAR_SERVICE_ID + ".lastupdatetime";
+const KEY_LAST_REFRESH = CALENDAR_IQ_SERVICE_ID + ".lastupdatetime";
 /** Property key under which the number of saved next appointments is stored. */
-const PROP_APPOINTMENT_COUNT = CALENDAR_SERVICE_ID + ".appointmentcount";
-/** Property key under which the next appointment data are stored. */
-const PROP_APPOINTMENTS = CALENDAR_SERVICE_ID + ".appointments";
+const KEY_APPOINTMENT_COUNT = CALENDAR_IQ_SERVICE_ID + ".appointmentcount";
+/** Property key under which the appointment data are stored. */
+const KEY_APPOINTMENTS = CALENDAR_IQ_SERVICE_ID + ".appointments";
 
-/** Dictionary key to identify this service as being the source of a background job result. */
-const KEY_CALENDAR_SERVICE = "service";
-/** Dictionary key under which the number of appointments will be stored. */
-const KEY_APPOINTMENT_COUNT = "appointmentcount";
-/** Dictionary key under which the next appointment times will be stored. */
-const KEY_APPOINTMENTS = "appointments";
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// STATE
 
 /* The following variables store appointment data in main memory to spare us the
  * need of having to load the values from storage each minute, which costs time
@@ -69,19 +71,22 @@ const KEY_APPOINTMENTS = "appointments";
  */
 
 /** The appointment interval in seconds. Overwritten as soon as the calendar service is registered. */
-var appointment_update_interval = 15 * 60;
+var update_interval = 15 * 60;
 /** Time of when we most recently received appointment data. */
-var last_appointment_refresh = -1;
+var last_refresh = -1;
 /** The number of appointments. */
 var appointment_count = -1;
 /** Array of appointments. */
 var appointments = null;
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// SETUP
+
 /**
  * Checks whether or not the calendar service can be run on this device.
  */
-function hasCalendarService() {
+function hasCalendarIQService() {
     return System has :ServiceDelegate;
 }
 
@@ -93,11 +98,11 @@ function hasCalendarService() {
  * @param update_interval the number of minutes between successive updates.
  * @return true or false as the registration did or did not complete successfully.
  */
-function registerCalendarService(update_interval) {
-    if (hasCalendarService()) {
+function registerCalendarIQService(the_update_interval) {
+    if (hasCalendarIQService()) {
         // Run the service every updateInterval minutes
-        appointment_update_interval = update_interval * 60;
-        Background.registerForTemporalEvent(new Time.Duration(appointment_update_interval));
+        update_interval = the_update_interval * 60;
+        Background.registerForTemporalEvent(new Time.Duration(update_interval));
         return true;
     } else {
         return false;
@@ -107,84 +112,90 @@ function registerCalendarService(update_interval) {
 /**
  * Unregisters the background process for the calendar processing.
  */
-function unregisterCalendarService() {
+function unregisterCalendarIQService() {
     // Stops the calendar service
-    if (hasCalendarService()) {
+    if (hasCalendarIQService()) {
         Background.deleteTemporalEvent();
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// SERVICE INTERFACE
+
 /**
  * Processes the calendar service data if they come from the calendar service
- * in the first place. If not, we sanitize the appointment data we have saved
- * by removing those appointments that are now in the past.
+ * in the first place. If not, we take the opportunity to sanitize the appointment
+ * data we have saved by removing those appointments that are now in the past.
  *
  * @return true if the data came from the calendar service and were processed
  *         by this method, false if the data should be further processed by
  *         the caller.
  */
-function processCalendarServiceData(data) {
-    if (data instanceof Lang.Dictionary && CALENDAR_SERVICE_ID.equals(data[KEY_CALENDAR_SERVICE])) {
+function processCalendarIQServiceData(data) {
+    if (data instanceof Lang.Dictionary && CALENDAR_IQ_SERVICE_ID.equals(data[CALENDAR_IQ_SERVICE_ID])) {
         // Save the appointments in our local variables to be saved later
-        last_appointment_refresh = Time.now().value();
+        last_refresh = Time.now().value();
         appointment_count = data[KEY_APPOINTMENT_COUNT];
         appointments = data[KEY_APPOINTMENTS];
 
         return true;
 
     } else {
-        // If we don't have any appointments yet, return nothing.
-        if (appointments == null || appointment_count <= 0) {
-            return false;
-        }
-
-        // Get the current time in seconds UTC
-        var now = Time.now().value();
-
-        // Go through the list of appointments and find the index of the first which is still
-        // in the future
-        var firstValidIndex = 0;
-        while (firstValidIndex < appointment_count && appointments[firstValidIndex] <= now) {
-            firstValidIndex += 1;
-        }
-
-        // If we have moved past passed appointments, save the new list
-        if (firstValidIndex > 0) {
-            if (firstValidIndex >= appointment_count) {
-                // Reset our variables
-                appointment_count = 0;
-                appointments = null;
-
-            } else {
-                // Build a new array
-                var newAppointments = new [appointment_count - firstValidIndex];
-                for (var i = firstValidIndex; i < appointment_count; i++) {
-                    newAppointments[i - firstValidIndex] = appointments[i];
-                }
-
-                // Update the variables
-                appointment_count -= firstValidIndex;
-                appointments = newAppointments;
-            }
-        }
-
+        sanitizeCalendarIQData();
         return false;
     }
 
 }
 
 /**
- * Loads appointment data from storage. This is automatically called by the
- * getNextAppointment() function if it hasn't been called before, but can also
- * be called manually.
+ * Sanitizes the saved data by removing appointments that are now in the past.
  */
-function loadAppointments() {
-    last_appointment_refresh = Application.Storage.getValue(PROP_LAST_REFRESH);
-    appointment_count = Application.Storage.getValue(PROP_APPOINTMENT_COUNT);
-    appointments = Application.Storage.getValue(PROP_APPOINTMENTS);
+function sanitizeCalendarIQData() {
+    if (appointments != null && appointment_count > 0) {
+        // Get the current time in seconds UTC
+        var now = Time.now().value();
+    
+        // Go through the list of appointments and find the index of the first which is still
+        // in the future
+        var firstValidIndex = 0;
+        while (firstValidIndex < appointment_count && appointments[firstValidIndex] <= now) {
+            firstValidIndex += 1;
+        }
+    
+        // If we have moved past passed appointments, save the new list
+        if (firstValidIndex > 0) {
+            if (firstValidIndex >= appointment_count) {
+                // Reset our variables
+                appointment_count = 0;
+                appointments = null;
+    
+            } else {
+                // Build a new array
+                var newAppointments = new [appointment_count - firstValidIndex];
+                for (var i = firstValidIndex; i < appointment_count; i++) {
+                    newAppointments[i - firstValidIndex] = appointments[i];
+                }
+    
+                // Update the variables
+                appointment_count -= firstValidIndex;
+                appointments = newAppointments;
+            }
+        }
+    }
+}
+
+/**
+ * Loads all data from storage. This is automatically called by the getNextAppointment()
+ * function if it hasn't been called before, but can also be called manually.
+ */
+function loadCalendarIQData() {
+    last_refresh = Application.Storage.getValue(KEY_LAST_REFRESH);
+    appointment_count = Application.Storage.getValue(KEY_APPOINTMENT_COUNT);
+    appointments = Application.Storage.getValue(KEY_APPOINTMENTS);
 
     // If the appointment count is not existent, set it to zero to make sure that
-    // getNextAppointment() doesn't call loadAppointments() on every invocation
+    // getNextAppointment() doesn't call loadCalendarIQData() on every invocation
     if (appointment_count == null || appointment_count < 0) {
         appointment_count = 0;
     }
@@ -193,11 +204,15 @@ function loadAppointments() {
 /**
  * Saves our appointment variables to storage to be retrieved later.
  */
-function storeAppointments() {
-    Application.Storage.setValue(PROP_LAST_REFRESH, last_appointment_refresh);
-    Application.Storage.setValue(PROP_APPOINTMENT_COUNT, appointment_count);
-    Application.Storage.setValue(PROP_APPOINTMENTS, appointments);
+function storeCalendarIQData() {
+    Application.Storage.setValue(KEY_LAST_REFRESH, last_refresh);
+    Application.Storage.setValue(KEY_APPOINTMENT_COUNT, appointment_count);
+    Application.Storage.setValue(KEY_APPOINTMENTS, appointments);
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// DATA ACCESS
 
 /**
  * Returns a Moment that specifies the time of the next appointment in local time. The
@@ -206,7 +221,7 @@ function storeAppointments() {
 function getNextAppointment() {
     if (appointment_count == -1) {
         // We haven't loaded appointments yet, so try loading them and proceed
-        loadAppointments();
+        loadCalendarIQData();
     }
 
     // If we don't have any appointments, return nothing.
@@ -240,6 +255,10 @@ function getNextAppointment() {
 
     return null;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// UTILITIES
 
 /**
  * Calls displayableTime(...) for the time described by this moment.
@@ -293,12 +312,15 @@ function displayableTime(hours, minutes, seconds) {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// SERVICE DELEGATE
+
 /**
  * This service delegate runs in the background and asks an app on the mobile
  * phone for the next calendar appointment.
  */
 (:background)
-class CalendarServiceDelegate extends System.ServiceDelegate {
+class CalendarIQServiceDelegate extends System.ServiceDelegate {
 
     function initialize() {
         System.ServiceDelegate.initialize();
@@ -328,7 +350,7 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
         }
 
         Background.exit({
-            KEY_CALENDAR_SERVICE => CALENDAR_SERVICE_ID,
+            KEY_CALENDAR_IQ_SERVICE => CALENDAR_IQ_SERVICE_ID,
             KEY_APPOINTMENT_COUNT => appointmentCount,
             KEY_APPOINTMENTS => appointments});
         */
@@ -338,10 +360,10 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
         // Only end the background process by handling this message if it was sent
         // after our most recent invocation
         var messageTimestamp = message.data[0];
-        var lastInvocation = Time.now().value() - appointment_update_interval;
+        var lastInvocation = Time.now().value() - update_interval;
 
         if (messageTimestamp >= lastInvocation) {
-            // Unpack the remainder of the message
+            // Unpack appointments
             var appointmentCount = message.data[1];
 
             var appointments = new [appointmentCount];
@@ -351,7 +373,7 @@ class CalendarServiceDelegate extends System.ServiceDelegate {
             }
 
             Background.exit({
-                KEY_CALENDAR_SERVICE => CALENDAR_SERVICE_ID,
+                KEY_CALENDAR_IQ_SERVICE => CALENDAR_IQ_SERVICE_ID,
                 KEY_APPOINTMENT_COUNT => appointmentCount,
                 KEY_APPOINTMENTS => appointments});
         }

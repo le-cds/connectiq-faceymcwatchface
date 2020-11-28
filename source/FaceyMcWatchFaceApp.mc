@@ -30,7 +30,7 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     function onStop(state) {
         if (!mIsBackground) {
             // Be sure to save our appointments now
-            storeAppointments();
+            storeCalendarIQData();
         }
     }
 
@@ -39,7 +39,7 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
         // Register the calendar service and load appointments from storage now
         // while we're at it
         initializeCalendarService();
-        loadAppointments();
+        loadCalendarIQData();
 
         mView = new WatchFaceView();
         return [mView];
@@ -71,14 +71,14 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     // Returns the background service to run.
     function getServiceDelegate() {
         mIsBackground = true;
-        return [new CalendarServiceDelegate()];
+        return [new CalendarIQServiceDelegate()];
     }
 
     // Receives data produced by our background service.
     function onBackgroundData(data) {
         // We would usually update the UI, but why bother when the
         // appointment item is updated on the full minute anyway
-        processCalendarServiceData(data);
+        processCalendarIQServiceData(data);
     }
 
     /**
@@ -97,9 +97,9 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
         
         // If so, make sure the calendar background service is running
         if (appointments) {
-            registerCalendarService(Properties.getValue(APPOINTMENT_UPDATE_INTERVAL));
+            registerCalendarIQService(Properties.getValue(APPOINTMENT_UPDATE_INTERVAL));
         } else {
-            unregisterCalendarService();
+            unregisterCalendarIQService();
         }
     }
 
