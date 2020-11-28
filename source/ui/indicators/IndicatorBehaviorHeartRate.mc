@@ -3,7 +3,7 @@ using Toybox.Application;
 using Toybox.System;
 
 /**
- * Indicates the heart rate. Supports partial updates with a 2-second update
+ * Indicates the heart rate. Supports partial updates with a 5-second update
  * interval.
  */
 class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
@@ -20,7 +20,7 @@ class IndicatorBehaviorHeartRate extends DefaultIndicatorBehavior {
     }
 
     public function wantsPartialUpdate() {
-        return System.getClockTime().sec % 2 == 0;
+        return System.getClockTime().sec % 5 == 0;
     }
     
     public function update() {
