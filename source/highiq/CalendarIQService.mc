@@ -38,6 +38,8 @@ using Toybox.Time;
  *
  * - Use the displayable...(...) methods to turn an appointment into a dictionary of
  *   time components that can be displayed on screen.
+ * 
+ * - To retrieve the phone's most recently known battery level, call getPhoneBatteryLevel().
  */
 
 
@@ -59,6 +61,8 @@ const KEY_LAST_REFRESH = CALENDAR_IQ_SERVICE_ID + ".lastupdatetime";
 const KEY_APPOINTMENT_COUNT = CALENDAR_IQ_SERVICE_ID + ".appointmentcount";
 /** Property key under which the appointment data are stored. */
 const KEY_APPOINTMENTS = CALENDAR_IQ_SERVICE_ID + ".appointments";
+/** Property key under which the phone battery level is stored. */
+const KEY_PHONE_BATTERY = CALENDAR_IQ_SERVICE_ID + ".phonebattery";
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,6 +82,8 @@ var last_refresh = -1;
 var appointment_count = -1;
 /** Array of appointments. */
 var appointments = null;
+/** The phone battery level, if available. */
+var phone_battery_level = null;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +144,7 @@ function processCalendarIQServiceData(data) {
         last_refresh = Time.now().value();
         appointment_count = data[KEY_APPOINTMENT_COUNT];
         appointments = data[KEY_APPOINTMENTS];
+        phone_battery_level = data[KEY_PHONE_BATTERY];
 
         return true;
 
@@ -193,6 +200,7 @@ function loadCalendarIQData() {
     last_refresh = Application.Storage.getValue(KEY_LAST_REFRESH);
     appointment_count = Application.Storage.getValue(KEY_APPOINTMENT_COUNT);
     appointments = Application.Storage.getValue(KEY_APPOINTMENTS);
+    phone_battery_level = Application.Storage.getValue(KEY_PHONE_BATTERY);
 
     // If the appointment count is not existent, set it to zero to make sure that
     // getNextAppointment() doesn't call loadCalendarIQData() on every invocation
@@ -208,11 +216,21 @@ function storeCalendarIQData() {
     Application.Storage.setValue(KEY_LAST_REFRESH, last_refresh);
     Application.Storage.setValue(KEY_APPOINTMENT_COUNT, appointment_count);
     Application.Storage.setValue(KEY_APPOINTMENTS, appointments);
+    Application.Storage.setValue(KEY_PHONE_BATTERY, phone_battery_level);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // DATA ACCESS
+
+/**
+ * Returns the last known phone battery level. This value is between 0 and 100 if the
+ * phone is not charging, and between 0 and -100 if it is. The absolute value always
+ * indicates the battery charge. If the battery level is unknown, return null.
+ */
+function getPhoneBatteryLevel() {
+    return phone_battery_level;
+}
 
 /**
  * Returns a Moment that specifies the time of the next appointment in local time. The
@@ -371,11 +389,28 @@ class CalendarIQServiceDelegate extends System.ServiceDelegate {
                 // Discard any superfluous seconds; minute granularity is perfectly fine
                 appointments[i] = message.data[i + 2] - message.data[i + 2] % 60;
             }
+            
+            // See if there's more data following. See CalendarIQ message format docs. The
+            // Index pointer here points at the first unused array element.
+            var msgIdx = 2 + appointmentCount;
+            
+            // Check for phone sync interval setting
+            if (msgIdx < message.data.size()) {
+                // Not used yet
+            }
+            
+            // Advance and check for phone battery state
+            msgIdx++;
+            var phoneBattery = null;
+            if (msgIdx < message.data.size()) {
+                phoneBattery = message.data[msgIdx];
+            }
 
             Background.exit({
-                KEY_CALENDAR_IQ_SERVICE => CALENDAR_IQ_SERVICE_ID,
+                CALENDAR_IQ_SERVICE_ID => CALENDAR_IQ_SERVICE_ID,
                 KEY_APPOINTMENT_COUNT => appointmentCount,
-                KEY_APPOINTMENTS => appointments});
+                KEY_APPOINTMENTS => appointments,
+                KEY_PHONE_BATTERY => phoneBattery});
         }
     }
 
