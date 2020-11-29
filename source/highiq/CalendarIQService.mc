@@ -53,7 +53,7 @@ using Toybox.Time;
 const UTC_OFFSET = System.getClockTime().timeZoneOffset;
 
 /** Identifier of the calendar service. */
-const CALENDAR_IQ_SERVICE_ID = "calendariqservice";
+const CALENDAR_IQ_SERVICE_ID = "calendarservice";
 
 /** Property key under which the time of the most recent update is stored. */
 const KEY_LAST_REFRESH = CALENDAR_IQ_SERVICE_ID + ".lastupdatetime";
