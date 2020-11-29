@@ -5,7 +5,7 @@ module Meters {
 
 // Number of things and behaviors
 const METER_COUNT = 2;
-const METER_BEHAVIOR_COUNT = 5;
+const METER_BEHAVIOR_COUNT = 6;
 
 // Enumerations of available things and behaviors to index into the other arrays
 enum /* METER */ {
@@ -18,7 +18,8 @@ enum /* METER_BEHAVIORS */ {
     METER_BEHAVIOR_FLOORS_CLIMBED,
     METER_BEHAVIOR_STEPS,
     METER_BEHAVIOR_MOVE_BAR,
-    METER_BEHAVIOR_ACTIVE_MINUTES
+    METER_BEHAVIOR_ACTIVE_MINUTES,
+    METER_BEHAVIOR_PHONE_BATTERY
 }
 
 // Names used in all sorts of properties, settings, drawables...
@@ -32,7 +33,8 @@ const METER_BEHAVIOR_NAMES = [
     "MeterBehaviorFloorsClimbed",
     "MeterBehaviorSteps",
     "MeterBehaviorMoveBar",
-    "MeterBehaviorActiveMinutes"
+    "MeterBehaviorActiveMinutes",
+    "MeterBehaviorPhoneBattery"
 ];
 
 // String resource IDs that belong to things. Use these to generate names in the UI.
@@ -46,7 +48,8 @@ const METER_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.MeterBehaviorFloorsClimbed,
     Rez.Strings.MeterBehaviorSteps,
     Rez.Strings.MeterBehaviorMoveBar,
-    Rez.Strings.MeterBehaviorActiveMinutes
+    Rez.Strings.MeterBehaviorActiveMinutes,
+    Rez.Strings.MeterBehaviorPhoneBattery
 ];
 
 /**
@@ -64,6 +67,8 @@ function createMeterBehavior(id) {
             return new MeterBehaviorMoveBar();
         case METER_BEHAVIOR_ACTIVE_MINUTES:
             return new MeterBehaviorActiveMinutes();
+        case METER_BEHAVIOR_PHONE_BATTERY:
+            return new MeterBehaviorPhoneBattery();
         default:
             return null;
     }

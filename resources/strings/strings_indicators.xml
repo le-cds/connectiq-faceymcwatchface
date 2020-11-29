@@ -22,4 +22,5 @@
     <string id="IndicatorBehaviorCalories">Calories (kCal)</string>
     <string id="IndicatorBehaviorAltitude">Altitude</string>
     <string id="IndicatorBehaviorDistance">Distance</string>
+    <string id="IndicatorBehaviorPhoneBattery">Phone battery charge</string>
 </strings>

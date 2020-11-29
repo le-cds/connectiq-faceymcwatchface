@@ -5,4 +5,5 @@
     <bitmap id="MeterBehaviorSteps" filename="icon_BehaviorSteps.png" />
     <bitmap id="MeterBehaviorMoveBar" filename="icon_BehaviorMoveBar.png" />
     <bitmap id="MeterBehaviorActiveMinutes" filename="icon_BehaviorActiveMinutes.png" />
+    <bitmap id="MeterBehaviorPhoneBattery" filename="icon_BehaviorPhoneBattery.png" />
 </drawables>

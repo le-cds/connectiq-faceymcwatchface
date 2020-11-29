@@ -13,4 +13,5 @@
     <bitmap id="IndicatorBehaviorCalories" filename="icon_BehaviorCalories.png" />
     <bitmap id="IndicatorBehaviorAltitude" filename="icon_BehaviorAltitude.png" />
     <bitmap id="IndicatorBehaviorDistance" filename="icon_BehaviorDistance.png" />
+    <bitmap id="IndicatorBehaviorPhoneBattery" filename="icon_BehaviorPhoneBattery.png" />
 </drawables>

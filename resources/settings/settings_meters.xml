@@ -7,6 +7,7 @@
             <listEntry value="0">@Strings.MeterBehaviorBattery</listEntry>
             <listEntry value="1">@Strings.MeterBehaviorFloorsClimbed</listEntry>
             <listEntry value="3">@Strings.MeterBehaviorMoveBar</listEntry>
+            <listEntry value="5">@Strings.MeterBehaviorPhoneBattery</listEntry>
             <listEntry value="2">@Strings.MeterBehaviorSteps</listEntry>
         </settingConfig>
     </setting>
@@ -17,6 +18,7 @@
             <listEntry value="0">@Strings.MeterBehaviorBattery</listEntry>
             <listEntry value="1">@Strings.MeterBehaviorFloorsClimbed</listEntry>
             <listEntry value="3">@Strings.MeterBehaviorMoveBar</listEntry>
+            <listEntry value="5">@Strings.MeterBehaviorPhoneBattery</listEntry>
             <listEntry value="2">@Strings.MeterBehaviorSteps</listEntry>
         </settingConfig>
     </setting>

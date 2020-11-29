@@ -141,6 +141,13 @@
             "languages": {
                 "en": "Distance"
             }
+        },
+        {
+            "id": "PhoneBattery",
+            "worksWithoutText": true,
+            "languages": {
+                "en": "Phone battery charge"
+            }
         }
     ]
 }

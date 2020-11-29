@@ -10,4 +10,5 @@
     <string id="MeterBehaviorSteps">Steps stepped</string>
     <string id="MeterBehaviorMoveBar">Move bar</string>
     <string id="MeterBehaviorActiveMinutes">Activ</string>
+    <string id="MeterBehaviorPhoneBattery">Phone battery charge</string>
 </strings>

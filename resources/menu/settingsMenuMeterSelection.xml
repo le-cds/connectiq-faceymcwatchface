@@ -5,5 +5,6 @@
     <icon-menu-item id="MeterBehaviorBattery" label="@Strings.MeterBehaviorBattery" icon="@Drawables.MeterBehaviorBattery" />
     <icon-menu-item id="MeterBehaviorFloorsClimbed" label="@Strings.MeterBehaviorFloorsClimbed" icon="@Drawables.MeterBehaviorFloorsClimbed" />
     <icon-menu-item id="MeterBehaviorMoveBar" label="@Strings.MeterBehaviorMoveBar" icon="@Drawables.MeterBehaviorMoveBar" />
+    <icon-menu-item id="MeterBehaviorPhoneBattery" label="@Strings.MeterBehaviorPhoneBattery" icon="@Drawables.MeterBehaviorPhoneBattery" />
     <icon-menu-item id="MeterBehaviorSteps" label="@Strings.MeterBehaviorSteps" icon="@Drawables.MeterBehaviorSteps" />
 </menu2>

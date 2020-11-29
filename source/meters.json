@@ -53,6 +53,13 @@
             "languages": {
                 "en": "Activ"
             }
+        },
+        {
+            "id": "PhoneBattery",
+            "worksWithoutText": true,
+            "languages": {
+                "en": "Phone battery charge"
+            }
         }
     ]
 }
