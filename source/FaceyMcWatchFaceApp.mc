@@ -4,6 +4,7 @@ using Toybox.Background;
 using Toybox.Time;
 using Toybox.WatchUi;
 using FaceyMcWatchface.Indicators as Ind;
+using FaceyMcWatchface.Meters as Met;
 
 (:background)
 class FaceyMcWatchFaceApp extends Application.AppBase {
@@ -38,8 +39,7 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     function getInitialView() {
         // Register the calendar service and load appointments from storage now
         // while we're at it
-        initializeCalendarService();
-        loadCalendarIQData();
+        startStopCalendarService();
 
         mView = new WatchFaceView();
         return [mView];
@@ -58,12 +58,11 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
     // New app settings have been received.
     function onSettingsChanged() {
         if (!mIsBackground) {
-            // The calendar service might have had its settings changed
-            initializeCalendarService();
-    
+            // The calendar service might not be necessary anymore
+            startStopCalendarService();
+        
+            // Update UI
             mView.onSettingsChanged();
-    
-            // Trigger a UI update to reflect the new settings
             WatchUi.requestUpdate();
         }
     }
@@ -85,19 +84,34 @@ class FaceyMcWatchFaceApp extends Application.AppBase {
      * Takes care of starting, restarting or stopping the calendar service in accordance
      * with the active settings.
      */
-    function initializeCalendarService() {
-        // We need to check whether any of the indicators is supposed to show appointments
-        var appointments = false;
+    function startStopCalendarService() {
+        // We need to check whether any of the indicators and meters are based on data
+        // received from CalendarIQ
+        var requiresSync = false;
         for (var i = 0; i < Ind.INDICATOR_COUNT; i++) {
-            if (getProperty(Ind.INDICATOR_NAMES[i]) == Ind.INDICATOR_BEHAVIOR_APPOINTMENTS) {
-                appointments = true;
+            var behavior = getProperty(Ind.INDICATOR_NAMES[i]);
+            if (behavior == Ind.INDICATOR_BEHAVIOR_APPOINTMENTS
+                || behavior == Ind.INDICATOR_BEHAVIOR_PHONE_BATTERY) {
+                
+                requiresSync = true;
                 break;
             }
         }
         
+        // Meters may require synchronisation as well
+        if (!requiresSync) {
+            for (var i = 0; i < Met.METER_COUNT; i++) {
+                var behavior = getProperty(Met.METER_NAMES[i]);
+                if (behavior == Met.METER_BEHAVIOR_PHONE_BATTERY) {
+                    requiresSync = true;
+                    break;
+                }
+            }
+        }
+        
         // If so, make sure the calendar background service is running
-        if (appointments) {
-            registerCalendarIQService(Properties.getValue(APPOINTMENT_UPDATE_INTERVAL));
+        if (requiresSync) {
+            registerCalendarIQService();
         } else {
             unregisterCalendarIQService();
         }

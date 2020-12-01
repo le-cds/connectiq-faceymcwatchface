@@ -13,9 +13,7 @@ using Toybox.Time;
  * Setup
  *
  * - In your AppBase subclass, call registerCalendarService() in the getInitialView()
- *   function or register for temporal events yourself. Optionally, call the
- *   loadCalendarIQData() function as well. If you don't it will be called automatically
- *   upon the first invocation to getNextAppointment().
+ *   function.
  *
  * - Add a getServiceDelegate() function and return a list that contains an instance
  *   of CalendarServiceDelegate.
@@ -26,8 +24,8 @@ using Toybox.Time;
  *   other way.
  *
  * - Add a call to storeCalendarIQData() to your onStop() function so that when the
- *   app is closed, we store the state of our appointments. To save energy, this
- *   library avoids any access to storage while the app is running.
+ *   app is closed, we have a chance to save our data. To save energy, this library
+ *   avoids any access to storage while the app is running.
  *
  *
  * Data Retrieval
@@ -55,13 +53,11 @@ const UTC_OFFSET = System.getClockTime().timeZoneOffset;
 /** Identifier of the calendar service. */
 const CALENDAR_IQ_SERVICE_ID = "calendarservice";
 
-/** Property key under which the time of the most recent update is stored. */
+/** Property keys for the different kinds of data we store. */
+const KEY_SYNC_INTERVAL = CALENDAR_IQ_SERVICE_ID + ".syncinterval";
 const KEY_LAST_REFRESH = CALENDAR_IQ_SERVICE_ID + ".lastupdatetime";
-/** Property key under which the number of saved next appointments is stored. */
 const KEY_APPOINTMENT_COUNT = CALENDAR_IQ_SERVICE_ID + ".appointmentcount";
-/** Property key under which the appointment data are stored. */
 const KEY_APPOINTMENTS = CALENDAR_IQ_SERVICE_ID + ".appointments";
-/** Property key under which the phone battery level is stored. */
 const KEY_PHONE_BATTERY = CALENDAR_IQ_SERVICE_ID + ".phonebattery";
 
 
@@ -74,8 +70,11 @@ const KEY_PHONE_BATTERY = CALENDAR_IQ_SERVICE_ID + ".phonebattery";
  * finishes.
  */
 
-/** The appointment interval in seconds. Overwritten as soon as the calendar service is registered. */
-var update_interval = 15 * 60;
+/**
+ * The synchronisation interval in seconds. Initialised if we load a previously
+ * saved update interval or if we receive an updated interval from CalendarIQ.
+ */
+var sync_interval = null;
 /** Time of when we most recently received appointment data. */
 var last_refresh = -1;
 /** The number of appointments. */
@@ -97,19 +96,22 @@ function hasCalendarIQService() {
 }
 
 /**
- * Tries to register a background process for the calendar processing. This
- * will succeed if the watch supports service delegates. Call this procedure from
- * the base app's getInitialView() function.
+ * Tries to register a background process for the calendar processing. This will
+ * succeed if the watch supports service delegates. Call this procedure from the
+ * base app's getInitialView() function.
  *
- * @param update_interval the number of minutes between successive updates.
  * @return true or false as the registration did or did not complete successfully.
  */
-function registerCalendarIQService(the_update_interval) {
+function registerCalendarIQService() {
     if (hasCalendarIQService()) {
+        if (sync_interval == null) {
+            loadCalendarIQData();
+        }
+        
         // Run the service every updateInterval minutes
-        update_interval = the_update_interval * 60;
-        Background.registerForTemporalEvent(new Time.Duration(update_interval));
+        Background.registerForTemporalEvent(new Time.Duration(sync_interval));
         return true;
+        
     } else {
         return false;
     }
@@ -130,6 +132,35 @@ function unregisterCalendarIQService() {
 // SERVICE INTERFACE
 
 /**
+ * Updates the sync interval and returns true if the interval actually changed.
+ * This does not restart any timers. If the new interval is null, we default to
+ * a 10 minute sync interval.
+ */
+(:background)
+function setSyncInterval(new_sync_interval) {
+    // Default to 10 minutes
+    if (new_sync_interval == null) {
+        new_sync_interval = 10 * 60;
+    }
+    
+    // Make sure these are sane values
+    if (new_sync_interval < 5 * 60) {
+        // Update at most every five minutes
+        new_sync_interval = 5 * 60;
+    } else if (new_sync_interval > 30 * 60) {
+        // Update at least once every half hour
+        new_sync_interval = 30 * 60;
+    }
+    
+    if (new_sync_interval != sync_interval) {
+        sync_interval = new_sync_interval;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * Processes the calendar service data if they come from the calendar service
  * in the first place. If not, we take the opportunity to sanitize the appointment
  * data we have saved by removing those appointments that are now in the past.
@@ -145,20 +176,30 @@ function processCalendarIQServiceData(data) {
         appointment_count = data[KEY_APPOINTMENT_COUNT];
         appointments = data[KEY_APPOINTMENTS];
         phone_battery_level = data[KEY_PHONE_BATTERY];
+        
+        if (data[KEY_SYNC_INTERVAL] != null) {
+            // We update twice as often as CalendarIQ sends us data to minimise delay
+            if (setSyncInterval(data[KEY_SYNC_INTERVAL] / 2)) {
+                // The sync interval changed, we need to restart the timer event. The timer
+                // must currently be running or else we wouldn't have received any CalendarIQ
+                // data to process in the first place.
+                unregisterCalendarIQService();
+                registerCalendarIQService();
+            }
+        }
 
         return true;
 
     } else {
-        sanitizeCalendarIQData();
+        removePastAppointments();
         return false;
     }
-
 }
 
 /**
- * Sanitizes the saved data by removing appointments that are now in the past.
+ * Remove appointments that are now in the past.
  */
-function sanitizeCalendarIQData() {
+function removePastAppointments() {
     if (appointments != null && appointment_count > 0) {
         // Get the current time in seconds UTC
         var now = Time.now().value();
@@ -201,6 +242,8 @@ function loadCalendarIQData() {
     appointment_count = Application.Storage.getValue(KEY_APPOINTMENT_COUNT);
     appointments = Application.Storage.getValue(KEY_APPOINTMENTS);
     phone_battery_level = Application.Storage.getValue(KEY_PHONE_BATTERY);
+    
+    loadSyncInterval();
 
     // If the appointment count is not existent, set it to zero to make sure that
     // getNextAppointment() doesn't call loadCalendarIQData() on every invocation
@@ -210,9 +253,19 @@ function loadCalendarIQData() {
 }
 
 /**
+ * Loads and correctly initializes the synchronisation interval. This is a separate
+ * function because the background process needs access to the interval.
+ */
+(:background)
+function loadSyncInterval() {
+    setSyncInterval(Application.Storage.getValue(KEY_SYNC_INTERVAL));
+}
+
+/**
  * Saves our appointment variables to storage to be retrieved later.
  */
 function storeCalendarIQData() {
+    Application.Storage.setValue(KEY_SYNC_INTERVAL, sync_interval);
     Application.Storage.setValue(KEY_LAST_REFRESH, last_refresh);
     Application.Storage.setValue(KEY_APPOINTMENT_COUNT, appointment_count);
     Application.Storage.setValue(KEY_APPOINTMENTS, appointments);
@@ -229,6 +282,11 @@ function storeCalendarIQData() {
  * indicates the battery charge. If the battery level is unknown, return null.
  */
 function getPhoneBatteryLevel() {
+    if (appointment_count == -1) {
+        // We haven't loaded appointments yet, so try loading them and proceed
+        loadCalendarIQData();
+    }
+    
     return phone_battery_level;
 }
 
@@ -368,35 +426,43 @@ class CalendarIQServiceDelegate extends System.ServiceDelegate {
         }
 
         Background.exit({
-            KEY_CALENDAR_IQ_SERVICE => CALENDAR_IQ_SERVICE_ID,
+            CALENDAR_IQ_SERVICE_ID => CALENDAR_IQ_SERVICE_ID,
+            KEY_SYNC_INTERVAL => 15 * 60,
             KEY_APPOINTMENT_COUNT => appointmentCount,
-            KEY_APPOINTMENTS => appointments});
+            KEY_APPOINTMENTS => appointments,
+            KEY_PHONE_BATTERY => 13});
         */
     }
 
     function phoneMessageReceived(message) {
+        // Be sure that the sync interval is initialized
+        if (sync_interval == null) {
+            loadSyncInterval();
+        }
+        
         // Only end the background process by handling this message if it was sent
         // after our most recent invocation
         var messageTimestamp = message.data[0];
-        var lastInvocation = Time.now().value() - update_interval;
+        var lastInvocation = Time.now().value() - sync_interval;
 
         if (messageTimestamp >= lastInvocation) {
             // Unpack appointments
-            var appointmentCount = message.data[1];
+            var appsCount = message.data[1];
 
-            var appointments = new [appointmentCount];
-            for (var i = 0; i < appointmentCount; i += 1) {
+            var apps = new [appsCount];
+            for (var i = 0; i < appsCount; i += 1) {
                 // Discard any superfluous seconds; minute granularity is perfectly fine
-                appointments[i] = message.data[i + 2] - message.data[i + 2] % 60;
+                apps[i] = message.data[i + 2] - message.data[i + 2] % 60;
             }
             
             // See if there's more data following. See CalendarIQ message format docs. The
             // Index pointer here points at the first unused array element.
-            var msgIdx = 2 + appointmentCount;
+            var msgIdx = 2 + appsCount;
             
-            // Check for phone sync interval setting
+            // Check for phone sync interval setting (in minutes, we need seconds)
+            var syncInterval = null;
             if (msgIdx < message.data.size()) {
-                // Not used yet
+                syncInterval = message.data[msgIdx] * 60;
             }
             
             // Advance and check for phone battery state
@@ -408,8 +474,9 @@ class CalendarIQServiceDelegate extends System.ServiceDelegate {
 
             Background.exit({
                 CALENDAR_IQ_SERVICE_ID => CALENDAR_IQ_SERVICE_ID,
-                KEY_APPOINTMENT_COUNT => appointmentCount,
-                KEY_APPOINTMENTS => appointments,
+                KEY_SYNC_INTERVAL => syncInterval,
+                KEY_APPOINTMENT_COUNT => appsCount,
+                KEY_APPOINTMENTS => apps,
                 KEY_PHONE_BATTERY => phoneBattery});
         }
     }
