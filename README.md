@@ -32,23 +32,24 @@ There are…
 
 All of them can be freely configured to show stuff, according to this helpful table:
 
-| Thing                                                     |                      | Indicator | Meter |
-| --------------------------------------------------------- | -------------------- | --------- | ----- |
-| ![](resources/drawables/icon_BehaviorAlarms.png)          | Active Alarms        | Yes       |       |
-| ![](resources/drawables/icon_BehaviorActiveMinutes.png)   | Active minutes       |           | Yes   |
-| ![](resources/drawables/icon_BehaviorAltitude.png)        | Altitude             | Yes       |       |
-| ![](resources/drawables/icon_BehaviorBattery.png)         | Battery Charge       | Yes       | Yes   |
-| ![](resources/drawables/icon_BehaviorBluetooth.png)       | Bluetooth state      | Yes       |       |
-| ![](resources/drawables/icon_BehaviorCalories.png)        | Calories (kCal)      | Yes       |       |
-| ![](resources/drawables/icon_BehaviorDistance.png)        | Distance travelled   | Yes       |       |
-| ![](resources/drawables/icon_BehaviorDnD.png)             | Do not Disturb       | Yes       |       |
-| ![](resources/drawables/icon_BehaviorFloorsClimbed.png)   | Floors climbed       | Yes       | Yes   |
-| ![](resources/drawables/icon_BehaviorFloorsDescended.png) | Floors descended     | Yes       |       |
-| ![](resources/drawables/icon_BehaviorHeartRate.png)       | Heart rate           | Yes       |       |
-| ![](resources/drawables/icon_BehaviorMoveBar.png)         | Move bar             |           | Yes   |
-| ![](resources/drawables/icon_BehaviorAppointments.png)    | Next appointment     | Yes       |       |
-| ![](resources/drawables/icon_BehaviorSteps.png)           | Steps stepped        | Yes       | Yes   |
-| ![](resources/drawables/icon_BehaviorNotifications.png)   | Unread notifications | Yes       |       |
+| Thing                                                     |                         | Indicator | Meter |
+| --------------------------------------------------------- | ----------------------- | --------- | ----- |
+| ![](resources/drawables/icon_BehaviorAlarms.png)          | Active Alarms           | Yes       |       |
+| ![](resources/drawables/icon_BehaviorActiveMinutes.png)   | Active minutes          |           | Yes   |
+| ![](resources/drawables/icon_BehaviorAltitude.png)        | Altitude                | Yes       |       |
+| ![](resources/drawables/icon_BehaviorBattery.png)         | Battery Charge          | Yes       | Yes   |
+| ![](resources/drawables/icon_BehaviorBluetooth.png)       | Bluetooth state         | Yes       |       |
+| ![](resources/drawables/icon_BehaviorCalories.png)        | Calories (kCal)         | Yes       |       |
+| ![](resources/drawables/icon_BehaviorDistance.png)        | Distance travelled      | Yes       |       |
+| ![](resources/drawables/icon_BehaviorDnD.png)             | Do not Disturb          | Yes       |       |
+| ![](resources/drawables/icon_BehaviorFloorsClimbed.png)   | Floors climbed          | Yes       | Yes   |
+| ![](resources/drawables/icon_BehaviorFloorsDescended.png) | Floors descended        | Yes       |       |
+| ![](resources/drawables/icon_BehaviorHeartRate.png)       | Heart rate              | Yes       |       |
+| ![](resources/drawables/icon_BehaviorMoveBar.png)         | Move bar                |           | Yes   |
+| ![](resources/drawables/icon_BehaviorAppointments.png)    | Next appointment        | Yes       |       |
+| ![](resources/drawables/icon_BehaviorSteps.png)           | Steps stepped           | Yes       | Yes   |
+| ![](resources/drawables/icon_BehaviorSyncInterval.png)    | Sync interval (minutes) | Yes       |       |
+| ![](resources/drawables/icon_BehaviorNotifications.png)   | Unread notifications    | Yes       |       |
 
 ## Required permissions
 

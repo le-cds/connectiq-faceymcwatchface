@@ -5,7 +5,7 @@ module Indicators {
 
 // Number of things and behaviors
 const INDICATOR_COUNT = 6;
-const INDICATOR_BEHAVIOR_COUNT = 14;
+const INDICATOR_BEHAVIOR_COUNT = 15;
 
 // Enumerations of available things and behaviors to index into the other arrays
 enum /* INDICATOR */ {
@@ -31,7 +31,8 @@ enum /* INDICATOR_BEHAVIORS */ {
     INDICATOR_BEHAVIOR_CALORIES,
     INDICATOR_BEHAVIOR_ALTITUDE,
     INDICATOR_BEHAVIOR_DISTANCE,
-    INDICATOR_BEHAVIOR_PHONE_BATTERY
+    INDICATOR_BEHAVIOR_PHONE_BATTERY,
+    INDICATOR_BEHAVIOR_SYNC_INTERVAL
 }
 
 // Names used in all sorts of properties, settings, drawables...
@@ -58,7 +59,8 @@ const INDICATOR_BEHAVIOR_NAMES = [
     "IndicatorBehaviorCalories",
     "IndicatorBehaviorAltitude",
     "IndicatorBehaviorDistance",
-    "IndicatorBehaviorPhoneBattery"
+    "IndicatorBehaviorPhoneBattery",
+    "IndicatorBehaviorSyncInterval"
 ];
 
 // String resource IDs that belong to things. Use these to generate names in the UI.
@@ -85,7 +87,8 @@ const INDICATOR_BEHAVIOR_TO_STRING_RESOURCE = [
     Rez.Strings.IndicatorBehaviorCalories,
     Rez.Strings.IndicatorBehaviorAltitude,
     Rez.Strings.IndicatorBehaviorDistance,
-    Rez.Strings.IndicatorBehaviorPhoneBattery
+    Rez.Strings.IndicatorBehaviorPhoneBattery,
+    Rez.Strings.IndicatorBehaviorSyncInterval
 ];
 
 /**
@@ -121,6 +124,8 @@ function createIndicatorBehavior(id) {
             return new IndicatorBehaviorDistance();
         case INDICATOR_BEHAVIOR_PHONE_BATTERY:
             return new IndicatorBehaviorPhoneBattery();
+        case INDICATOR_BEHAVIOR_SYNC_INTERVAL:
+            return new IndicatorBehaviorSyncInterval();
         default:
             return null;
     }

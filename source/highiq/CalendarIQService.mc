@@ -74,7 +74,7 @@ const KEY_PHONE_BATTERY = CALENDAR_IQ_SERVICE_ID + ".phonebattery";
  * The synchronisation interval in seconds. Initialised if we load a previously
  * saved update interval or if we receive an updated interval from CalendarIQ.
  */
-var sync_interval = null;
+var sync_interval = 300;
 /** Time of when we most recently received appointment data. */
 var last_refresh = -1;
 /** The number of appointments. */

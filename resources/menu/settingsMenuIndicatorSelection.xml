@@ -14,5 +14,6 @@
     <icon-menu-item id="IndicatorBehaviorAppointments" label="@Strings.IndicatorBehaviorAppointments" icon="@Drawables.IndicatorBehaviorAppointments" />
     <icon-menu-item id="IndicatorBehaviorPhoneBattery" label="@Strings.IndicatorBehaviorPhoneBattery" icon="@Drawables.IndicatorBehaviorPhoneBattery" />
     <icon-menu-item id="IndicatorBehaviorSteps" label="@Strings.IndicatorBehaviorSteps" icon="@Drawables.IndicatorBehaviorSteps" />
+    <icon-menu-item id="IndicatorBehaviorSyncInterval" label="@Strings.IndicatorBehaviorSyncInterval" icon="@Drawables.IndicatorBehaviorSyncInterval" />
     <icon-menu-item id="IndicatorBehaviorNotifications" label="@Strings.IndicatorBehaviorNotifications" icon="@Drawables.IndicatorBehaviorNotifications" />
 </menu2>

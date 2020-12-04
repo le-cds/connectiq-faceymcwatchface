@@ -148,6 +148,13 @@
             "languages": {
                 "en": "Phone battery charge"
             }
+        },
+        {
+            "id": "SyncInterval",
+            "worksWithoutText": true,
+            "languages": {
+                "en": "Sync interval"
+            }
         }
     ]
 }

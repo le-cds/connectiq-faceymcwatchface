@@ -23,6 +23,7 @@ Facey McWatchface supports displaying a wide array of information, and what show
 * Move bar
 * Next appointment
 * Steps stepped
+* Sync interval
 * Unread notifications
 
 Facey McWatchface does not collect any kinds of data. It requires the following permissions:
