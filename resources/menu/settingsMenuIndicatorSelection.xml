@@ -11,6 +11,7 @@
     <icon-menu-item id="IndicatorBehaviorFloorsClimbed" label="@Strings.IndicatorBehaviorFloorsClimbed" icon="@Drawables.IndicatorBehaviorFloorsClimbed" />
     <icon-menu-item id="IndicatorBehaviorFloorsDescended" label="@Strings.IndicatorBehaviorFloorsDescended" icon="@Drawables.IndicatorBehaviorFloorsDescended" />
     <icon-menu-item id="IndicatorBehaviorHeartRate" label="@Strings.IndicatorBehaviorHeartRate" icon="@Drawables.IndicatorBehaviorHeartRate" />
+    <icon-menu-item id="IndicatorBehaviorSyncTime" label="@Strings.IndicatorBehaviorSyncTime" icon="@Drawables.IndicatorBehaviorSyncTime" />
     <icon-menu-item id="IndicatorBehaviorAppointments" label="@Strings.IndicatorBehaviorAppointments" icon="@Drawables.IndicatorBehaviorAppointments" />
     <icon-menu-item id="IndicatorBehaviorPhoneBattery" label="@Strings.IndicatorBehaviorPhoneBattery" icon="@Drawables.IndicatorBehaviorPhoneBattery" />
     <icon-menu-item id="IndicatorBehaviorSteps" label="@Strings.IndicatorBehaviorSteps" icon="@Drawables.IndicatorBehaviorSteps" />

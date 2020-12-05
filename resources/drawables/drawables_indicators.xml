@@ -15,4 +15,5 @@
     <bitmap id="IndicatorBehaviorDistance" filename="icon_BehaviorDistance.png" />
     <bitmap id="IndicatorBehaviorPhoneBattery" filename="icon_BehaviorPhoneBattery.png" />
     <bitmap id="IndicatorBehaviorSyncInterval" filename="icon_BehaviorSyncInterval.png" />
+    <bitmap id="IndicatorBehaviorSyncTime" filename="icon_BehaviorSyncTime.png" />
 </drawables>

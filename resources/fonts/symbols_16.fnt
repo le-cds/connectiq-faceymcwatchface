@@ -29,5 +29,6 @@ char id=77   x=64   y=16     width=16    height=16    xoffset=0     yoffset=0   
 char id=78   x=80   y=16     width=16    height=16    xoffset=0     yoffset=0    xadvance=16    page=0  chnl=15
 char id=79   x=96   y=16     width=16    height=16    xoffset=0     yoffset=0    xadvance=16    page=0  chnl=15
 char id=81   x=112  y=16     width=16    height=16    xoffset=0     yoffset=0    xadvance=16    page=0  chnl=15
+char id=82   x=128  y=16     width=16    height=16    xoffset=0     yoffset=0    xadvance=16    page=0  chnl=15
 char id=80   x=0    y=32     width=16    height=16    xoffset=0     yoffset=0    xadvance=16    page=0  chnl=15
 char id=112  x=16   y=32     width=16    height=16    xoffset=0     yoffset=0    xadvance=16    page=0  chnl=15
