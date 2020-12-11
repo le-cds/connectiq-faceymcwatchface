@@ -11,7 +11,6 @@ Adding behaviours rather simple if you have a Python 3 installation at hand. Get
 3. Find and add an appropriate icon to `resources/fonts/symbols_font.afdesign`, export the font bitmap and register your icon in `symbols_font.fnt`.
 4. Export the new icon as a 32x32 pixel icon in `resources/drawables`. You’ll find the expected file name in the appropriate `drawables_xxx.xml` file.
 5. Implement your behaviour by adding a class in `source/ui/indicators` or `source/ui/meters`. The expected class name can be found in the appropriate factory function in `source/generated/XXXFactory.mc`.
-6. Mention the new behaviour in `README.md` and `promo/store_description.txt`.
 
 ## Adding a Colour Theme
 
@@ -27,7 +26,7 @@ Done! Yay!
 Do this to release a new release:
 
 * [ ] Compile release notes in `VERSIONS.md`.
-* [ ] Ensure `promo/store_description.txt` is up to date.
+* [ ] Bring `README.md` and `promo/store_description.txt` up to date with the new features.
 * [ ] Update screenshots.
 * [ ] Create a new release branch `releases/<version>`
 * [ ] Update `AppName` in `strings.xml`.
