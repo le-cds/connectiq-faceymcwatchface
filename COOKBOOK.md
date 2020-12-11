@@ -36,5 +36,6 @@ Do this to release a new release:
 * [ ] Do a GitHub release.
 * [ ] Back on the `master` branch, increase the version number in `manifest.xml` to match the current release, but increase revision appropriately.
 * [ ] Add a new milestone on GitHub.
+* [ ] Close the released milestone.
 
 For internal beta releases, simply produce a build from the `master` branch and be done with it.
