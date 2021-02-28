@@ -138,12 +138,17 @@ class Indicator extends WatchUi.Drawable {
         mBehavior.update();
         
         if (partial && mClipDimensions != null) {
+        	var leftX = mCenterX - mClipDimensions[0] / 2;
             dc.setClip(
-                mCenterX - mClipDimensions[0] / 2,
+                leftX,
                 mTopY,
                 mClipDimensions[0],
                 mClipDimensions[1]
             );
+            
+            // Be sure to erase the background to avoid text artifacts
+            dc.setColor(mBehavior.getBackgroundColor(), Graphics.COLOR_TRANSPARENT);
+            dc.fillRectangle(leftX, mTopY, mClipDimensions[0], mClipDimensions[1]);
         }
         
         // Draw the icon
