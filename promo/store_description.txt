@@ -12,7 +12,7 @@ Facey McWatchface supports displaying a wide array of information, and what show
 * Active Alarms
 * Active minutes
 * Altitude
-* Battery Charge
+* Battery charge
 * Bluetooth state
 * Calories (kCal)
 * Distance travelled
@@ -22,8 +22,10 @@ Facey McWatchface supports displaying a wide array of information, and what show
 * Heart rate
 * Move bar
 * Next appointment
+* Phone battery charge
 * Steps stepped
 * Sync interval
+* Sync time
 * Unread notifications
 
 Facey McWatchface does not collect any kinds of data. It requires the following permissions:

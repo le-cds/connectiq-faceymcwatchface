@@ -45,8 +45,10 @@ All of them can be freely configured to show stuff, according to this helpful ta
 | ![](resources/drawables/icon_BehaviorFloorsClimbed.png)   | Floors climbed          | Yes       | Yes   |
 | ![](resources/drawables/icon_BehaviorFloorsDescended.png) | Floors descended        | Yes       |       |
 | ![](resources/drawables/icon_BehaviorHeartRate.png)       | Heart rate              | Yes       |       |
+| ![](resources/drawables/icon_BehaviorSyncTime.png)        | Last Sync Time          | Yes       |       |
 | ![](resources/drawables/icon_BehaviorMoveBar.png)         | Move bar                |           | Yes   |
 | ![](resources/drawables/icon_BehaviorAppointments.png)    | Next appointment        | Yes       |       |
+| ![](resources/drawables/icon_BehaviorPhoneBattery.png)    | Phone Battery Charge    | Yes       | Yes   |
 | ![](resources/drawables/icon_BehaviorSteps.png)           | Steps stepped           | Yes       | Yes   |
 | ![](resources/drawables/icon_BehaviorSyncInterval.png)    | Sync interval (minutes) | Yes       |       |
 | ![](resources/drawables/icon_BehaviorNotifications.png)   | Unread notifications    | Yes       |       |
@@ -75,7 +77,7 @@ I have either used the watchface myself on the following devices (successfully, 
 The following devices _should_ work:
 
 * Approach® S62
-* D2™ Charlie, Delta (all variations)
+* D2™ Air, Charlie, Delta (all variations)
 * Darth Vader™
 * Descent™ Mk1
 * fēnix® 5 (Plus, S Plus, X, X Plus)
@@ -85,6 +87,7 @@ The following devices _should_ work:
 * MARQ™ Adventurer, Athlete, Aviator, Captain (American Magic Edition), Commander, Driver, Expedition, Golfer
 * quatix® 5 and 6
 * tactix® Charlie
+* Venu (all variations)
 
 ## For Developers
 
