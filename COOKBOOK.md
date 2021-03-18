@@ -31,6 +31,7 @@ Do this to release a new release:
 * [ ] Create a new release branch `releases/<version>`
 * [ ] Update `AppName` in `strings.xml`.
 * [ ] Update the UUID in `manifest.xml`.
+* [ ] Ensure that all supported devices are included in `manifest.xml`.
 * [ ] Produce a build.
 * [ ] Upload the build to the Connect IQ store.
 * [ ] Do a GitHub release.
